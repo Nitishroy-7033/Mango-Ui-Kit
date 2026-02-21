@@ -1,0 +1,101 @@
+.mango-otp-root {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: fit-content;
+}
+
+.mango-otp-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--labelSecondaryColor, #4b5563);
+    margin-left: 2px;
+}
+
+.mango-otp-container {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.mango-otp-box {
+    border: 1.5px solid var(--borderColor, #e5e7eb);
+    background: var(--primaryContainercolor, #ffffff);
+    text-align: center;
+    font-weight: 700;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    border-radius: 10px;
+    color: var(--textColor, #1f2937);
+}
+
+/* Variants */
+.mango-otp-variant-filled {
+    background: var(--secondaryColor, #f3f4f6);
+    border-color: transparent;
+}
+
+.mango-otp-variant-underlined {
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-width: 2.5px;
+    background: transparent;
+}
+
+/* Sizes */
+.mango-otp-size-sm .mango-otp-box {
+    width: 32px;
+    height: 40px;
+    font-size: 1rem;
+}
+
+.mango-otp-size-md .mango-otp-box {
+    width: 48px;
+    height: 56px;
+    font-size: 1.25rem;
+}
+
+.mango-otp-size-lg .mango-otp-box {
+    width: 60px;
+    height: 72px;
+    font-size: 1.5rem;
+}
+
+/* States */
+.mango-otp-box:focus {
+    border-color: var(--primaryColor);
+    background: var(--primaryContainercolor);
+    box-shadow: 0 0 0 4px rgba(250, 128, 41, 0.15);
+    transform: translateY(-2px);
+}
+
+.mango-otp-box.has-error {
+    border-color: #ef4444;
+}
+
+.mango-otp-box.has-error:focus {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+.mango-otp-error {
+    color: #ef4444;
+    font-size: 0.75rem;
+    margin-top: 2px;
+    margin-left: 4px;
+}
+
+.mango-otp-helper {
+    color: var(--labelSecondaryColor, #4b5563);
+    font-size: 0.75rem;
+    opacity: 0.8;
+    margin-top: 2px;
+    margin-left: 4px;
+}
+
+.mango-otp-box:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--secondaryColor);
+}
