@@ -27,12 +27,12 @@ export * from './components/stat-card';
 export * from './components/table';
 export * from './components/tabs';
 export * from './components/time-picker';
-export * from './components/confirmation-modal';
 export * from './components/calendar-date-picker';
 export * from './components/date-range-picker';
 export * from './components/theme-provider';
 export * from './components/tooltip';
 export * from './components/otp-input';
+export * from './components/dialog';
 
 export * from './hooks';
 export * from './utils';
