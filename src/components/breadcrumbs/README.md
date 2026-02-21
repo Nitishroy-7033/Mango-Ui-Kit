@@ -1,37 +1,60 @@
 # Breadcrumbs 🥭
 
-A navigation utility used to show the user's current location within a hierarchy.
+A premium breadcrumb navigation component with support for icons, custom styling, variants, and smart collapsing.
 
 ## Features
-- 🏷️ **Clear Hierarchy**: Easily indicate where the user is in the app.
-- ✨ **Custom Separators**: Use default chevron or pass your own separator.
-- 🎨 **Icon support**: Optional icons next to each breadcrumb link.
-- 🔗 **Smart Links**: Automatically turns all but the last item into clickable links.
+- ✨ **Variants**: Choose between `default`, `filled`, `outline`, and `ghost`.
+- 📐 **Sizing**: Support for `sm`, `md`, and `lg`.
+- 🔍 **Smart Collapsing**: Use `maxItems` to automatically hide intermediate pages in long paths.
+- 🖼️ **Icon Support**: Add icons to any item (supports Lucide components or custom React nodes).
+- 🎨 **Deep Customization**: Control `activeColor`, `textColor`, `hoverColor`, and `bgColor`.
+- 🎭 **Hover Effects**: Premium micro-animations for links (lift effect and icon scaling).
+- 🧱 **Separators**: Use any React node as a custom separator.
 
 ## Usage
 
+### Basic Usage
 ```tsx
 import { Breadcrumbs } from 'mango-ui-kit';
-import { Home, Folder, FileText } from 'lucide-react';
+import { Home } from 'lucide-react';
 
-const myPath = [
+const items = [
   { label: 'Home', href: '/', icon: Home },
-  { label: 'Documents', href: '/docs', icon: Folder },
-  { label: 'Requirements.pdf', icon: FileText },
+  { label: 'Products', href: '/products' },
+  { label: 'Mango UI Kit' }
 ];
 
-<Breadcrumbs items={myPath} />
+function Navbar() {
+  return <Breadcrumbs items={items} variant="filled" />;
+}
+```
+
+### Collapsed Architecture
+```tsx
+<Breadcrumbs 
+  items={longPathItems} 
+  maxItems={3} 
+  variant="outline" 
+/>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `items` | `BreadcrumbItem[]` | `[]` | List of items to display. |
-| `separator` | `ReactNode` | `<ChevronRight />` | Element to display between items. |
-| `className` | `string` | - | Extra CSS classes for the nav container. |
+| `items` | `BreadcrumbItem[]` | `[]` | Array of breadcrumb items. |
+| `variant` | `'default' \| 'filled' \| 'outline' \| 'ghost'` | `'default'` | Visual structure of the breadcrumb. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Component size. |
+| `maxItems` | `number` | `0` | Max items to show before collapsing (0 = disabled). |
+| `activeColor` | `string` | - | Text color for the last (active) item. |
+| `textColor` | `string` | - | Text color for idle items. |
+| `hoverColor` | `string` | - | Text color on hover. |
+| `bgColor` | `string` | - | Background color for container. |
+| `separator` | `ReactNode` | `<ChevronRight />` | Custom separator between items. |
+| `showLastSeparator` | `boolean` | `false` | Show separator after the last item. |
 
-### BreadcrumbItem (Type)
-- `label` (string): Text to display.
-- `href` (string): Target URL for the link.
-- `icon` (LucideIcon): Optional icon component.
+## BreadcrumbItem Object
+- `label` (string): Text display.
+- `href` (string, optional): Navigation link.
+- `icon` (ReactNode, optional): Icon before text.
+- `color` (string, optional): Overrides item text color.
