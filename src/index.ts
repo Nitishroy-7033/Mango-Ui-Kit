@@ -1,3 +1,5 @@
+import './styles/index.css';
+
 // Existing components
 export * from './components/button';
 export * from './components/badge';

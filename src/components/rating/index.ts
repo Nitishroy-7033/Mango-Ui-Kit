@@ -1,2 +1,2 @@
 export * from './rating';
-export * from './rating.types';
+export type * from './rating.types';

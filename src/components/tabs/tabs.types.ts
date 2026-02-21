@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, ComponentType } from 'react';
 
 export interface TabItem {
   id: string;
   label: string;
-  icon?: ReactNode;
+  icon?: ComponentType<any>;
   content?: ReactNode;
 }
 

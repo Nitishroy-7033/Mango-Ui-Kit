@@ -1,2 +1,2 @@
 export * from './time-picker';
-export * from './time-picker.types';
+export type * from './time-picker.types';

@@ -1,12 +1,11 @@
-import type { ReactNode, ComponentType } from 'react';
+import type { ComponentType } from 'react';
 
 export interface StatCardProps {
-  title: string;
+  label: string;
   value: string | number;
-  icon?: ComponentType<{ size?: number; className?: string }>;
-  trend?: 'up' | 'down';
-  trendValue?: number;
-  color?: string;
-  description?: string;
+  icon?: ComponentType<any>;
+  trend?: number;
+  trendLabel?: string;
+  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
   className?: string;
 }

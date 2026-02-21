@@ -1,2 +1,2 @@
 export * from './progress-bar';
-export * from './progress-bar.types';
+export type * from './progress-bar.types';

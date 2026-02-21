@@ -1,2 +1,2 @@
 export * from './breadcrumbs';
-export * from './breadcrumbs.types';
+export type * from './breadcrumbs.types';

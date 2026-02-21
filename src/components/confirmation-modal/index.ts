@@ -1,2 +1,2 @@
 export * from './confirmation-modal';
-export * from './confirmation-modal.types';
+export type * from './confirmation-modal.types';

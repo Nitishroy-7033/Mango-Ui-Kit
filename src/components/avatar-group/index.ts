@@ -1,2 +1,2 @@
 export * from './avatar-group';
-export * from './avatar-group.types';
+export type * from './avatar-group.types';

@@ -1,2 +1,2 @@
 export * from './multi-select';
-export * from './multi-select.types';
+export type * from './multi-select.types';

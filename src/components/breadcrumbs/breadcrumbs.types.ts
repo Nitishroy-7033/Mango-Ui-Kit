@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, ComponentType } from 'react';
 
 export interface BreadcrumbItem {
   label: string;
   href?: string;
+  icon?: ComponentType<any>;
 }
 
 export interface BreadcrumbsProps {

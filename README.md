@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# Mango UI Kit 🥭
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, modern React UI component library built with TypeScript, Lucide Icons, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
+- ✨ **Premium Aesthetics**: Carefully crafted components with a focus on modern design.
+- 🎨 **Theme Support**: Built-in support for light and dark modes via CSS variables.
+- 🛡️ **Type Safe**: Written in TypeScript for excellent developer experience.
+- 🧩 **Modular**: Use only the components you need.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install mango-ui-kit
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+First, import the styles in your main entry file (e.g., `main.ts` or `App.tsx`):
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```tsx
+import 'mango-ui-kit/dist/style.css';
 ```
+
+Then, you can start using components:
+
+```tsx
+import { Button, Card, AppBar } from 'mango-ui-kit';
+
+function App() {
+  return (
+    <div>
+      <AppBar 
+        user={{ fullName: "John Doe" }}
+        subscriptionPlan="Pro"
+      />
+      <Card hoverable className="m-4">
+        <h1>Welcome to Mango UI</h1>
+        <Button variant="primary">Get Started</Button>
+      </Card>
+    </div>
+  );
+}
+```
+
+## Available Components
+
+- **Navigation**: AppBar, Sidebar, Breadcrumbs
+- **Inputs**: Button, Input, Dropdown, MultiSelect, FileDropzone, Toggle, TimePicker
+- **Feedback**: Spinner, ProgressBar, Skeleton, ConfirmationModal, Rating
+- **Data Display**: Table, Card, StatCard, Badge, Avatar, AvatarGroup, Accordion, Tabs
+- **Date/Time**: CalendarDatePicker, DateRangePicker
+- **Layout**: Drawer
+
+## Peer Dependencies
+
+Ensure you have the following installed:
+- `react` >= 18.0.0
+- `react-dom` >= 18.0.0
+
+## License
+
+MIT © Mango UI Team

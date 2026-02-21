@@ -1,2 +1,2 @@
 export * from './app-bar';
-export * from './app-bar.types';
+export type * from './app-bar.types';

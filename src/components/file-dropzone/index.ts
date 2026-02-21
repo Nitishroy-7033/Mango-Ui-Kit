@@ -1,2 +1,2 @@
 export * from './file-dropzone';
-export * from './file-dropzone.types';
+export type * from './file-dropzone.types';
