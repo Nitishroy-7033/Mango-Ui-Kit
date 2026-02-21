@@ -40,6 +40,8 @@ export * from './components/checkbox';
 export * from './components/radio';
 export * from './components/segmented-control';
 export * from './components/slider';
+export * from './components/toast';
+export * from './components/command-palette';
 
 export * from './hooks';
 export * from './utils';

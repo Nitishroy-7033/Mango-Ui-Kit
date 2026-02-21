@@ -1,0 +1,193 @@
+.mango-toast-container {
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    pointer-events: none;
+    max-width: 420px;
+    width: 100%;
+}
+
+/* Positions */
+.mango-toast-container.top-right {
+    top: 0;
+    right: 0;
+}
+
+.mango-toast-container.top-left {
+    top: 0;
+    left: 0;
+}
+
+.mango-toast-container.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+.mango-toast-container.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.mango-toast-container.top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mango-toast-container.bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mango-toast-item {
+    pointer-events: auto;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--borderColor, #e5e7eb);
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --toast-primary: var(--primaryColor, #ffc107);
+}
+
+/* Animations */
+.mango-toast-enter {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.mango-toast-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.mango-toast-exit {
+    transform: scale(0.95);
+    opacity: 0;
+}
+
+/* Variants & Colors */
+.mango-toast-success {
+    --toast-primary: #10b981;
+}
+
+.mango-toast-error {
+    --toast-primary: #ef4444;
+}
+
+.mango-toast-warning {
+    --toast-primary: #f59e0b;
+}
+
+.mango-toast-info {
+    --toast-primary: #3b82f6;
+}
+
+.mango-toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--toast-primary);
+    flex-shrink: 0;
+}
+
+.mango-toast-content {
+    flex: 1;
+}
+
+.mango-toast-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--textColor, #111827);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.mango-toast-description {
+    font-size: 0.88rem;
+    color: var(--labelSecondaryColor, #4b5563);
+    margin: 2px 0 0 0;
+    line-height: 1.5;
+}
+
+.mango-toast-action {
+    margin-top: 8px;
+    background: transparent;
+    border: 1px solid var(--toast-primary);
+    color: var(--toast-primary);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mango-toast-action:hover {
+    background: var(--toast-primary);
+    color: white;
+}
+
+.mango-toast-close {
+    background: transparent;
+    border: none;
+    color: var(--borderColor);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    height: fit-content;
+}
+
+.mango-toast-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--textColor);
+}
+
+/* Progress Bar (The Mango Twist) */
+.mango-toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: var(--toast-primary);
+    opacity: 0.3;
+    width: 100%;
+    transform-origin: left;
+}
+
+@keyframes toast-progress-fade {
+    from {
+        transform: scaleX(1);
+    }
+
+    to {
+        transform: scaleX(0);
+    }
+}
+
+.mango-toast-item.has-duration .mango-toast-progress {
+    animation: toast-progress-fade linear forwards;
+}
+
+/* Dark mode hint */
+[data-theme='dark'] .mango-toast-item {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+[data-theme='dark'] .mango-toast-title {
+    color: white;
+}
+
+[data-theme='dark'] .mango-toast-description {
+    color: #9ca3af;
+}
