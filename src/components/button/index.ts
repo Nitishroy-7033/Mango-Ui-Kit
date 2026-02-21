@@ -1,3 +1,3 @@
 export * from './button';
-export type * from './button.types';
+export type { ButtonProps, ButtonVariant, ButtonSize } from './button.types';
 export * from './button.styles';
