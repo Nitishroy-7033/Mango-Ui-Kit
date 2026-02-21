@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Toggle } from './toggle';
+import type { ToggleProps } from './toggle.types';
 
 const meta: Meta<typeof Toggle> = {
     title: 'Components/Toggle',
@@ -11,18 +12,18 @@ const meta: Meta<typeof Toggle> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ToggleDemo = (args: React.ComponentProps<typeof Toggle>) => {
-    const [checked, setChecked] = useState(args.checked ?? false);
-    return <Toggle {...args} checked={checked} onChange={setChecked} />;
+const ToggleDemo = (props: ToggleProps) => {
+    const [checked, setChecked] = useState(props.checked ?? false);
+    return <Toggle {...props} checked={checked} onChange={setChecked} />;
 };
 
 export const Default: Story = {
-    render: (args) => <ToggleDemo {...args} />,
+    render: (args: ToggleProps) => <ToggleDemo {...args} />,
     args: { label: 'Enable notifications' },
 };
 
 export const Checked: Story = {
-    render: (args) => <ToggleDemo {...args} />,
+    render: (args: ToggleProps) => <ToggleDemo {...args} />,
     args: { label: 'Dark mode', checked: true },
 };
 
@@ -31,11 +32,11 @@ export const Disabled: Story = {
 };
 
 export const LabelRight: Story = {
-    render: (args) => <ToggleDemo {...args} />,
-    args: { label: 'Auto-save', labelPosition: 'right' },
+    render: (args: ToggleProps) => <ToggleDemo {...args} />,
+    args: { label: 'Auto-save' },
 };
 
 export const NoLabel: Story = {
-    render: (args) => <ToggleDemo {...args} />,
+    render: (args: ToggleProps) => <ToggleDemo {...args} />,
     args: {},
 };

@@ -1,6 +1,25 @@
 {
   "name": "mango-ui-kit",
   "version": "1.0.0",
+  "description": "A premium, modern React UI component library built with TypeScript and Tailwind CSS.",
+  "keywords": [
+    "react",
+    "ui-kit",
+    "components",
+    "typescript",
+    "tailwind",
+    "premium-ui"
+  ],
+  "author": "Mango UI Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nitishroy-7033/Mango-Ui-Kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nitishroy-7033/Mango-Ui-Kit/issues"
+  },
+  "homepage": "https://github.com/Nitishroy-7033/Mango-Ui-Kit#readme",
   "type": "module",
   "main": "dist/mango-ui-kit.umd.cjs",
   "module": "dist/mango-ui-kit.js",

@@ -1,8 +1,9 @@
 export interface ProgressBarProps {
-  value: number;
-  max?: number;
+  progress?: number;
   label?: string;
-  showValue?: boolean;
+  showPercentage?: boolean;
+  size?: 'sm' | 'md' | 'lg';
   color?: string;
+  animated?: boolean;
   className?: string;
 }

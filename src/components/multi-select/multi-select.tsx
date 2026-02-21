@@ -16,16 +16,17 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleOption = (optionId: string) => {
-    const newValue = value.includes(optionId)
-      ? value.filter(id => id !== optionId)
-      : [...value, optionId];
+  const toggleOption = (optionId: string | number) => {
+    const currentValues = value || [];
+    const newValue = currentValues.includes(optionId)
+      ? currentValues.filter(id => id !== optionId)
+      : [...currentValues, optionId];
     onChange(newValue);
   };
 
-  const removeOption = (e: React.MouseEvent, optionId: string) => {
+  const removeOption = (e: React.MouseEvent, optionId: string | number) => {
     e.stopPropagation();
-    onChange(value.filter(id => id !== optionId));
+    onChange((value || []).filter(id => id !== optionId));
   };
 
   useEffect(() => {

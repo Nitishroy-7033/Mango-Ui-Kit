@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Globe } from 'lucide-react';
 import { Dropdown } from './dropdown';
+import type { DropdownProps } from './dropdown.types';
 
 const meta: Meta<typeof Dropdown> = {
     title: 'Components/Dropdown',
@@ -20,31 +21,31 @@ const options = [
     { id: 'de', name: 'Germany', details: 'Europe' },
 ];
 
-const DropdownDemo = (args: React.ComponentProps<typeof Dropdown>) => {
-    const [value, setValue] = useState<string | number>('');
+const DropdownDemo = (props: DropdownProps) => {
+    const [value, setValue] = useState<string>(props.value || '');
     return (
         <div style={{ width: 280 }}>
-            <Dropdown {...args} value={value} onChange={setValue} />
+            <Dropdown {...props} value={value} onChange={setValue} />
         </div>
     );
 };
 
 export const Default: Story = {
-    render: (args) => <DropdownDemo {...args} />,
+    render: (args: DropdownProps) => <DropdownDemo {...args} />,
     args: { options, placeholder: 'Select a country', label: 'Country' },
 };
 
 export const Searchable: Story = {
-    render: (args) => <DropdownDemo {...args} />,
+    render: (args: DropdownProps) => <DropdownDemo {...args} />,
     args: { options, placeholder: 'Select a country', label: 'Country', searchable: true },
 };
 
 export const WithIcon: Story = {
-    render: (args) => <DropdownDemo {...args} />,
+    render: (args: DropdownProps) => <DropdownDemo {...args} />,
     args: { options, placeholder: 'Select region', label: 'Region', icon: Globe },
 };
 
 export const Disabled: Story = {
-    render: (args) => <DropdownDemo {...args} />,
+    render: (args: DropdownProps) => <DropdownDemo {...args} />,
     args: { options, placeholder: 'Disabled', disabled: true },
 };

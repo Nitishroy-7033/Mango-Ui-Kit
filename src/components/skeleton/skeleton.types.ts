@@ -7,4 +7,6 @@ export interface SkeletonProps {
   borderRadius?: string | number;
   className?: string;
   count?: number;
+  animate?: boolean;
+  shimmer?: boolean;
 }

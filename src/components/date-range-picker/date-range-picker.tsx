@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '../../utils/cn';
-import type { DateRangePickerProps, DateRange } from './date-range-picker.types';
+import type { DateRangePickerProps } from './date-range-picker.types';
 import './date-range-picker.css';
 
 export const DateRangePicker: React.FC<DateRangePickerProps> = ({
@@ -109,9 +109,9 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
             <div className={cn('range-input-trigger', isOpen && 'active')} onClick={() => setIsOpen(!isOpen)}>
                 <CalendarIcon size={16} />
                 <div className="date-display">
-                    <span>{value.startDate || 'Start date'}</span>
+                    <span>{value.startDate || placeholder.split('-')[0] || 'Start date'}</span>
                     <span className="separator">-</span>
-                    <span>{value.endDate || 'End date'}</span>
+                    <span>{value.endDate || placeholder.split('-')[1] || 'End date'}</span>
                 </div>
             </div>
 
