@@ -1,47 +1,90 @@
 # AppBar 🥭
 
-A full-featured application top navigation bar with search, theme toggling, notifications, and user profile management.
+An extremely flexible, high-performance navigation bar. It supports multiple layout patterns including standard App Bars, Marketing NavBars, and Landing Page headers.
 
 ## Features
-- 🔍 **Search Bar**: Integrated search input with callback.
-- 🌓 **Theme Toggle**: built-in sun/moon toggle for light and dark modes.
-- 👑 **Subscription Badge**: Displays current plan (e.g., Free, Pro, Enterprise).
-- ⚡ **Upgrade Button**: Contextual "Upgrade" button for free users.
-- 👤 **Profile Menu**: Animated dropdown menu for profile, settings, and logout.
-- 🔔 **Notifications**: Bell icon with red indicator for new notifications.
-- 📱 **Responsive**: Menu toggle button for triggering sidebar on small screens.
+- 🎨 **5 Visual Styles**: `glass`, `flat`, `bordered`, `sticky`, and `floating`.
+- 📍 **Layout Inserts**: Add any custom component into `leftContent`, `centerContent`, or `rightContent`.
+- 📂 **Multi-level Nav**: Support for navigation items with nested dropdown menus.
+- 👤 **Integrated Profile**: Built-in user menu with avatar fallbacks and logout handling.
+- 📱 **Mobile Ready**: Intelligent responsiveness that hides complex elements and shows a menu toggle on small screens.
+- 🌈 **Full Color Control**: Override background, text, and border colors via props.
 
 ## Usage
 
+### 🚀 Standard Dashboard
 ```tsx
 import { AppBar } from 'mango-ui-kit';
+import { Layout } from 'lucide-react';
 
 <AppBar
-  user={{
-    fullName: "Nitish Roy",
-    email: "nitish@example.com",
-    avatarUrl: "/avatars/nitish.jpg"
-  }}
-  subscriptionPlan="Free"
-  onUpgrade={() => console.log('Upgrade clicked')}
-  onSearch={(query) => console.log('Searching for:', query)}
-  notificationCount={3}
-  theme="dark"
-  onToggleTheme={() => toggleMyTheme()}
+  brandName="MangoDash"
+  logo={<Layout />}
+  navItems={[
+    { label: 'Market', active: true },
+    { label: 'Inventory', children: [{ label: 'Stock' }, { label: 'Orders' }] }
+  ]}
+  user={{ fullName: 'John Doe', avatarUrl: '/avatar.png' }}
+  notificationCount={5}
+/>
+```
+
+### 💎 Marketing NavBar
+```tsx
+import { AppBar, Button } from 'mango-ui-kit';
+
+<AppBar
+  variant="glass"
+  brandName="BrandName"
+  showSearch={false}
+  rightContent={
+    <div className="flex gap-2">
+      <Button variant="ghost">Login</Button>
+      <Button variant="primary" rounded="full">Sign Up</Button>
+    </div>
+  }
 />
 ```
 
 ## Props
 
+### 📐 Layout & Style
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `AppBarVariant` | `'glass'` | Visual style (`glass`, `flat`, `bordered`, `sticky`, `floating`).|
+| `sticky` | `boolean` | `true` | Pins the bar to the top of the viewport. |
+| `fixed` | `boolean` | `false` | Sets `position: fixed` for overlaying content. |
+| `logo` | `ReactNode` | - | Image or Icon for the brand. |
+| `brandName` | `string` | - | Text displayed next to the logo. |
+
+### 🧩 Content Injection
+| Prop | Type | Description |
+| --- | --- | --- |
+| `leftContent` | `ReactNode` | Extra items to add to the left section (after brand). |
+| `centerContent`| `ReactNode` | Custom content for the middle area. |
+| `rightContent` | `ReactNode` | Custom buttons/icons for the right section. |
+| `navItems` | `NavItem[]` | List of navigation links (supports icons and sub-menus). |
+
+### 👤 Dashboard Logic
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `user` | `UserObject` | - | Contains `fullName`, `email`, and `avatarUrl`. |
-| `theme` | `'light' \| 'dark'` | `'light'` | Current theme mode for the icons. |
-| `onToggleTheme` | `() => void` | - | Callback triggered when the theme toggle is clicked. |
-| `onToggleSidebar`| `() => void` | - | Callback for the mobile menu button. |
-| `onUpgrade` | `() => void` | - | Callback for the "Upgrade" button. |
-| `subscriptionPlan`| `string` | - | Plan name (e.g. "Free", "Pro"). Shows "Free" as a special badge. |
-| `onSearch` | `(val: string) => void` | - | Callback for input changes in the search bar. |
-| `notificationCount`| `number` | `0` | Number of notifications to show in the dot. |
-| `onLogout` | `() => void` | - | Callback triggered from the profile dropdown logout button. |
-| `searchPlaceholder`| `string` | `'Search...'` | Placeholder for the search input. |
+| `subscriptionPlan`| `string` | - | Displays a status badge (e.g. "Business"). |
+| `notificationCount`| `number` | `0` | Count shown on the notification bell. |
+| `showSearch` | `boolean` | `true` | Toggles the central search bar. |
+| `showThemeToggle` | `boolean` | `true` | Toggles the light/dark mode switch. |
+
+### 🎨 Color Branding
+| Prop | Type | Description |
+| --- | --- | --- |
+| `bgColor` | `string` | Custom background color. |
+| `textColor` | `string` | Custom text color. |
+| `borderColor` | `string` | Custom bottom border color. |
+| `accentColor` | `string` | Custom color for active links and badges. |
+
+### NavItem (Type)
+- `label` (string): Text to display.
+- `icon` (Component): Optional Lucide icon.
+- `active` (boolean): Highlights the link.
+- `children` (NavItem[]): Nested items for a dropdown menu.
+- `onClick` (function): Navigation callback.

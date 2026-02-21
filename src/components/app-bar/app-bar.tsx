@@ -1,28 +1,82 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bell, ChevronDown, Moon, Sun, ArrowUpCircle, LogOut, User, Settings, Crown, Menu } from 'lucide-react';
+import { Bell, ChevronDown, Moon, Sun, LogOut, User, Settings, Crown, Menu, Search } from 'lucide-react';
 import { cn } from '../../utils/cn';
-import type { AppBarProps } from './app-bar.types';
+import type { AppBarProps, NavItem } from './app-bar.types';
 import './app-bar.css';
 
+const NavLink: React.FC<{ item: NavItem }> = ({ item }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const Icon = item.icon;
+
+  const hasChildren = item.children && item.children.length > 0;
+
+  return (
+    <div
+      className={cn('nav-item-dropdown', hasChildren && 'has-children')}
+      onMouseEnter={() => hasChildren && setIsOpen(true)}
+      onMouseLeave={() => hasChildren && setIsOpen(false)}
+    >
+      <button
+        className={cn('nav-link', item.active && 'active')}
+        onClick={() => item.onClick?.()}
+      >
+        {Icon && <Icon size={18} />}
+        <span>{item.label}</span>
+        {hasChildren && <ChevronDown size={14} className={cn('nav-arrow', isOpen && 'rotated')} />}
+      </button>
+
+      {hasChildren && isOpen && (
+        <div className="nav-dropdown-menu">
+          {item.children?.map((child, idx) => (
+            <button
+              key={idx}
+              className="dropdown-item"
+              onClick={() => child.onClick?.()}
+            >
+              {child.icon && <child.icon size={16} />}
+              <span>{child.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const AppBar: React.FC<AppBarProps> = ({
-  theme = 'light',
-  onToggleTheme,
-  onToggleSidebar,
+  variant = 'glass',
+  sticky = true,
+  fixed = false,
+  logo,
+  brandName,
+  leftContent,
+  centerContent,
+  rightContent,
+  navItems = [],
   user,
   onLogout,
-  onUpgrade,
   subscriptionPlan,
+  notificationCount = 0,
+  showThemeToggle = true,
+  theme = 'light',
+  onToggleTheme,
+  showSidebarToggle = false,
+  onToggleSidebar,
+  showSearch = true,
   searchPlaceholder = 'Search...',
   onSearch,
-  notificationCount = 0,
   className,
+  bgColor,
+  textColor,
+  borderColor,
+  accentColor,
 }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
         setShowUserMenu(false);
       }
     };
@@ -30,103 +84,117 @@ export const AppBar: React.FC<AppBarProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const isFree = subscriptionPlan?.toLowerCase() === 'free';
+  const styles = {
+    '--primaryContainercolor': bgColor,
+    '--textColor': textColor,
+    '--borderColor': borderColor,
+    '--primaryColor': accentColor,
+  } as React.CSSProperties;
 
   return (
-    <header className={cn('app-bar', className)}>
-      {onToggleSidebar && (
-        <button
-          className="menu-toggle-btn"
-          onClick={onToggleSidebar}
-          title="Toggle Sidebar"
-        >
-          <Menu size={20} />
-        </button>
+    <header
+      className={cn(
+        'app-bar',
+        `app-bar-variant-${variant}`,
+        sticky && 'app-bar-sticky',
+        fixed && 'app-bar-fixed',
+        className
       )}
+      style={styles}
+    >
+      {/* ── LEFT SECTION ── */}
+      <div className="app-bar-left">
+        {showSidebarToggle && (
+          <button className="mobile-menu-btn" onClick={onToggleSidebar}>
+            <Menu size={24} />
+          </button>
+        )}
 
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder={searchPlaceholder}
-          className="search-input-full"
-          onChange={(e) => onSearch?.(e.target.value)}
-        />
+        {(logo || brandName) && (
+          <div className="app-bar-brand">
+            {logo && <div className="app-bar-logo">{logo}</div>}
+            {brandName && <span className="app-bar-brand-name">{brandName}</span>}
+          </div>
+        )}
+
+        {leftContent}
+
+        <nav className="app-bar-nav">
+          {navItems.map((item, idx) => (
+            <NavLink key={idx} item={item} />
+          ))}
+        </nav>
       </div>
 
-      <div className="app-bar-actions">
+      {/* ── CENTER SECTION ── */}
+      <div className="app-bar-center">
+        {centerContent}
+
+        {showSearch && (
+          <div className="app-bar-search">
+            <Search size={18} className="search-icon" />
+            <input
+              type="text"
+              className="app-bar-search-input"
+              placeholder={searchPlaceholder}
+              onChange={(e) => onSearch?.(e.target.value)}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* ── RIGHT SECTION ── */}
+      <div className="app-bar-right">
+        {rightContent}
+
         {subscriptionPlan && (
           <div className={cn('plan-badge', subscriptionPlan.toLowerCase())}>
-            <Crown size={14} className="medal-icon" />
-            <span>{subscriptionPlan} Plan</span>
+            <Crown size={14} />
+            <span>{subscriptionPlan}</span>
           </div>
         )}
 
-        {isFree && onUpgrade && (
-          <button className="upgrade-btn" onClick={onUpgrade}>
-            <ArrowUpCircle size={18} />
-            <span>Upgrade</span>
+        <div className="app-bar-actions">
+          {showThemeToggle && onToggleTheme && (
+            <button className="nav-link icon-only" onClick={onToggleTheme}>
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
+          )}
+
+          <button className="nav-link icon-only notification-btn">
+            <Bell size={20} />
+            {notificationCount > 0 && <span className="notification-badge">{notificationCount}</span>}
           </button>
-        )}
 
-        <div className="divider" />
+          {user && (
+            <div className="user-profile" ref={userMenuRef}>
+              <button
+                className="user-profile-trigger"
+                onClick={() => setShowUserMenu(!showUserMenu)}
+              >
+                <div className="user-avatar">
+                  {user.avatarUrl ? (
+                    <img src={user.avatarUrl} alt={user.fullName} />
+                  ) : (
+                    <div className="fallback-avatar">{user.fullName?.[0] || 'U'}</div>
+                  )}
+                </div>
+                <ChevronDown size={14} className={cn('dropdown-icon', showUserMenu && 'rotated')} />
+              </button>
 
-        {onToggleTheme && (
-          <button
-            className="icon-btn"
-            onClick={onToggleTheme}
-            title="Toggle Theme"
-          >
-            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-          </button>
-        )}
-
-        <button className="icon-btn notification-btn">
-          <Bell size={20} />
-          {notificationCount > 0 && <span className="notification-dot"></span>}
-        </button>
-
-        <div className="user-profile" ref={menuRef}>
-          <div
-            className="user-profile-trigger"
-            onClick={() => setShowUserMenu(!showUserMenu)}
-          >
-            <div className="user-avatar">
-              {user?.avatarUrl ? (
-                <img src={user.avatarUrl} alt={user.fullName || 'User'} />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-white font-bold text-sm">
-                  {user?.fullName?.[0] ?? 'U'}
+              {showUserMenu && (
+                <div className="user-dropdown-menu">
+                  <div className="dropdown-header">
+                    <p className="dropdown-name">{user.fullName}</p>
+                    <p className="dropdown-email">{user.email}</p>
+                  </div>
+                  <div className="dropdown-divider" />
+                  <button className="dropdown-item"><User size={16} /> Profile</button>
+                  <button className="dropdown-item"><Settings size={16} /> Settings</button>
+                  <div className="dropdown-divider" />
+                  <button className="dropdown-item logout" onClick={onLogout}><LogOut size={16} /> Logout</button>
                 </div>
               )}
-            </div>
-            <div className="user-details">
-              <span className="user-name">{user?.fullName || 'User'}</span>
-              <ChevronDown size={14} className={cn('dropdown-icon', showUserMenu && 'rotated')} />
-            </div>
-          </div>
-
-          {showUserMenu && (
-            <div className="user-dropdown-menu">
-              <div className="dropdown-header">
-                <div className="dropdown-user-info">
-                  <span className="dropdown-name">{user?.fullName || 'User'}</span>
-                  <span className="dropdown-email">{user?.email || 'user@example.com'}</span>
-                </div>
-              </div>
-              <div className="dropdown-divider"></div>
-              <button className="dropdown-item">
-                <User size={16} />
-                <span>My Profile</span>
-              </button>
-              <button className="dropdown-item">
-                <Settings size={16} />
-                <span>Settings</span>
-              </button>
-              <div className="dropdown-divider"></div>
-              <button className="dropdown-item logout" onClick={() => { setShowUserMenu(false); onLogout?.(); }}>
-                <LogOut size={16} />
-                <span>Logout</span>
-              </button>
             </div>
           )}
         </div>
@@ -134,5 +202,3 @@ export const AppBar: React.FC<AppBarProps> = ({
     </header>
   );
 };
-
-AppBar.displayName = 'AppBar';
