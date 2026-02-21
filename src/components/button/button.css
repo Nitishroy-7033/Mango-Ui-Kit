@@ -1,3 +1,7 @@
+/* ═══════════════════════════════════════════════════════════
+   MANGO UI – Button Styles
+   ═══════════════════════════════════════════════════════════ */
+
 /* ── Base ──────────────────────────────────────────────── */
 .mango-btn {
     display: inline-flex;
@@ -17,7 +21,8 @@
         border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
         color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
         box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.2s ease;
 }
 
 .mango-btn:active:not(:disabled) {
@@ -60,7 +65,7 @@
     gap: 10px;
 }
 
-/* ── Variants ──────────────────────────────────────────── */
+/* ═══════ Variants ═══════════════════════════════════════ */
 
 /* Primary */
 .mango-btn-primary {
@@ -71,9 +76,8 @@
 }
 
 .mango-btn-primary:hover:not(:disabled) {
-    background-color: var(--primaryColor);
     filter: brightness(1.08);
-    box-shadow: 0 4px 12px rgba(250, 128, 41, 0.35);
+    box-shadow: 0 4px 14px rgba(250, 128, 41, 0.35);
 }
 
 /* Secondary */
@@ -120,10 +124,46 @@
 .mango-btn-danger:hover:not(:disabled) {
     background-color: #dc2626;
     border-color: #dc2626;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
 }
 
-/* ── Icon Only ─────────────────────────────────────────── */
+/* ── NEW: Dashed ───────────────────────────────────────── */
+.mango-btn-dashed {
+    background-color: transparent;
+    color: var(--primaryColor);
+    border: 2px dashed var(--primaryColor);
+}
+
+.mango-btn-dashed:hover:not(:disabled) {
+    background-color: var(--lightPrimaryColor);
+    border-color: var(--primaryColor);
+}
+
+/* ── NEW: Link ─────────────────────────────────────────── */
+.mango-btn-link {
+    background-color: transparent;
+    color: var(--primaryColor);
+    border-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.mango-btn-link:hover:not(:disabled) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    opacity: 0.85;
+}
+
+.mango-btn-link:active:not(:disabled) {
+    transform: none;
+}
+
+/* ═══════ Modifiers ══════════════════════════════════════ */
+
+/* Icon Only */
 .mango-btn-icon-only {
     padding: 0;
 }
@@ -143,7 +183,7 @@
     height: 48px;
 }
 
-/* ── Full Width ────────────────────────────────────────── */
+/* Full Width */
 .mango-btn-full-width {
     width: 100%;
 }
@@ -151,6 +191,10 @@
 /* ── Rounded ───────────────────────────────────────────── */
 .mango-btn-rounded-none {
     border-radius: 0;
+}
+
+.mango-btn-rounded-sm {
+    border-radius: 6px;
 }
 
 .mango-btn-rounded-md {
@@ -161,13 +205,17 @@
     border-radius: 16px;
 }
 
+.mango-btn-rounded-xl {
+    border-radius: 20px;
+}
+
 .mango-btn-rounded-full {
     border-radius: 9999px;
 }
 
 /* ── Loading spinner ───────────────────────────────────── */
 .mango-btn .mango-btn-spinner {
-    animation: mango-spin 0.75s linear infinite;
+    animation: mango-spin 0.7s linear infinite;
 }
 
 @keyframes mango-spin {
@@ -185,5 +233,131 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    line-height: 0;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ═══════ Hover Effects ═══════════════════════════════════ */
+
+/* Rotate Icon */
+.mango-btn-hover-rotate:hover .mango-btn-icon {
+    transform: rotate(15deg);
+}
+
+/* Slide Icon */
+.mango-btn-hover-slide:hover .mango-btn-icon {
+    transform: translateX(4px);
+}
+
+/* Scale Button */
+.mango-btn-hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.mango-btn-hover-scale:active {
+    transform: scale(0.95);
+}
+
+/* Glow Effect */
+.mango-btn-hover-glow:hover:not(:disabled) {
+    box-shadow: 0 0 20px rgba(250, 128, 41, 0.5);
+}
+
+.mango-btn-danger.mango-btn-hover-glow:hover:not(:disabled) {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SPLIT BUTTON
+   ═══════════════════════════════════════════════════════════ */
+
+.split-btn-wrapper {
+    display: inline-flex;
+    position: relative;
+}
+
+.split-btn-main {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-right: none !important;
+}
+
+.split-btn-trigger {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    min-width: 36px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.split-btn-trigger.mango-btn-secondary,
+.split-btn-trigger.mango-btn-outline,
+.split-btn-trigger.mango-btn-ghost,
+.split-btn-trigger.mango-btn-dashed {
+    border-left: 1px solid var(--borderColor) !important;
+}
+
+/* Dropdown */
+.split-btn-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 180px;
+    background: var(--primaryContainercolor);
+    border: 1px solid var(--borderColor);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 6px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px) scale(0.98);
+    transition:
+        opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.18s;
+}
+
+.split-btn-dropdown.split-btn-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.split-btn-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-family, 'General Sans', sans-serif);
+    color: var(--textColor);
+    background: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    text-align: left;
+}
+
+.split-btn-action:hover {
+    background-color: var(--secondaryColor);
+}
+
+.split-btn-action-danger {
+    color: #ef4444;
+}
+
+.split-btn-action-danger:hover {
+    background-color: #fef2f2;
+}
+
+.split-btn-action-icon {
+    display: inline-flex;
+    opacity: 0.7;
     flex-shrink: 0;
 }
