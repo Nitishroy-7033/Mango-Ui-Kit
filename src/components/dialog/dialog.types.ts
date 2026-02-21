@@ -35,6 +35,10 @@ export interface DialogProps {
     secondaryButton?: DialogButtonProps;
     /** Whether to show a close (X) icon in the top right */
     showClose?: boolean;
+    /** Whether to show the entire header section (icon + close button) */
+    showHeader?: boolean;
+    /** Whether to show the entire footer section (action buttons) */
+    showFooter?: boolean;
     /** Allow closing by clicking on the backdrop */
     closeOnOverlayClick?: boolean;
     /** Custom width for the dialog (default: 440px) */

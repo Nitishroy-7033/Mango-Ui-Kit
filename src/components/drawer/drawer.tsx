@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { cn } from '../../utils/cn';
@@ -12,9 +12,33 @@ export const Drawer: React.FC<DrawerProps> = ({
   subtitle,
   children,
   footer,
-  width = '420px',
+  position = 'right',
+  size = '420px',
+  showClose = true,
+  showHeader = true,
+  showFooter = true,
   className = '',
+  style,
 }) => {
+  const [mounted, setMounted] = useState(false);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setMounted(true);
+      // Small timeout to ensure the DOM is painted before adding the "active" class
+      const timer = setTimeout(() => setActive(true), 10);
+      document.body.style.overflow = 'hidden';
+      return () => clearTimeout(timer);
+    } else {
+      setActive(false);
+      // Wait for the transition to finish before unmounting (400ms matches CSS)
+      const timer = setTimeout(() => setMounted(false), 400);
+      document.body.style.overflow = 'unset';
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -22,40 +46,58 @@ export const Drawer: React.FC<DrawerProps> = ({
 
     if (isOpen) {
       window.addEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'hidden';
     }
 
     return () => {
       window.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!mounted) return null;
+
+  const sizeValue = typeof size === 'number' ? `${size}px` : size;
+
+  const drawerStyle = {
+    ...style,
+    '--drawer-size': sizeValue,
+  } as React.CSSProperties;
 
   return createPortal(
-    <div className={cn('drawer-overlay', isOpen && 'active')} onClick={onClose}>
+    <div className={cn('mango-drawer-overlay', active && 'active')} onClick={onClose}>
       <div
-        className={cn('common-side-drawer', className, isOpen && 'open')}
-        style={{ '--drawer-width': width } as React.CSSProperties}
+        className={cn(
+          'mango-drawer',
+          `is-${position}`,
+          active && 'open',
+          className
+        )}
+        style={drawerStyle}
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
       >
-        <header className="drawer-header">
-          <div className="header-text">
-            <h2>{title}</h2>
-            {subtitle && <p className="subtitle">{subtitle}</p>}
-          </div>
-          <button className="close-btn" onClick={onClose} aria-label="Close">
-            <X size={24} />
-          </button>
-        </header>
+        {showHeader && (title || showClose) && (
+          <header className="mango-drawer-header">
+            {(title || subtitle) && (
+              <div className="mango-drawer-header-text">
+                {title && <h2 className="mango-drawer-title">{title}</h2>}
+                {subtitle && <p className="mango-drawer-subtitle">{subtitle}</p>}
+              </div>
+            )}
+            {showClose && (
+              <button className="mango-drawer-close-btn" onClick={onClose} aria-label="Close">
+                <X size={20} />
+              </button>
+            )}
+          </header>
+        )}
 
-        <div className="drawer-body">
+        <div className="mango-drawer-body">
           {children}
         </div>
 
-        {footer && (
-          <footer className="drawer-footer">
+        {showFooter && footer && (
+          <footer className="mango-drawer-footer">
             {footer}
           </footer>
         )}

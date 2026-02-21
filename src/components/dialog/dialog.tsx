@@ -17,6 +17,8 @@ export const Dialog: React.FC<DialogProps> = ({
     primaryButton,
     secondaryButton,
     showClose = true,
+    showHeader = true,
+    showFooter = true,
     closeOnOverlayClick = true,
     width = 440,
     borderRadius,
@@ -110,31 +112,37 @@ export const Dialog: React.FC<DialogProps> = ({
                 style={dialogStyle}
             >
                 {/* Header with Icon and Close */}
-                <div className="mango-dialog-header">
-                    <div className={cn('mango-dialog-icon-badge', variant)}>
-                        {icon || getDefaultIcon()}
+                {showHeader && (
+                    <div className="mango-dialog-header">
+                        <div className={cn('mango-dialog-icon-badge', variant)}>
+                            {icon || getDefaultIcon()}
+                        </div>
+                        {showClose && (
+                            <button
+                                className="mango-dialog-close"
+                                onClick={onClose}
+                                aria-label="Close dialog"
+                            >
+                                <X size={20} />
+                            </button>
+                        )}
                     </div>
-                    {showClose && (
-                        <button
-                            className="mango-dialog-close"
-                            onClick={onClose}
-                            aria-label="Close dialog"
-                        >
-                            <X size={20} />
-                        </button>
-                    )}
-                </div>
+                )}
 
                 {/* Content Section */}
-                <div className="mango-dialog-body">
-                    {title && <h2 className="mango-dialog-title">{title}</h2>}
-                    <div className="mango-dialog-description">
-                        {children || description}
+                {(title || description || children) && (
+                    <div className="mango-dialog-body">
+                        {title && <h2 className="mango-dialog-title">{title}</h2>}
+                        {(description || children) && (
+                            <div className="mango-dialog-description">
+                                {children || description}
+                            </div>
+                        )}
                     </div>
-                </div>
+                )}
 
                 {/* Actions Footer */}
-                {(primaryButton || secondaryButton) && (
+                {showFooter && (primaryButton || secondaryButton) && (
                     <div className="mango-dialog-footer">
                         {secondaryButton && renderButton(secondaryButton, false)}
                         {primaryButton && renderButton(primaryButton, true)}
