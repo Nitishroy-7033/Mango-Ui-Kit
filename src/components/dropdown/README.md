@@ -1,56 +1,87 @@
 # Dropdown 🥭
 
-A premium selection component with support for search, rich option metadata, and footer actions.
+A massive, premium selection component designed for high-end SaaS dashboards. Supports multi-selection, search, lazy loading, and advanced trigger interactions.
 
 ## Features
-- 🔍 **Searchable**: Built-in filter mechanism for long lists.
-- 🖼️ **Rich Options**: Each option can have an icon and secondary details text.
-- 🧱 **Structured**: Support for internal labels and footers.
-- ✨ **Animated**: Smooth dropdown opening with arrow rotation.
-- 🔏 **Single Select**: Managed state for selecting one option.
+- ✅ **Multi-select**: Support for selecting multiple items with modern tag visualization.
+- 🔍 **Integrated Search**: Real-time filtering for long option lists.
+- ♻️ **Lazy Loading**: Infinite scroll support (hits API/callback at configurable scroll thresholds).
+- 🖱️ **Triggers**: Open via `click`, `hover`, or `contextMenu` (Right-click).
+- 🏗️ **Placement**: Smart positioning for `top` and `bottom` opening directions.
+- 🎨 **Premium Styling**: Multiple variants (`solid`, `outline`, `ghost`, `plain`) and sizes.
+- 🖼️ **Rich Metadata**: Options support icons, descriptions, and custom rendering.
+- 🪄 **Bridge Interaction**: Integrated hover bridge keeps the menu open even on visual gaps.
 
 ## Usage
 
+### Simple Searchable Dropdown
 ```tsx
 import { Dropdown } from 'mango-ui-kit';
-import { User, Shield } from 'lucide-react';
 import { useState } from 'react';
 
-function MyForm() {
-  const [role, setRole] = useState('user');
+const options = [
+  { id: '1', name: 'Room 101', details: 'AC • Available' },
+  { id: '2', name: 'Room 405', details: 'Non-AC • Occupied' },
+];
 
-  const options = [
-    { id: 'user', name: 'Standard User', details: 'Basic access', icon: <User size={16} /> },
-    { id: 'admin', name: 'Administrator', details: 'Full system access', icon: <Shield size={16} /> },
-  ];
-
-  return (
-    <Dropdown 
-      value={role} 
-      onChange={setRole} 
-      options={options} 
-      label="Choose Role" 
-      searchable 
-    />
-  );
+function Basic() {
+  const [val, setVal] = useState('');
+  return <Dropdown value={val} onChange={setVal} options={options} searchable label="Rooms" />;
 }
+```
+
+### Multi-select with Custom Trigger
+```tsx
+import { Dropdown } from 'mango-ui-kit';
+import { Shield } from 'lucide-react';
+
+<Dropdown 
+  multiple 
+  placeholder="Select Permissions" 
+  variant="outline" 
+  icon={Shield}
+  options={permissionOptions} 
+/>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `options` | `DropdownOption[]`| `[]` | List of options to display. |
-| `value` | `string` | - | ID of the currently selected option. |
-| `onChange` | `(id: string) => void`| - | Callback triggered when an option is selected. |
-| `placeholder` | `string` | `'Select option'` | Text displayed when no option is selected. |
-| `label` | `string` | `'Select'` | Internal label shown inside the menu. |
-| `icon` | `ElementType` | - | Optional icon for the trigger button. |
-| `searchable` | `boolean` | `false` | Enables a search bar inside the menu. |
-| `footer` | `ReactNode` | - | Optional content at the bottom of the menu. |
+| `options` | `DropdownOption[]` | `[]` | Array of options to display. |
+| `value` | `string \| string[]` | - | Current selection (array if `multiple` is true). |
+| `onChange` | `(value: any) => void` | - | Callback when selection changes. |
+| `placeholder` | `string` | `'Select option'` | Text shown when no selection is made. |
+| `multiple` | `boolean` | `false` | Enable multi-selection. |
+| `searchable` | `boolean` | `false` | Enable search bar inside menu. |
+| `trigger` | `'click' \| 'hover' \| 'contextMenu'` | `'click'` | How the menu is opened. |
+| `placement` | `'bottom' \| 'top'` | `'bottom'` | Direction the menu opens. |
+| `variant` | `'default' \| 'outline' \| 'ghost' \| 'plain'` | `'default'` | Visual style of the trigger. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the trigger button. |
+| `loading` | `boolean` | `false` | Shows spinner and disabled state. |
+| `hasMore` | `boolean` | `false` | Used for infinite scroll. |
+| `onLoadMore` | `() => void` | - | Triggered when scrolled to threshold. |
+| `showLabel` | `boolean` | `true` | Show/hide the internal menu header label. |
+| `footer` | `ReactNode` | - | Content at the bottom of the menu. |
+| `maxHeight` | `number \| string` | `300` | Max height of the options list. |
 
-### DropdownOption (Type)
-- `id` (string): Unique identifier.
-- `name` (string): Primary label.
-- `details` (string): Secondary descriptive text.
-- `icon` (ReactNode): Visual icon for the option.
+## DropdownOption Object
+- `id` (string | number): Unique identifier.
+- `name` (string): Display text.
+- `details` (string, optional): Secondary text.
+- `icon` (ReactNode, optional): Icon displayed next to name.
+- `disabled` (boolean, optional): Disable specific option.
+- `group` (string, optional): (Future use) for categorized options.
+
+## Custom Rendering
+You can use the `renderOption` prop to take full control of the item UI:
+```tsx
+<Dropdown 
+  renderOption={(option, isSelected) => (
+    <div className="custom-cell">
+      <strong>{option.name}</strong>
+      <span>{option.customData}</span>
+    </div>
+  )} 
+/>
+```
