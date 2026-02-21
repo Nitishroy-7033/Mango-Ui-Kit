@@ -1,0 +1,11 @@
+import { Meta, StoryObj } from '@storybook/react';
+import { SegmentedControl } from './segmented-control';
+declare const meta: Meta<typeof SegmentedControl>;
+export default meta;
+type Story = StoryObj<typeof SegmentedControl>;
+export declare const Default: Story;
+export declare const Variants: () => import("react/jsx-runtime").JSX.Element;
+export declare const Sizes: () => import("react/jsx-runtime").JSX.Element;
+export declare const WithIcons: () => import("react/jsx-runtime").JSX.Element;
+export declare const FullWidth: () => import("react/jsx-runtime").JSX.Element;
+export declare const DisabledState: () => import("react/jsx-runtime").JSX.Element;

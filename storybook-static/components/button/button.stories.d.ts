@@ -1,0 +1,18 @@
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { Button } from './button';
+declare const meta: Meta<typeof Button>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export declare const AllVariants: Story;
+export declare const HoverEffects: Story;
+export declare const DashedButtons: Story;
+export declare const LinkButtons: Story;
+export declare const IconPosition: Story;
+export declare const Loading: Story;
+export declare const SplitButtonStory: Story;
+export declare const CustomColors: Story;
+export declare const Rounded: Story;
+export declare const Sizes: Story;
+export declare const IconOnly: Story;
+export declare const FullWidth: Story;
+export declare const Playground: Story;

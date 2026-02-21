@@ -1,0 +1,13 @@
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { MultiSelect } from './multi-select';
+declare const meta: Meta<typeof MultiSelect>;
+export default meta;
+type Story = StoryObj<typeof MultiSelect>;
+export declare const Default: Story;
+export declare const WithIcons: Story;
+export declare const WithoutIcons: Story;
+export declare const RichUI: Story;
+export declare const PaginationAndLoading: Story;
+export declare const SizesAndVariants: Story;
+export declare const PreSelected: Story;
+export declare const WithFooter: Story;

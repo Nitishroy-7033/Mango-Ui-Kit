@@ -1,0 +1,11 @@
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { MediaUploader } from './media-uploader';
+declare const meta: Meta<typeof MediaUploader>;
+export default meta;
+type Story = StoryObj<typeof MediaUploader>;
+export declare const Default: Story;
+export declare const AvatarMode: Story;
+export declare const GridGalleryLayout: Story;
+export declare const MiniTriggers: Story;
+export declare const CustomUIReference: Story;
+export declare const Constraints: Story;

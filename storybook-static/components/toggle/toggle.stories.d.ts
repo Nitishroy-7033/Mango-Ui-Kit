@@ -1,0 +1,14 @@
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { Toggle } from './toggle';
+declare const meta: Meta<typeof Toggle>;
+export default meta;
+type Story = StoryObj<typeof Toggle>;
+export declare const Default: Story;
+export declare const AllVariants: Story;
+export declare const Sizes: Story;
+export declare const WithIcons: Story;
+export declare const WithLabels: Story;
+export declare const WithDescription: Story;
+export declare const CustomColors: Story;
+export declare const RealWorldSettings: Story;
+export declare const Disabled: Story;

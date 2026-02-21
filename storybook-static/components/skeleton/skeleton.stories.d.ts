@@ -1,0 +1,10 @@
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { Skeleton } from './skeleton';
+declare const meta: Meta<typeof Skeleton>;
+export default meta;
+type Story = StoryObj<typeof Skeleton>;
+export declare const Default: Story;
+export declare const Composition: Story;
+export declare const MultipleLines: Story;
+export declare const Variants: Story;
+export declare const CustomRadius: Story;

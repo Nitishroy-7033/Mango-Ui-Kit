@@ -1,0 +1,10 @@
+import { Meta, StoryObj } from '@storybook/react';
+import { Radio } from './radio';
+declare const meta: Meta<typeof Radio>;
+export default meta;
+type Story = StoryObj<typeof Radio>;
+export declare const Default: Story;
+export declare const Variants: () => import("react/jsx-runtime").JSX.Element;
+export declare const Sizes: () => import("react/jsx-runtime").JSX.Element;
+export declare const States: () => import("react/jsx-runtime").JSX.Element;
+export declare const Group: () => import("react/jsx-runtime").JSX.Element;

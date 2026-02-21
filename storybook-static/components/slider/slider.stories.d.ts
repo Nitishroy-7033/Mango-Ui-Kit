@@ -1,0 +1,12 @@
+import { Meta, StoryObj } from '@storybook/react';
+import { Slider } from './slider';
+declare const meta: Meta<typeof Slider>;
+export default meta;
+type Story = StoryObj<typeof Slider>;
+export declare const Default: Story;
+export declare const Range: () => import("react/jsx-runtime").JSX.Element;
+export declare const Variants: () => import("react/jsx-runtime").JSX.Element;
+export declare const Sizes: () => import("react/jsx-runtime").JSX.Element;
+export declare const WithMarks: () => import("react/jsx-runtime").JSX.Element;
+export declare const CustomColor: () => import("react/jsx-runtime").JSX.Element;
+export declare const Disabled: () => import("react/jsx-runtime").JSX.Element;

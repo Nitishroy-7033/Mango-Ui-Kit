@@ -1,0 +1,13 @@
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { Tooltip } from './tooltip';
+declare const meta: Meta<typeof Tooltip>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export declare const Default: Story;
+export declare const Positions: Story;
+export declare const OnText: Story;
+export declare const OnIcon: Story;
+export declare const OnIconButtons: Story;
+export declare const OnCustomElement: Story;
+export declare const WithDelay: Story;
+export declare const RichContent: Story;

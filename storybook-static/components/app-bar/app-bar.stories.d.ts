@@ -1,0 +1,10 @@
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { AppBar } from './app-bar';
+declare const meta: Meta<typeof AppBar>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export declare const ModernDashboard: Story;
+export declare const MarketingNavBar: Story;
+export declare const FloatingNavBar: Story;
+export declare const FullControl: Story;
+export declare const BrandedTheme: Story;

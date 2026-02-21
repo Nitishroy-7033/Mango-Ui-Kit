@@ -1,0 +1,13 @@
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { ProgressBar, CircularProgress } from './progress-bar';
+declare const meta: Meta<typeof ProgressBar>;
+export default meta;
+type Story = StoryObj<typeof ProgressBar>;
+export declare const AllLinearVariants: Story;
+export declare const SemanticColors: Story;
+export declare const Sizes: Story;
+export declare const Stepped: Story;
+export declare const Stacked: Story;
+export declare const Circular: StoryObj<typeof CircularProgress>;
+export declare const CircularSizes: StoryObj<typeof CircularProgress>;
+export declare const RealWorldDashboard: Story;
