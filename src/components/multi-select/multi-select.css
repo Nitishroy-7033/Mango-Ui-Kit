@@ -8,14 +8,14 @@
     --ms-border: var(--borderColor, #e5e7eb);
     --ms-bg: var(--primaryContainercolor, #ffffff);
     --ms-text: var(--textColor, #1f2937);
-    --ms-tag-bg: rgba(250, 128, 41, 0.08);
+    --ms-tag-bg: var(--lightPrimaryColor, rgba(250, 128, 41, 0.08));
     --ms-tag-text: var(--primaryColor, #fa8029);
 }
 
 .mango-multi-select-label {
     font-size: 0.88rem;
     font-weight: 600;
-    color: var(--labelSecondaryColor, #4b5563);
+    color: var(--labelColor, #4b5563);
     margin-left: 2px;
 }
 
@@ -62,7 +62,7 @@
     border-radius: 6px;
     font-size: 0.8rem;
     font-weight: 600;
-    border: 1px solid rgba(250, 128, 41, 0.2);
+    border: 1px solid var(--borderColor);
     animation: mango-tag-pop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -84,7 +84,7 @@
 }
 
 .placeholder {
-    color: #9ca3af;
+    color: var(--labelSecondaryColor, #9ca3af);
     font-size: 0.88rem;
 }
 
@@ -92,12 +92,12 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #9ca3af;
+    color: var(--labelSecondaryColor, #9ca3af);
 }
 
 .clear-all {
     cursor: pointer;
-    color: #9ca3af;
+    color: var(--labelSecondaryColor, #9ca3af);
     transition: color 0.2s;
 }
 
@@ -121,10 +121,10 @@
     top: calc(100% + 6px);
     left: 0;
     right: 0;
-    background: white;
+    background: var(--primaryContainercolor, white);
     border: 1px solid var(--ms-border);
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     overflow: hidden;
     display: flex;
@@ -138,7 +138,7 @@
     gap: 8px;
     border-bottom: 1px solid var(--ms-border);
     background: var(--secondaryColor);
-    color: #9ca3af;
+    color: var(--labelSecondaryColor, #9ca3af);
 }
 
 .mango-multi-select-search input {
@@ -187,13 +187,14 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
-    background: white;
-    color: white;
+    background: var(--primaryContainercolor, white);
+    color: transparent;
 }
 
 .option-checkbox.checked {
     background: var(--primaryColor);
     border-color: var(--primaryColor);
+    color: white;
 }
 
 .option-content {
@@ -210,7 +211,7 @@
 
 .option-details {
     font-size: 0.75rem;
-    opacity: 0.6;
+    color: var(--labelSecondaryColor);
 }
 
 .no-results,
