@@ -1,51 +1,128 @@
+/* ══════════════════════════════════════════════════════
+   Mango Toggle Component
+   ══════════════════════════════════════════════════════ */
+
+/* ── Base Container ───────────────────────────────── */
 .mango-toggle-container {
     display: inline-flex;
     align-items: center;
     gap: 12px;
     cursor: pointer;
     user-select: none;
-    transition: opacity 0.2s;
+    outline: none;
+    position: relative;
+}
+
+.mango-toggle-container:focus-visible .mango-toggle-root {
+    box-shadow: 0 0 0 3px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.3);
 }
 
 .mango-toggle-container.is-disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    opacity: 0.45;
+    pointer-events: none;
 }
 
+/* ── Label Block ─────────────────────────────────── */
+.toggle-label-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.mango-toggle-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--textColor, #383838);
+    line-height: 1.3;
+}
+
+.mango-toggle-description {
+    font-size: 0.78rem;
+    color: var(--labelSecondaryColor, #94a3b8);
+    line-height: 1.4;
+}
+
+/* ── Track Root ──────────────────────────────────── */
 .mango-toggle-root {
     position: relative;
     display: flex;
     align-items: center;
-    background: var(--borderColor, #e2e8f0);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+    background: var(--borderColor, #d1d5db);
+    transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s,
+        box-shadow 0.3s;
+    flex-shrink: 0;
 }
 
+/* ── Thumb ───────────────────────────────────────── */
 .mango-toggle-thumb {
     position: absolute;
-    left: 4px;
+    left: 3px;
     background: #ffffff;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        width 0.2s ease,
+        height 0.2s ease;
     z-index: 2;
+    border-radius: inherit;
 }
 
+/* ── Icon inside thumb ───────────────────────────── */
 .mango-toggle-icon {
     opacity: 0;
-    transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s;
     display: flex;
+    position: absolute;
 }
 
 .mango-toggle-icon.is-visible {
     opacity: 1;
 }
 
-/* ── Sizes ─────────────────────────────────────────── */
+/* ── Track ON/OFF labels ─────────────────────────── */
+.toggle-track-on,
+.toggle-track-off {
+    position: absolute;
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 1;
+}
 
+.toggle-track-on {
+    right: 6px;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0;
+}
+
+.toggle-track-off {
+    left: 6px;
+    color: rgba(0, 0, 0, 0.35);
+    opacity: 1;
+}
+
+.mango-toggle-root.is-checked .toggle-track-on {
+    opacity: 1;
+    right: unset;
+    left: 6px;
+}
+
+.mango-toggle-root.is-checked .toggle-track-off {
+    opacity: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   SIZES
+   ══════════════════════════════════════════════════════ */
+
+/* SM */
 .toggle-sm .mango-toggle-root {
     width: 32px;
     height: 18px;
@@ -53,105 +130,289 @@
 }
 
 .toggle-sm .mango-toggle-thumb {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
+    border-radius: 7px;
 }
 
-.toggle-sm.checked .mango-toggle-thumb {
-    transform: translateX(14px);
+.toggle-sm .is-checked .mango-toggle-thumb {
+    transform: translateX(13px);
 }
 
+/* MD */
 .toggle-md .mango-toggle-root {
-    width: 44px;
-    height: 24px;
-    border-radius: 12px;
+    width: 46px;
+    height: 26px;
+    border-radius: 13px;
 }
 
 .toggle-md .mango-toggle-thumb {
-    width: 20px;
-    height: 20px;
+    width: 21px;
+    height: 21px;
+    border-radius: 11px;
 }
 
-.toggle-md.checked .mango-toggle-thumb {
-    transform: translateX(20px);
+.toggle-md .is-checked .mango-toggle-thumb {
+    transform: translateX(19px);
 }
 
+/* LG */
 .toggle-lg .mango-toggle-root {
-    width: 56px;
-    height: 32px;
-    border-radius: 16px;
+    width: 60px;
+    height: 34px;
+    border-radius: 17px;
 }
 
 .toggle-lg .mango-toggle-thumb {
     width: 28px;
     height: 28px;
+    border-radius: 14px;
 }
 
-.toggle-lg.checked .mango-toggle-thumb {
-    transform: translateX(24px);
+.toggle-lg .is-checked .mango-toggle-thumb {
+    transform: translateX(25px);
 }
 
-/* ── Variants ─────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════
+   VARIANTS
+   ══════════════════════════════════════════════════════ */
 
-/* 1. Solid (Modern Mango) */
-.mango-toggle-root.is-solid.checked {
+/* ── 1. Solid (Default) ───────────────────────────── */
+.mango-toggle-root.is-solid.is-checked {
     background: var(--toggle-color, var(--primaryColor, #fa8029));
 }
 
-/* 2. iOS Style */
+/* ── 2. iOS ──────────────────────────────────────── */
 .mango-toggle-root.is-ios {
-    background: #e9e9ea;
+    background: #d1d1d6;
 }
 
-.mango-toggle-root.is-ios.checked {
+.mango-toggle-root.is-ios.is-checked {
     background: #34c759;
-    /* Standard iOS Green */
 }
 
-/* 3. Modern Minimal */
+/* ── 3. Modern (Outline) ─────────────────────────── */
 .mango-toggle-root.is-modern {
     background: transparent;
-    border: 2px solid var(--borderColor);
+    border: 2px solid var(--borderColor, #d1d5db);
 }
 
 .mango-toggle-root.is-modern .mango-toggle-thumb {
-    background: var(--borderColor);
+    background: var(--borderColor, #d1d5db);
     box-shadow: none;
+    width: 11px;
+    height: 11px;
+    left: 4px;
 }
 
-.mango-toggle-root.is-modern.checked {
-    border-color: var(--toggle-color, var(--primaryColor));
+.toggle-md .mango-toggle-root.is-modern .mango-toggle-thumb {
+    width: 16px;
+    height: 16px;
 }
 
-.mango-toggle-root.is-modern.checked .mango-toggle-thumb {
-    background: var(--toggle-color, var(--primaryColor));
+.toggle-lg .mango-toggle-root.is-modern .mango-toggle-thumb {
+    width: 22px;
+    height: 22px;
 }
 
-/* 4. Glassmorphism */
+.mango-toggle-root.is-modern.is-checked {
+    border-color: var(--toggle-color, var(--primaryColor, #fa8029));
+}
+
+.mango-toggle-root.is-modern.is-checked .mango-toggle-thumb {
+    background: var(--toggle-color, var(--primaryColor, #fa8029));
+}
+
+/* ── 4. Glass ────────────────────────────────────── */
 .mango-toggle-root.is-glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mango-toggle-root.is-glass.checked {
-    background: rgba(250, 128, 41, 0.2);
-    border-color: rgba(250, 128, 41, 0.3);
-}
-
-/* ── Label & UI ────────────────────────────────────── */
-
-.mango-toggle-label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--textColor);
-}
-
-/* Dark Mode Adjustments */
-[data-theme='dark'] .mango-toggle-root:not(.checked) {
     background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.mango-toggle-root.is-glass.is-checked {
+    background: rgba(var(--primaryColor-rgb, 250, 128, 41), 0.25);
+    border-color: rgba(var(--primaryColor-rgb, 250, 128, 41), 0.4);
+}
+
+.mango-toggle-root.is-glass .mango-toggle-thumb {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* ── 5. Square ───────────────────────────────────── */
+.mango-toggle-root.is-square {
+    border-radius: 5px !important;
+}
+
+.toggle-sm .mango-toggle-root.is-square .mango-toggle-thumb {
+    border-radius: 3px;
+}
+
+.toggle-md .mango-toggle-root.is-square .mango-toggle-thumb {
+    border-radius: 4px;
+}
+
+.toggle-lg .mango-toggle-root.is-square .mango-toggle-thumb {
+    border-radius: 5px;
+}
+
+.mango-toggle-root.is-square.is-checked {
+    background: var(--toggle-color, var(--primaryColor, #fa8029));
+}
+
+/* ── 6. Pill-Slim ────────────────────────────────── */
+.toggle-sm .mango-toggle-root.is-pill-slim {
+    width: 36px;
+    height: 14px;
+    border-radius: 7px;
+}
+
+.toggle-md .mango-toggle-root.is-pill-slim {
+    width: 50px;
+    height: 18px;
+    border-radius: 9px;
+}
+
+.toggle-lg .mango-toggle-root.is-pill-slim {
+    width: 64px;
+    height: 22px;
+    border-radius: 11px;
+}
+
+.toggle-sm .mango-toggle-root.is-pill-slim .mango-toggle-thumb {
+    width: 20px;
+    height: 20px;
+    top: -3px;
+    border-radius: 10px;
+}
+
+.toggle-md .mango-toggle-root.is-pill-slim .mango-toggle-thumb {
+    width: 26px;
+    height: 26px;
+    top: -4px;
+    border-radius: 13px;
+}
+
+.toggle-lg .mango-toggle-root.is-pill-slim .mango-toggle-thumb {
+    width: 32px;
+    height: 32px;
+    top: -5px;
+    border-radius: 16px;
+}
+
+.toggle-sm .is-pill-slim.is-checked .mango-toggle-thumb {
+    transform: translateX(15px);
+}
+
+.toggle-md .is-pill-slim.is-checked .mango-toggle-thumb {
+    transform: translateX(22px);
+}
+
+.toggle-lg .is-pill-slim.is-checked .mango-toggle-thumb {
+    transform: translateX(30px);
+}
+
+.mango-toggle-root.is-pill-slim.is-checked {
+    background: var(--toggle-color, var(--primaryColor, #fa8029));
+}
+
+.mango-toggle-root.is-pill-slim .mango-toggle-thumb {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* ── 7. Flat ─────────────────────────────────────── */
+.mango-toggle-root.is-flat {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.mango-toggle-root.is-flat .mango-toggle-thumb {
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.mango-toggle-root.is-flat.is-checked {
+    background: var(--toggle-color, var(--primaryColor, #fa8029));
+}
+
+.mango-toggle-root.is-flat.is-checked .mango-toggle-thumb {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* ── 8. Neon ─────────────────────────────────────── */
+.mango-toggle-root.is-neon {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(var(--primaryColor-rgb, 250, 128, 41), 0.25);
+}
+
+.mango-toggle-root.is-neon .mango-toggle-thumb {
+    background: #ffffff;
+    border: 2px solid rgba(var(--primaryColor-rgb, 250, 128, 41), 0.3);
+}
+
+.mango-toggle-root.is-neon.is-checked {
+    background: rgba(var(--primaryColor-rgb, 250, 128, 41), 0.12);
+    border-color: var(--toggle-color, var(--primaryColor, #fa8029));
+    box-shadow: 0 0 12px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.3),
+        inset 0 0 8px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.1);
+}
+
+.mango-toggle-root.is-neon.is-checked .mango-toggle-thumb {
+    border-color: var(--toggle-color, var(--primaryColor, #fa8029));
+    box-shadow: 0 0 8px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.6);
+}
+
+/* ── 9. Bounce ───────────────────────────────────── */
+.mango-toggle-root.is-bounce.is-checked {
+    background: var(--toggle-color, var(--primaryColor, #fa8029));
+}
+
+.mango-toggle-root.is-bounce .mango-toggle-thumb {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background 0.3s;
+}
+
+/* Squish effect on press */
+.mango-toggle-container:active .mango-toggle-root.is-bounce:not(.is-checked) .mango-toggle-thumb {
+    width: 125%;
+}
+
+.mango-toggle-container:active .mango-toggle-root.is-bounce.is-checked .mango-toggle-thumb {
+    width: 125%;
+    transform: translateX(14px);
+}
+
+/* ══════════════════════════════════════════════════════
+   DARK MODE
+   ══════════════════════════════════════════════════════ */
+
+[data-theme='dark'] .mango-toggle-root:not(.is-checked) {
+    background: rgba(255, 255, 255, 0.12);
 }
 
 [data-theme='dark'] .mango-toggle-thumb {
     background: #e2e8f0;
+}
+
+[data-theme='dark'] .mango-toggle-root.is-ios:not(.is-checked) {
+    background: #3a3a3c;
+}
+
+[data-theme='dark'] .toggle-track-off {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme='dark'] .mango-toggle-root.is-modern:not(.is-checked) {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme='dark'] .mango-toggle-root.is-modern:not(.is-checked) .mango-toggle-thumb {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+[data-theme='dark'] .mango-toggle-root.is-flat:not(.is-checked) {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .mango-toggle-root.is-neon:not(.is-checked) {
+    background: rgba(255, 255, 255, 0.05);
 }
