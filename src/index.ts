@@ -31,6 +31,7 @@ export * from './components/confirmation-modal';
 export * from './components/calendar-date-picker';
 export * from './components/date-range-picker';
 export * from './components/theme-provider';
+export * from './components/tooltip';
 
 export * from './hooks';
 export * from './utils';

@@ -32,7 +32,7 @@ export const Disabled: Story = {
 
 export const LabelRight: Story = {
     render: (args) => <ToggleDemo {...args} />,
-    args: { label: 'Auto-save', labelPosition: 'right' },
+    args: { label: 'Auto-save' },
 };
 
 export const NoLabel: Story = {

@@ -1,0 +1,189 @@
+/* ── Base ──────────────────────────────────────────────── */
+.mango-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-family, 'General Sans', sans-serif);
+    font-weight: 600;
+    border: 2px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    transition:
+        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mango-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.mango-btn:focus-visible {
+    outline: 2px solid var(--primaryColor);
+    outline-offset: 2px;
+}
+
+.mango-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ── Sizes ─────────────────────────────────────────────── */
+.mango-btn-sm {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 12px;
+    border-radius: 8px;
+    gap: 6px;
+}
+
+.mango-btn-md {
+    height: 40px;
+    padding: 0 18px;
+    font-size: 14px;
+    border-radius: 10px;
+    gap: 8px;
+}
+
+.mango-btn-lg {
+    height: 48px;
+    padding: 0 24px;
+    font-size: 16px;
+    border-radius: 12px;
+    gap: 10px;
+}
+
+/* ── Variants ──────────────────────────────────────────── */
+
+/* Primary */
+.mango-btn-primary {
+    background-color: var(--primaryColor);
+    color: #ffffff;
+    border-color: var(--primaryColor);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.mango-btn-primary:hover:not(:disabled) {
+    background-color: var(--primaryColor);
+    filter: brightness(1.08);
+    box-shadow: 0 4px 12px rgba(250, 128, 41, 0.35);
+}
+
+/* Secondary */
+.mango-btn-secondary {
+    background-color: var(--secondaryColor);
+    color: var(--textColor);
+    border-color: var(--borderColor);
+}
+
+.mango-btn-secondary:hover:not(:disabled) {
+    background-color: var(--borderColor);
+}
+
+/* Outline */
+.mango-btn-outline {
+    background-color: transparent;
+    color: var(--primaryColor);
+    border-color: var(--primaryColor);
+}
+
+.mango-btn-outline:hover:not(:disabled) {
+    background-color: var(--lightPrimaryColor);
+}
+
+/* Ghost */
+.mango-btn-ghost {
+    background-color: transparent;
+    color: var(--textColor);
+    border-color: transparent;
+}
+
+.mango-btn-ghost:hover:not(:disabled) {
+    background-color: var(--secondaryColor);
+}
+
+/* Danger */
+.mango-btn-danger {
+    background-color: #ef4444;
+    color: #ffffff;
+    border-color: #ef4444;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.mango-btn-danger:hover:not(:disabled) {
+    background-color: #dc2626;
+    border-color: #dc2626;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+
+/* ── Icon Only ─────────────────────────────────────────── */
+.mango-btn-icon-only {
+    padding: 0;
+}
+
+.mango-btn-icon-only.mango-btn-sm {
+    width: 32px;
+    height: 32px;
+}
+
+.mango-btn-icon-only.mango-btn-md {
+    width: 40px;
+    height: 40px;
+}
+
+.mango-btn-icon-only.mango-btn-lg {
+    width: 48px;
+    height: 48px;
+}
+
+/* ── Full Width ────────────────────────────────────────── */
+.mango-btn-full-width {
+    width: 100%;
+}
+
+/* ── Rounded ───────────────────────────────────────────── */
+.mango-btn-rounded-none {
+    border-radius: 0;
+}
+
+.mango-btn-rounded-md {
+    border-radius: 10px;
+}
+
+.mango-btn-rounded-lg {
+    border-radius: 16px;
+}
+
+.mango-btn-rounded-full {
+    border-radius: 9999px;
+}
+
+/* ── Loading spinner ───────────────────────────────────── */
+.mango-btn .mango-btn-spinner {
+    animation: mango-spin 0.75s linear infinite;
+}
+
+@keyframes mango-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Icon wrappers ─────────────────────────────────────── */
+.mango-btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}

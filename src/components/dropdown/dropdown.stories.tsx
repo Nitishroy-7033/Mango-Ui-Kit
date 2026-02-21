@@ -21,7 +21,7 @@ const options = [
 ];
 
 const DropdownDemo = (args: React.ComponentProps<typeof Dropdown>) => {
-    const [value, setValue] = useState<string | number>('');
+    const [value, setValue] = useState<string>('');
     return (
         <div style={{ width: 280 }}>
             <Dropdown {...args} value={value} onChange={setValue} />

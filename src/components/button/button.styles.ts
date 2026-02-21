@@ -1,20 +1,24 @@
 import { cva } from 'class-variance-authority';
 
+/**
+ * @deprecated Use the Button component directly with variant/size/rounded props.
+ * Styles are now applied via CSS classes internally.
+ */
 export const buttonStyles = cva(
-    'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mango-400 disabled:pointer-events-none disabled:opacity-50',
+    'mango-btn',
     {
         variants: {
             variant: {
-                primary: 'bg-mango-400 text-neutral-950 hover:bg-mango-500 shadow-sm',
-                secondary: 'bg-neutral-800 text-white hover:bg-neutral-700',
-                outline: 'border border-neutral-300 bg-transparent hover:bg-neutral-50',
-                ghost: 'hover:bg-neutral-100 text-neutral-700',
-                danger: 'bg-red-500 text-white hover:bg-red-600',
+                primary: 'mango-btn-primary',
+                secondary: 'mango-btn-secondary',
+                outline: 'mango-btn-outline',
+                ghost: 'mango-btn-ghost',
+                danger: 'mango-btn-danger',
             },
             size: {
-                sm: 'h-8 px-3 text-xs',
-                md: 'h-10 px-4 text-sm',
-                lg: 'h-12 px-6 text-base',
+                sm: 'mango-btn-sm',
+                md: 'mango-btn-md',
+                lg: 'mango-btn-lg',
             },
         },
         defaultVariants: {

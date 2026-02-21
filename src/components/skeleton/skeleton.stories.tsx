@@ -1,5 +1,4 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
+﻿import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Skeleton } from './skeleton';
 
 const meta: Meta<typeof Skeleton> = {
@@ -46,3 +45,4 @@ export const CardSkeleton: Story = {
         </div>
     ),
 };
+

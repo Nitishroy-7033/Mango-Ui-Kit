@@ -1,0 +1,132 @@
+/* ── Container ─────────────────────────────────────────── */
+.tooltip-wrapper {
+    position: relative;
+    display: inline-flex;
+}
+
+/* ── Tooltip bubble ────────────────────────────────────── */
+.tooltip-bubble {
+    position: absolute;
+    z-index: 9999;
+    padding: 8px 14px;
+    font-family: var(--font-family, 'General Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    pointer-events: none;
+    border-radius: 10px;
+
+    /* Theme-aware background */
+    background: var(--primaryContainercolor);
+    color: var(--textColor);
+    border: 1px solid var(--borderColor);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 2px 6px rgba(0, 0, 0, 0.06);
+
+    /* Animation — hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.2s;
+}
+
+/* ── Visible state ─────────────────────────────────────── */
+.tooltip-bubble.tooltip-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ── Arrow ─────────────────────────────────────────────── */
+.tooltip-bubble::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--primaryContainercolor);
+    border: 1px solid var(--borderColor);
+}
+
+/* ── Position: Top ─────────────────────────────────────── */
+.tooltip-pos-top {
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px) scale(0.96);
+}
+
+.tooltip-pos-top.tooltip-visible {
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.tooltip-pos-top::after {
+    bottom: -6px;
+    left: 50%;
+    margin-left: -6px;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+/* ── Position: Bottom ──────────────────────────────────── */
+.tooltip-pos-bottom {
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px) scale(0.96);
+}
+
+.tooltip-pos-bottom.tooltip-visible {
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.tooltip-pos-bottom::after {
+    top: -6px;
+    left: 50%;
+    margin-left: -6px;
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
+}
+
+/* ── Position: Left ────────────────────────────────────── */
+.tooltip-pos-left {
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px) scale(0.96);
+}
+
+.tooltip-pos-left.tooltip-visible {
+    transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.tooltip-pos-left::after {
+    right: -6px;
+    top: 50%;
+    margin-top: -6px;
+    border-left: none;
+    border-bottom: none;
+    transform: rotate(45deg);
+}
+
+/* ── Position: Right ───────────────────────────────────── */
+.tooltip-pos-right {
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-6px) scale(0.96);
+}
+
+.tooltip-pos-right.tooltip-visible {
+    transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.tooltip-pos-right::after {
+    left: -6px;
+    top: 50%;
+    margin-top: -6px;
+    border-right: none;
+    border-top: none;
+    transform: rotate(45deg);
+}

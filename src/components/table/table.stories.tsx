@@ -1,5 +1,4 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
+﻿import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Table } from './table';
 
 const meta: Meta<typeof Table> = {
@@ -58,3 +57,4 @@ export const Clickable: Story = {
         />
     ),
 };
+

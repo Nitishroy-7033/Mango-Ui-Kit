@@ -1,5 +1,4 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
+﻿import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Spinner } from './spinner';
 
 const meta: Meta<typeof Spinner> = {
@@ -38,3 +37,4 @@ export const Sizes: Story = {
         </div>
     ),
 };
+

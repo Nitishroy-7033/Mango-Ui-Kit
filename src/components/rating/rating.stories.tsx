@@ -25,7 +25,7 @@ export const Default: Story = {
 };
 
 export const Readonly: Story = {
-    args: { value: 4, max: 5, readonly: true, size: 24 },
+    args: { value: 4, max: 5, readOnly: true, size: 24 },
 };
 
 export const LargeStars: Story = {
