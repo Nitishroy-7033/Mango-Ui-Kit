@@ -21,8 +21,6 @@ export interface DateRangePickerProps {
     label?: string;
     /** Optional small uppercase label rendered inside the trigger (e.g. 'SELECT PERIOD') */
     innerLabel?: string;
-    /** Position of the innerLabel. Defaults to 'left' */
-    innerLabelPosition?: 'left' | 'top';
     /** Helper text */
     helperText?: string;
     /** Error state */

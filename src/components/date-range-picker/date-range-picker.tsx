@@ -26,7 +26,6 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
     disabled = false,
     label,
     innerLabel,
-    innerLabelPosition = 'left',
     helperText,
     error,
     minDate,
@@ -164,16 +163,8 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
                 onClick={() => !disabled && setIsOpen(!isOpen)}
             >
                 <CalendarIcon className="trigger-icon" size={16} />
-                <span className={cn('trigger-content', innerLabel && `trigger-content-${innerLabelPosition}`)}>
-                    {innerLabel && (
-                        <>
-                            <span className="trigger-inner-label">{innerLabel}</span>
-                            {innerLabelPosition === 'left' && <span className="trigger-inner-divider">|</span>}
-                        </>
-                    )}
-                    <span className={cn('trigger-text', !hasValue && 'trigger-placeholder')}>
-                        {displayText()}
-                    </span>
+                <span className={cn('trigger-text', !hasValue && 'trigger-placeholder')}>
+                    {displayText()}
                 </span>
                 {clearable && hasValue && !disabled && (
                     <span className="drp-clear-btn" onClick={clearRange}>
@@ -196,6 +187,12 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
                         boxShadow: showBorder ? undefined : '0 10px 30px rgba(0,0,0,0.1)',
                     }}
                 >
+                    {innerLabel && (
+                        <div className="drp-card-header">
+                            <span className="drp-card-title">{innerLabel}</span>
+                        </div>
+                    )}
+
                     {/* Quick preset ranges */}
                     {presets.length > 0 && (
                         <div className="drp-presets">

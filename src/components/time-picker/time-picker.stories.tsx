@@ -14,11 +14,18 @@ const meta: Meta<typeof TimePicker> = {
         use12Hours: { control: 'boolean' },
         showSeconds: { control: 'boolean' },
         minuteStep: { control: 'select', options: [1, 5, 10, 15, 30] },
-        innerLabelPosition: { control: 'select', options: ['left', 'top'] },
+        selectionMode: { control: 'select', options: ['digital', 'analog'] },
+        showBorder: { control: 'boolean' },
+        showFooter: { control: 'boolean' },
+        cardBorderRadius: { control: 'text' },
+        cardBorderColor: { control: 'color' },
+        cardBorderWidth: { control: 'text' },
     },
 };
 export default meta;
 type Story = StoryObj<typeof TimePicker>;
+
+/* ... (Metadata and imports above) */
 
 const Wrapper = (props: React.ComponentProps<typeof TimePicker>) => {
     const [value, setValue] = useState(props.value ?? '');
@@ -29,10 +36,80 @@ const Wrapper = (props: React.ComponentProps<typeof TimePicker>) => {
     );
 };
 
+export const AnalogMode: Story = {
+    render: () => {
+        const [t, setT] = useState('09:30 AM');
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', width: '320px' }}>
+                <div>
+                    <p style={{ fontSize: '0.72rem', fontWeight: 700, opacity: 0.5, marginBottom: '6px', textTransform: 'uppercase' }}>Analog (12h)</p>
+                    <TimePicker
+                        selectionMode="analog"
+                        use12Hours
+                        value={t}
+                        onChange={setT}
+                        innerLabel="ANALOG CLOCK"
+                    />
+                </div>
+                <div>
+                    <p style={{ fontSize: '0.72rem', fontWeight: 700, opacity: 0.5, marginBottom: '6px', textTransform: 'uppercase' }}>Analog (24h)</p>
+                    <TimePicker
+                        selectionMode="analog"
+                        use12Hours={false}
+                        value={t.split(' ')[0]}
+                        onChange={setT}
+                        innerLabel="24H CLOCK"
+                    />
+                </div>
+            </div>
+        );
+    }
+};
+
+export const BorderAndFooterManagement: Story = {
+    render: () => {
+        const [t, setT] = useState('');
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '320px' }}>
+                <div>
+                    <p style={{ fontSize: '0.72rem', fontWeight: 700, opacity: 0.5, marginBottom: '6px', textTransform: 'uppercase' }}>No Outer Border</p>
+                    <TimePicker
+                        showBorder={false}
+                        value={t}
+                        onChange={setT}
+                        innerLabel="SHADOW ONLY"
+                    />
+                </div>
+                <div>
+                    <p style={{ fontSize: '0.72rem', fontWeight: 700, opacity: 0.5, marginBottom: '6px', textTransform: 'uppercase' }}>No Footer</p>
+                    <TimePicker
+                        showFooter={false}
+                        value={t}
+                        onChange={setT}
+                        innerLabel="HIDDEN FOOTER"
+                    />
+                </div>
+                <div>
+                    <p style={{ fontSize: '0.72rem', fontWeight: 700, opacity: 0.5, marginBottom: '6px', textTransform: 'uppercase' }}>Custom Card Styles</p>
+                    <TimePicker
+                        cardBorderRadius="40px"
+                        cardBorderColor="#2563eb"
+                        cardBorderWidth="4px"
+                        value={t}
+                        onChange={setT}
+                        innerLabel="PILL CARD"
+                    />
+                </div>
+            </div>
+        );
+    },
+};
+
 export const Default: Story = {
     render: (args) => <Wrapper {...args} />,
     args: { placeholder: 'Select time' },
 };
+/* ... (remaining stories moved down) */
 
 export const WithValue: Story = {
     render: (args) => <Wrapper {...args} />,
@@ -187,28 +264,10 @@ export const InnerLabel: Story = {
     render: () => (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '300px' }}>
             <div>
-                <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '6px' }}>Left (default)</p>
+                <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '6px' }}>Label in Popup Only</p>
                 {(() => {
                     const [t, setT] = useState(''); return (
-                        <TimePicker innerLabel="Time" value={t} onChange={setT} placeholder="Select time" />
-                    );
-                })()}
-            </div>
-
-            <div>
-                <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '6px' }}>Left with value</p>
-                {(() => {
-                    const [t, setT] = useState('14:30'); return (
-                        <TimePicker innerLabel="Meeting Time" innerLabelPosition="left" value={t} onChange={setT} />
-                    );
-                })()}
-            </div>
-
-            <div>
-                <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '6px' }}>Top position</p>
-                {(() => {
-                    const [t, setT] = useState(''); return (
-                        <TimePicker innerLabel="Closing Time" innerLabelPosition="top" value={t} onChange={setT} placeholder="Pick a time" />
+                        <TimePicker innerLabel="Time Selector" value={t} onChange={setT} placeholder="Open to see inner label" />
                     );
                 })()}
             </div>
@@ -218,7 +277,7 @@ export const InnerLabel: Story = {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {(['sm', 'md', 'lg'] as const).map(s => {
                         const [t, setT] = useState('');
-                        return <TimePicker key={s} size={s} innerLabel="Time" value={t} onChange={setT} placeholder={`Size ${s.toUpperCase()}`} />;
+                        return <TimePicker key={s} size={s} innerLabel={`Label ${s.toUpperCase()}`} value={t} onChange={setT} placeholder={`Size ${s.toUpperCase()}`} />;
                     })}
                 </div>
             </div>
@@ -226,7 +285,7 @@ export const InnerLabel: Story = {
             <div>
                 <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '6px' }}>12-hour with innerLabel</p>
                 {(() => {
-                    const [t, setT] = useState('09:30'); return (
+                    const [t, setT] = useState('09:30 AM'); return (
                         <TimePicker innerLabel="Start Time" value={t} onChange={setT} use12Hours />
                     );
                 })()}

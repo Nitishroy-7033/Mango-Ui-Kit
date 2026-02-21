@@ -13,7 +13,6 @@ const meta: Meta<typeof DateRangePicker> = {
         size: { control: 'select', options: ['sm', 'md', 'lg'] },
         disabled: { control: 'boolean' },
         clearable: { control: 'boolean' },
-        innerLabelPosition: { control: 'select', options: ['left', 'top'] },
         showBorder: { control: 'boolean' },
         showFooter: { control: 'boolean' },
         cardBorderRadius: { control: 'text' },
@@ -223,28 +222,10 @@ export const InnerLabel: Story = {
     render: () => (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '380px' }}>
             <div>
-                <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '6px' }}>Left (default)</p>
+                <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '6px' }}>Label in Popup Only</p>
                 {(() => {
                     const [r, setR] = useState<DateRange>(emptyRange); return (
-                        <DateRangePicker innerLabel="Period" value={r} onChange={setR} clearable />
-                    );
-                })()}
-            </div>
-
-            <div>
-                <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '6px' }}>Left with value</p>
-                {(() => {
-                    const [r, setR] = useState<DateRange>({ startDate: '2026-02-01', endDate: '2026-02-28' }); return (
-                        <DateRangePicker innerLabel="Select Period" innerLabelPosition="left" value={r} onChange={setR} clearable />
-                    );
-                })()}
-            </div>
-
-            <div>
-                <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '6px' }}>Top position</p>
-                {(() => {
-                    const [r, setR] = useState<DateRange>(emptyRange); return (
-                        <DateRangePicker innerLabel="Date Range" innerLabelPosition="top" value={r} onChange={setR} clearable />
+                        <DateRangePicker innerLabel="Filter Range" value={r} onChange={setR} clearable placeholder="Open to see inner label" />
                     );
                 })()}
             </div>
@@ -254,7 +235,7 @@ export const InnerLabel: Story = {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {(['sm', 'md', 'lg'] as const).map(s => {
                         const [r, setR] = useState<DateRange>(emptyRange);
-                        return <DateRangePicker key={s} size={s} innerLabel="Period" value={r} onChange={setR} placeholder={`Size ${s.toUpperCase()} range`} />;
+                        return <DateRangePicker key={s} size={s} innerLabel={`Range ${s.toUpperCase()}`} value={r} onChange={setR} placeholder={`Size ${s.toUpperCase()} range`} />;
                     })}
                 </div>
             </div>

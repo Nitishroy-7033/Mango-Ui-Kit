@@ -153,46 +153,13 @@
     font-weight: 400;
 }
 
-/* Inner Label (compact uppercase label inside the trigger) */
+/* Inner Label (compact uppercase label inside the trigger) - DEPRECATED for trigger */
 .trigger-content {
     flex: 1;
     display: flex;
     align-items: center;
     min-width: 0;
     gap: 8px;
-}
-
-/* LEFT (default) — label | value, side by side */
-.trigger-content-left {
-    flex-direction: row;
-    align-items: center;
-}
-
-/* TOP — label stacked above value */
-.trigger-content-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1px;
-}
-
-.trigger-inner-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--labelSecondaryColor);
-    line-height: 1;
-    pointer-events: none;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.trigger-inner-divider {
-    color: var(--borderColor);
-    font-size: 0.85rem;
-    flex-shrink: 0;
-    line-height: 1;
-    opacity: 0.6;
 }
 
 .trigger-content .trigger-text {
@@ -235,6 +202,21 @@
     overflow: hidden;
     z-index: 10000;
     box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.drp-card-header {
+    background: rgba(250, 128, 41, 0.08);
+    /* primary tint */
+    border-bottom: 1.5px solid rgba(250, 128, 41, 0.2);
+    padding: 12px 18px;
+}
+
+.drp-card-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primaryColor);
 }
 
 /* ── Presets ──────────────────────────────────────────── */
