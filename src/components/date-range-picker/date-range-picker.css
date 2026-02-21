@@ -1,73 +1,284 @@
+/* ── Container ────────────────────────────────────────── */
 .date-range-picker {
     position: relative;
     width: 100%;
 }
 
+/* ── Label & Helpers ──────────────────────────────────── */
+.picker-label {
+    display: block;
+    font-weight: 600;
+    color: var(--textColor);
+    margin-bottom: 6px;
+}
+
+.picker-label-sm {
+    font-size: 0.8rem;
+}
+
+.picker-label-md {
+    font-size: 0.875rem;
+}
+
+.picker-label-lg {
+    font-size: 1rem;
+}
+
+.picker-helper {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: var(--labelSecondaryColor);
+}
+
+.picker-error {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #ef4444;
+}
+
+/* ── Trigger – Base ───────────────────────────────────── */
 .range-input-trigger {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: var(--secondaryColor);
-    border: 1px solid var(--borderColor);
-    border-radius: 12px;
+    gap: 10px;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    user-select: none;
 }
 
-.range-input-trigger:hover {
+/* Sizes */
+.range-trigger-sm {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    border-radius: 8px;
+}
+
+.range-trigger-md {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+}
+
+.range-trigger-lg {
+    padding: 16px 20px;
+    font-size: 1rem;
+    border-radius: 14px;
+}
+
+/* Variants */
+.range-trigger-default {
+    background: var(--secondaryColor);
+    border: 1px solid var(--borderColor);
+    color: var(--textColor);
+}
+
+.range-trigger-filled {
+    background: var(--primaryColor);
+    border: 1px solid var(--primaryColor);
+    color: #fff;
+}
+
+.range-trigger-filled .trigger-icon,
+.range-trigger-filled .trigger-placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.range-trigger-outline {
+    background: transparent;
+    border: 1.5px solid var(--borderColor);
+    color: var(--textColor);
+}
+
+.range-trigger-ghost {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--textColor);
+}
+
+.range-trigger-ghost:hover {
+    background: var(--secondaryColor);
+}
+
+/* States */
+.range-input-trigger:hover:not(.is-disabled) {
     border-color: var(--primaryColor);
     background: var(--primaryContainercolor);
+}
+
+.range-trigger-filled:hover {
+    opacity: 0.92;
+    background: var(--primaryColor);
 }
 
 .range-input-trigger.active {
     border-color: var(--primaryColor);
-    box-shadow: 0 0 0 3px var(--lightPrimaryColor);
+    box-shadow: 0 0 0 3px rgba(250, 128, 41, 0.15);
     background: var(--primaryContainercolor);
 }
 
-.date-display {
+.range-input-trigger.has-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.range-input-trigger.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.trigger-icon {
+    color: var(--labelSecondaryColor);
+    flex-shrink: 0;
+    transition: color 0.2s;
+}
+
+.range-input-trigger:hover .trigger-icon {
+    color: var(--primaryColor);
+}
+
+.trigger-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: inherit;
+    letter-spacing: 0.01em;
+}
+
+.trigger-placeholder {
+    color: var(--labelSecondaryColor);
+    font-weight: 400;
+}
+
+/* Inner Label (compact uppercase label inside the trigger) */
+.trigger-content {
+    flex: 1;
     display: flex;
     align-items: center;
+    min-width: 0;
     gap: 8px;
-    color: var(--textColor);
-    font-size: 0.9rem;
-    font-weight: 500;
 }
 
-.date-display span {
-    min-width: 85px;
+/* LEFT (default) — label | value, side by side */
+.trigger-content-left {
+    flex-direction: row;
+    align-items: center;
 }
 
-.range-input-trigger .separator {
+/* TOP — label stacked above value */
+.trigger-content-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+}
+
+.trigger-inner-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--labelSecondaryColor);
-    opacity: 0.5;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.calendar-dropdown {
+.trigger-inner-divider {
+    color: var(--borderColor);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    line-height: 1;
+    opacity: 0.6;
+}
+
+.trigger-content .trigger-text {
+    font-size: 0.88rem;
+    font-weight: 500;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.trigger-content-top .trigger-text {
+    font-size: 0.88rem;
+}
+
+.drp-clear-btn {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 4px;
+    color: var(--labelSecondaryColor);
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.drp-clear-btn:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* ── Dropdown ─────────────────────────────────────────── */
+.drp-dropdown {
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
     width: 320px;
     background-color: var(--primaryContainercolor) !important;
     color: var(--textColor) !important;
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--borderColor);
-    border-radius: 16px;
-    padding: 16px;
+    overflow: hidden;
     z-index: 10000;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    transform-origin: top left;
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.04);
 }
 
-.calendar-header {
+/* ── Presets ──────────────────────────────────────────── */
+.drp-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--borderColor);
+    background: var(--secondaryColor);
+}
+
+.drp-preset-btn {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--borderColor);
+    background: var(--primaryContainercolor);
+    color: var(--textColor);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.drp-preset-btn:hover {
+    background: var(--primaryColor);
+    border-color: var(--primaryColor);
+    color: white;
+}
+
+/* ── Calendar Section ─────────────────────────────────── */
+.drp-calendar-section {
+    padding: 16px;
+}
+
+.drp-calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
 }
 
-.calendar-header button {
+.calendar-nav-btn {
     width: 32px;
     height: 32px;
     display: flex;
@@ -81,7 +292,7 @@
     transition: all 0.2s;
 }
 
-.calendar-header button:hover {
+.calendar-nav-btn:hover {
     background: var(--primaryColor);
     border-color: var(--primaryColor);
     color: white;
@@ -93,7 +304,7 @@
     color: var(--textColor);
 }
 
-.calendar-weekdays {
+.drp-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     margin-bottom: 8px;
@@ -101,76 +312,119 @@
 
 .weekday {
     text-align: center;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
     color: var(--labelSecondaryColor);
     text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-bottom: 6px;
 }
 
-.calendar-grid {
+.drp-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 2px;
 }
 
-.calendar-day {
-    height: 38px;
+/* ── Day Cells ────────────────────────────────────────── */
+.drp-day {
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.84rem;
     font-weight: 500;
     color: var(--textColor);
     cursor: pointer;
     border-radius: 8px;
-    transition: all 0.2s;
+    transition: all 0.15s;
+    position: relative;
 }
 
-.calendar-day:hover:not(.empty) {
-    background: var(--lightPrimaryColor);
+.drp-day:hover:not(.empty):not(.disabled) {
+    background: rgba(250, 128, 41, 0.12);
     color: var(--primaryColor);
 }
 
-.calendar-day.start,
-.calendar-day.end {
+.drp-day.start,
+.drp-day.end {
     background: var(--primaryColor) !important;
     color: white !important;
-    border-radius: 8px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(250, 128, 41, 0.35);
 }
 
-.calendar-day.in-range {
-    background: var(--lightPrimaryColor);
+.drp-day.in-range {
+    background: rgba(250, 128, 41, 0.1);
     color: var(--primaryColor);
     border-radius: 0;
+    font-weight: 600;
 }
 
-.calendar-day.today:not(.start):not(.end) {
+.drp-day.today:not(.start):not(.end) {
     color: var(--primaryColor);
     font-weight: 800;
-    text-decoration: underline;
+    border: 1.5px solid rgba(250, 128, 41, 0.3);
 }
 
-.calendar-day.empty {
+.drp-day.empty {
     cursor: default;
 }
 
-.calendar-footer {
-    margin-top: 16px;
+.drp-day.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.drp-day.disabled:hover {
+    background: none;
+    color: var(--textColor);
+}
+
+/* ── Footer ───────────────────────────────────────────── */
+.drp-footer {
+    margin-top: 14px;
     padding-top: 12px;
     border-top: 1px solid var(--borderColor);
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.clear-btn {
+.drp-hint {
+    font-size: 0.78rem;
+    color: var(--labelSecondaryColor);
+    font-style: italic;
+}
+
+.drp-clear-range-btn {
     background: transparent;
     border: none;
     color: var(--labelSecondaryColor);
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
+    transition: color 0.2s;
 }
 
-.clear-btn:hover {
-    color: var(--primaryColor);
+.drp-clear-range-btn:hover {
+    color: #ef4444;
+}
+
+/* ── Animation ────────────────────────────────────────── */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.18s cubic-bezier(0, 0, 0.2, 1) forwards;
 }

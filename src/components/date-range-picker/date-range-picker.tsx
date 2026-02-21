@@ -1,39 +1,74 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import type { DateRangePickerProps } from './date-range-picker.types';
 import './date-range-picker.css';
+
+const MONTH_NAMES = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+const toISO = (date: Date) => {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+};
 
 export const DateRangePicker: React.FC<DateRangePickerProps> = ({
     value,
     onChange,
     placeholder = 'Select date range',
     className = '',
+    variant = 'default',
+    size = 'md',
+    disabled = false,
+    label,
+    innerLabel,
+    innerLabelPosition = 'left',
+    helperText,
+    error,
+    minDate,
+    maxDate,
+    clearable = true,
+    presets = [],
+    showBorder = true,
+    showFooter = true,
+    cardBorderRadius = '18px',
+    cardBorderColor,
+    cardBorderWidth = '1.5px',
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [hoveredDate, setHoveredDate] = useState<string | null>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
     const firstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
 
-    const formatDate = (date: Date | null) => {
-        if (!date) return null;
-        return date.toISOString().split('T')[0];
+    const isDayDisabled = (dateStr: string) => {
+        if (minDate && dateStr < minDate) return true;
+        if (maxDate && dateStr > maxDate) return true;
+        return false;
     };
 
     const handleDateSelect = (day: number) => {
-        const selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-        const dateStr = formatDate(selectedDate);
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const selectedDate = new Date(year, month, day);
+        const dateStr = toISO(selectedDate);
+        if (isDayDisabled(dateStr)) return;
 
         if (!value.startDate || (value.startDate && value.endDate)) {
             onChange({ startDate: dateStr, endDate: null });
         } else {
-            const start = new Date(value.startDate);
+            const start = new Date(value.startDate + 'T00:00:00');
             if (selectedDate < start) {
                 onChange({ startDate: dateStr, endDate: value.startDate });
             } else {
                 onChange({ ...value, endDate: dateStr });
+                setIsOpen(false);
             }
         }
     };
@@ -42,7 +77,8 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + offset, 1));
     };
 
-    const clearRange = () => {
+    const clearRange = (e: React.MouseEvent) => {
+        e.stopPropagation();
         onChange({ startDate: null, endDate: null });
     };
 
@@ -64,32 +100,35 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
         const days = [];
 
         for (let i = 0; i < startDay; i++) {
-            days.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
+            days.push(<div key={`empty-${i}`} className="drp-day empty" />);
         }
 
-        const start = value.startDate ? new Date(value.startDate) : null;
-        const end = value.endDate ? new Date(value.endDate) : null;
+        const selStart = value.startDate || null;
+        const selEnd = value.endDate || hoveredDate || null;
+        const todayISO = toISO(new Date());
 
         for (let d = 1; d <= totalDays; d++) {
-            const date = new Date(year, month, d);
-            const dateStr = formatDate(date);
-
-            const isStart = value.startDate === dateStr;
-            const isEnd = value.endDate === dateStr;
-            const isInRange = start && end && date > start && date < end;
-            const isToday = new Date().toDateString() === date.toDateString();
+            const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+            const isStart = dateStr === selStart;
+            const isEnd = dateStr === selEnd;
+            const isInRange = selStart && selEnd && dateStr > selStart && dateStr < selEnd;
+            const isToday = dateStr === todayISO;
+            const isDisabled = isDayDisabled(dateStr);
 
             days.push(
                 <div
                     key={d}
                     className={cn(
-                        'calendar-day',
+                        'drp-day',
                         isStart && 'start',
-                        isEnd && 'end',
+                        isEnd && selEnd !== selStart && 'end',
                         isInRange && 'in-range',
-                        isToday && 'today'
+                        isToday && !isStart && !isEnd && 'today',
+                        isDisabled && 'disabled'
                     )}
-                    onClick={() => handleDateSelect(d)}
+                    onClick={() => !isDisabled && handleDateSelect(d)}
+                    onMouseEnter={() => value.startDate && !value.endDate && setHoveredDate(dateStr)}
+                    onMouseLeave={() => setHoveredDate(null)}
                 >
                     {d}
                 </div>
@@ -99,39 +138,116 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
         return days;
     };
 
-    const monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
+    const displayText = () => {
+        if (value.startDate && value.endDate) return `${value.startDate}  →  ${value.endDate}`;
+        if (value.startDate) return `${value.startDate}  →  ...`;
+        return placeholder;
+    };
+
+    const hasValue = !!(value.startDate || value.endDate);
 
     return (
         <div className={cn('date-range-picker', className)} ref={dropdownRef}>
-            <div className={cn('range-input-trigger', isOpen && 'active')} onClick={() => setIsOpen(!isOpen)}>
-                <CalendarIcon size={16} />
-                <div className="date-display">
-                    <span>{value.startDate || placeholder.split('-')[0] || 'Start date'}</span>
-                    <span className="separator">-</span>
-                    <span>{value.endDate || placeholder.split('-')[1] || 'End date'}</span>
-                </div>
+            {label && (
+                <label className={cn('picker-label', `picker-label-${size}`)}>{label}</label>
+            )}
+
+            <div
+                className={cn(
+                    'range-input-trigger',
+                    `range-trigger-${variant}`,
+                    `range-trigger-${size}`,
+                    isOpen && 'active',
+                    error && 'has-error',
+                    disabled && 'is-disabled'
+                )}
+                onClick={() => !disabled && setIsOpen(!isOpen)}
+            >
+                <CalendarIcon className="trigger-icon" size={16} />
+                <span className={cn('trigger-content', innerLabel && `trigger-content-${innerLabelPosition}`)}>
+                    {innerLabel && (
+                        <>
+                            <span className="trigger-inner-label">{innerLabel}</span>
+                            {innerLabelPosition === 'left' && <span className="trigger-inner-divider">|</span>}
+                        </>
+                    )}
+                    <span className={cn('trigger-text', !hasValue && 'trigger-placeholder')}>
+                        {displayText()}
+                    </span>
+                </span>
+                {clearable && hasValue && !disabled && (
+                    <span className="drp-clear-btn" onClick={clearRange}>
+                        <X size={14} />
+                    </span>
+                )}
             </div>
 
-            {isOpen && (
-                <div className="calendar-dropdown">
-                    <div className="calendar-header">
-                        <button type="button" onClick={() => changeMonth(-1)}><ChevronLeft size={16} /></button>
-                        <span className="current-month">{monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}</span>
-                        <button type="button" onClick={() => changeMonth(1)}><ChevronRight size={16} /></button>
-                    </div>
-                    <div className="calendar-weekdays">
-                        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-                            <div key={day} className="weekday">{day}</div>
-                        ))}
-                    </div>
-                    <div className="calendar-grid">
-                        {renderCalendar()}
-                    </div>
-                    <div className="calendar-footer">
-                        <button type="button" className="clear-btn" onClick={clearRange}>Clear Range</button>
+            {error && <p className="picker-error">{error}</p>}
+            {!error && helperText && <p className="picker-helper">{helperText}</p>}
+
+            {isOpen && !disabled && (
+                <div
+                    className="drp-dropdown animate-scale-in"
+                    style={{
+                        borderRadius: cardBorderRadius,
+                        borderColor: cardBorderColor ?? undefined,
+                        borderWidth: showBorder ? cardBorderWidth : '0px',
+                        borderStyle: 'solid',
+                        boxShadow: showBorder ? undefined : '0 10px 30px rgba(0,0,0,0.1)',
+                    }}
+                >
+                    {/* Quick preset ranges */}
+                    {presets.length > 0 && (
+                        <div className="drp-presets">
+                            {presets.map((p) => (
+                                <button
+                                    key={p.label}
+                                    className="drp-preset-btn"
+                                    onClick={() => { onChange(p.range); setIsOpen(false); }}
+                                >
+                                    {p.label}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+
+                    <div className="drp-calendar-section">
+                        <div className="drp-calendar-header">
+                            <button type="button" className="calendar-nav-btn" onClick={() => changeMonth(-1)}>
+                                <ChevronLeft size={16} />
+                            </button>
+                            <span className="current-month">
+                                {MONTH_NAMES[currentDate.getMonth()]} {currentDate.getFullYear()}
+                            </span>
+                            <button type="button" className="calendar-nav-btn" onClick={() => changeMonth(1)}>
+                                <ChevronRight size={16} />
+                            </button>
+                        </div>
+
+                        <div className="drp-weekdays">
+                            {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+                                <div key={day} className="weekday">{day}</div>
+                            ))}
+                        </div>
+
+                        <div className="drp-grid">
+                            {renderCalendar()}
+                        </div>
+
+                        {showFooter && (
+                            <div className="drp-footer">
+                                <span className="drp-hint">
+                                    {!value.startDate ? 'Click to set start date' :
+                                        !value.endDate ? 'Click to set end date' :
+                                            `${value.startDate} → ${value.endDate}`}
+                                </span>
+                                {clearable && hasValue && (
+                                    <button className="drp-clear-range-btn" onClick={(e) => clearRange(e)}>
+                                        Clear
+                                    </button>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             )}

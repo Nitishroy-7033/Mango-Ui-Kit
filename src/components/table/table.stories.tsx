@@ -8,7 +8,7 @@ const meta: Meta<typeof Table> = {
     title: 'Components/Table',
     component: Table,
     parameters: {
-        layout: 'centered',
+        layout: 'fullscreen',
     },
     tags: ['autodocs'],
 };
@@ -109,7 +109,7 @@ export const Enterprise: Story = {
         const [page, setPage] = useState(1);
 
         return (
-            <div style={{ width: '100%' }}>
+            <div style={{ width: '100%', padding: '24px', boxSizing: 'border-box' }}>
                 <Table
                     columns={columns}
                     dataSource={dataSource}
@@ -154,7 +154,7 @@ export const GroupedHeaders: Story = {
         ];
 
         return (
-            <div style={{ width: '100%', minWidth: '800px' }}>
+            <div style={{ width: '100%', minWidth: '800px', padding: '24px', boxSizing: 'border-box' }}>
                 <Table columns={groupedColumns} dataSource={data} rowKey="id" variant="bordered" />
             </div>
         );
@@ -176,7 +176,7 @@ export const InfiniteScroll: Story = {
         };
 
         return (
-            <div style={{ width: '100%' }}>
+            <div style={{ width: '100%', padding: '24px', boxSizing: 'border-box' }}>
                 <Table
                     columns={columns.slice(0, 4)}
                     dataSource={data}

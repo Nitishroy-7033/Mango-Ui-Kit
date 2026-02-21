@@ -1,148 +1,363 @@
-.calendar-date-picker {
+/* ── Root ─────────────────────────────────────────────── */
+.cdp-root {
     position: relative;
     width: 100%;
 }
 
-.date-input-trigger {
+/* ── External Label & Helpers ─────────────────────────── */
+.picker-label {
+    display: block;
+    font-weight: 600;
+    color: var(--textColor);
+    margin-bottom: 6px;
+}
+
+.picker-label-sm {
+    font-size: 0.8rem;
+}
+
+.picker-label-md {
+    font-size: 0.875rem;
+}
+
+.picker-label-lg {
+    font-size: 1rem;
+}
+
+.picker-helper {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: var(--labelSecondaryColor);
+}
+
+.picker-error {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #ef4444;
+}
+
+/* ── Trigger ──────────────────────────────────────────── */
+.cdp-trigger {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    background: var(--secondaryColor);
-    border: 1px solid var(--borderColor);
-    border-radius: 12px;
-    color: var(--textColor);
+    gap: 10px;
     cursor: pointer;
     transition: all 0.2s;
-    font-size: 0.95rem;
+    user-select: none;
+    position: relative;
 }
 
-.date-input-trigger:hover {
-    background: var(--primaryContainercolor);
+/* sizes */
+.cdp-trigger-sm {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    border-radius: 8px;
+}
+
+.cdp-trigger-md {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+}
+
+.cdp-trigger-lg {
+    padding: 16px 20px;
+    font-size: 1rem;
+    border-radius: 14px;
+}
+
+/* variants */
+.cdp-trigger-default {
+    background: var(--secondaryColor);
+    border: 1px solid var(--borderColor);
+    color: var(--textColor);
+}
+
+.cdp-trigger-filled {
+    background: var(--primaryColor);
+    border: 1px solid var(--primaryColor);
+    color: #fff;
+}
+
+.cdp-trigger-outline {
+    background: transparent;
+    border: 1.5px solid var(--borderColor);
+    color: var(--textColor);
+}
+
+.cdp-trigger-ghost {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--textColor);
+}
+
+.cdp-trigger-ghost:hover {
+    background: var(--secondaryColor);
+}
+
+/* states */
+.cdp-trigger:hover:not(.is-disabled) {
     border-color: var(--primaryColor);
-}
-
-.date-input-trigger.active {
     background: var(--primaryContainercolor);
-    border-color: var(--primaryColor);
-    box-shadow: 0 0 0 1px var(--primaryColor);
 }
 
-.date-input-trigger svg {
+.cdp-trigger-filled:hover:not(.is-disabled) {
+    opacity: 0.9;
+}
+
+.cdp-trigger.active {
+    border-color: var(--primaryColor);
+    box-shadow: 0 0 0 3px rgba(250, 128, 41, 0.15);
+}
+
+.cdp-trigger.has-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.cdp-trigger.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.cdp-trigger-icon {
     color: var(--labelSecondaryColor);
-    transition: color 0.3s ease;
+    flex-shrink: 0;
+    transition: color 0.2s;
 }
 
-.date-input-trigger:hover svg {
+.cdp-trigger:hover .cdp-trigger-icon {
     color: var(--primaryColor);
 }
 
-.calendar-dropdown {
+.cdp-trigger-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.cdp-trigger-placeholder {
+    color: var(--labelSecondaryColor);
+    font-weight: 400;
+}
+
+.cdp-clear-btn {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 4px;
+    color: var(--labelSecondaryColor);
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.cdp-clear-btn:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* ── Calendar Card ────────────────────────────────────── */
+.cdp-card {
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    width: 280px;
-    background-color: var(--primaryContainercolor) !important;
-    color: var(--textColor) !important;
-    border: 1px solid var(--borderColor);
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    background: var(--primaryContainercolor);
+    overflow: hidden;
     z-index: 10000;
+    box-shadow:
+        0 20px 50px -10px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(250, 128, 41, 0.08);
 }
 
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
+/* ── Card Header ──────────────────────────────────────── */
+.cdp-card-header {
+    background: rgba(250, 128, 41, 0.08);
+    border-bottom: 1.5px solid rgba(250, 128, 41, 0.2);
+    padding: 14px 20px;
 }
 
-.calendar-header button {
-    background: var(--secondaryColor);
-    border: none;
-    color: var(--textColor);
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.calendar-header button:hover {
-    background: var(--borderColor);
+.cdp-card-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--primaryColor);
 }
 
-.current-month {
-    font-weight: 700;
-    font-size: 0.95rem;
+/* ── Month Navigation ─────────────────────────────────── */
+.cdp-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px 8px;
+}
+
+.cdp-nav-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondaryColor);
+    border: 1px solid var(--borderColor);
+    border-radius: 10px;
     color: var(--textColor);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
 }
 
-.calendar-weekdays {
+.cdp-nav-btn:hover {
+    background: var(--primaryContainercolor);
+    border-color: var(--primaryColor);
+    color: var(--primaryColor);
+}
+
+.cdp-month-label {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--textColor);
+    letter-spacing: -0.01em;
+}
+
+/* ── Weekday Row ──────────────────────────────────────── */
+.cdp-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    margin-bottom: 8px;
+    padding: 8px 16px 4px;
+    gap: 2px;
 }
 
-.weekday {
+.cdp-weekday {
     text-align: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--labelSecondaryColor);
-    padding-bottom: 4px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--primaryColor);
+    letter-spacing: 0.04em;
+    padding: 4px 0;
 }
 
-.calendar-grid {
+/* ── Day Grid ─────────────────────────────────────────── */
+.cdp-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
+    padding: 4px 16px 16px;
+    gap: 2px;
 }
 
-.calendar-day {
+.cdp-day-empty {
+    aspect-ratio: 1;
+}
+
+.cdp-day {
     aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: var(--textColor);
+    font-size: 0.92rem;
     font-weight: 500;
+    color: var(--textColor);
+    background: transparent;
+    border: none;
+    /* border-radius is set inline via dayBorderRadius prop */
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.calendar-day:hover:not(.empty) {
-    background: rgba(250, 128, 41, 0.1);
+.cdp-day:hover:not(:disabled):not(.selected) {
+    background: rgba(250, 128, 41, 0.12);
     color: var(--primaryColor);
 }
 
-.calendar-day.selected {
-    background: var(--primaryColor);
-    color: white;
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(250, 128, 41, 0.3);
-}
-
-.calendar-day.today {
+.cdp-day.today {
     color: var(--primaryColor);
     font-weight: 800;
-    background: rgba(250, 128, 41, 0.05);
-    border: 1px solid rgba(250, 128, 41, 0.2);
+    background: rgba(250, 128, 41, 0.1);
+    border: 1.5px solid var(--primaryColor);
 }
 
-.calendar-day.empty {
-    cursor: default;
+.cdp-day.selected {
+    background: var(--primaryColor);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(250, 128, 41, 0.4);
 }
 
+.cdp-day.today.selected {
+    background: var(--primaryColor);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(250, 128, 41, 0.4);
+}
+
+.cdp-day.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* ── Footer Quick Actions ─────────────────────────────── */
+.cdp-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px 14px;
+    border-top: 1px solid var(--borderColor);
+    flex-wrap: wrap;
+}
+
+.cdp-quick-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: none;
+    background: rgba(250, 128, 41, 0.1);
+    color: var(--primaryColor);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.cdp-quick-btn:hover {
+    background: var(--primaryColor);
+    color: #fff;
+}
+
+.cdp-quick-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--borderColor);
+    background: var(--secondaryColor);
+    color: var(--labelSecondaryColor);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.cdp-quick-close:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* ── Animation ────────────────────────────────────────── */
 @keyframes scaleIn {
     from {
         opacity: 0;
-        transform: scale(0.95) translateY(-10px);
+        transform: scale(0.95) translateY(-6px);
     }
 
     to {
@@ -152,5 +367,5 @@
 }
 
 .animate-scale-in {
-    animation: scaleIn 0.2s cubic-bezier(0, 0, 0.2, 1) forwards;
+    animation: scaleIn 0.18s cubic-bezier(0, 0, 0.2, 1) forwards;
 }
