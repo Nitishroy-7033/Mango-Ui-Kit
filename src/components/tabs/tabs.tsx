@@ -33,7 +33,6 @@ export const Tabs: React.FC<TabsProps> = ({
   useEffect(() => {
     if (activeTabRef.current && tabsListRef.current) {
       const activeElement = activeTabRef.current;
-      const listElement = tabsListRef.current;
 
       const { offsetLeft, offsetWidth } = activeElement;
 

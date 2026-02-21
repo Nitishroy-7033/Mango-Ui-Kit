@@ -45,7 +45,7 @@ export const VideoUploader: React.FC<VideoUploaderProps> = ({
                         <div className="video-info">
                             <span className="name">{file.name}</span>
                             {file.status === 'uploading' && (
-                                <ProgressBar progress={file.progress} size="xs" color="var(--primaryColor)" />
+                                <ProgressBar progress={file.progress} size="xs" customColor="var(--primaryColor)" />
                             )}
                             {file.status === 'error' && <span className="error-text">{file.error}</span>}
                         </div>

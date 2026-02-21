@@ -1,5 +1,4 @@
-﻿import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
+﻿import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Tabs } from './tabs';
 import { Home, Users, Settings, Bell, Star, Mail, Shield, Zap } from 'lucide-react';
 

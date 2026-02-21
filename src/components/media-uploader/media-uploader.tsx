@@ -201,7 +201,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
                             <div className="item-main">
                                 <div className="item-preview">
                                     {file.status === 'uploading' ? (
-                                        <Spinner size={layout === 'grid' ? 24 : 32} variant="circular" color="var(--primaryColor)" />
+                                        <Spinner size={layout === 'grid' ? 24 : 32} variant="circular" style={{ color: 'var(--primaryColor)' }} />
                                     ) : (
                                         file.thumbnail ? (
                                             <img src={file.thumbnail} alt={file.name} className="thumbnail" />
@@ -222,7 +222,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
                                             <ProgressBar
                                                 progress={file.progress}
                                                 size="xs"
-                                                color="var(--primaryColor)"
+                                                customColor="var(--primaryColor)"
                                                 rounded="full"
                                             />
                                         </div>
