@@ -1,0 +1,6 @@
+@import './tailwind.css';
+
+:root {
+    --mango-primary: #ffc107;
+    --mango-secondary: #ff9800;
+}
