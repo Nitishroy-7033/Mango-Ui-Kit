@@ -1,19 +1,32 @@
 import { cva } from 'class-variance-authority';
 
 export const avatarStyles = cva(
-    'relative flex shrink-0 overflow-hidden rounded-full border border-neutral-700 bg-neutral-800',
+    'avatar-root',
     {
         variants: {
             size: {
-                xs: 'h-6 w-6 text-[0.6rem]',
-                sm: 'h-8 w-8 text-xs',
-                md: 'h-10 w-10 text-sm',
-                lg: 'h-12 w-12 text-base',
-                xl: 'h-16 w-16 text-lg',
+                xs: 'avatar-xs',
+                sm: 'avatar-sm',
+                md: 'avatar-md',
+                lg: 'avatar-lg',
+                xl: 'avatar-xl',
+                '2xl': 'avatar-2xl',
             },
+            shape: {
+                circle: 'avatar-circle',
+                square: 'avatar-square',
+                rounded: 'avatar-rounded',
+            },
+            variant: {
+                solid: '',
+                bordered: 'avatar-variant-bordered',
+                ghost: 'avatar-variant-ghost',
+            }
         },
         defaultVariants: {
             size: 'md',
+            shape: 'circle',
+            variant: 'solid',
         },
     }
 );

@@ -1,0 +1,194 @@
+/* ── Avatar Base ────────────────────────────────────────── */
+.avatar-root {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    overflow: hidden;
+    background-color: var(--secondaryColor, #2d2f33);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.avatar-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+}
+
+/* ── Shapes ─────────────────────────────────────────── */
+.avatar-circle {
+    border-radius: 9999px;
+}
+
+.avatar-square {
+    border-radius: 0px;
+}
+
+.avatar-rounded {
+    border-radius: 0.75rem;
+    /* 12px */
+}
+
+/* ── Sizes ──────────────────────────────────────────── */
+.avatar-xs {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.65rem;
+}
+
+.avatar-sm {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+}
+
+.avatar-md {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.875rem;
+}
+
+.avatar-lg {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1rem;
+}
+
+.avatar-xl {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.25rem;
+}
+
+.avatar-2xl {
+    width: 6rem;
+    height: 6rem;
+    font-size: 2rem;
+}
+
+/* ── Variants ───────────────────────────────────────── */
+.avatar-variant-bordered {
+    border: 2px solid var(--borderColor);
+}
+
+.avatar-variant-ghost {
+    background-color: transparent;
+    border: 2px dashed var(--borderColor);
+}
+
+/* ── Status ─────────────────────────────────────────── */
+.avatar-status-dot {
+    position: absolute;
+    display: block;
+    border-radius: 9999px;
+    border: 2px solid var(--primaryContainercolor, #fff);
+    z-index: 10;
+}
+
+/* Status Positions */
+.status-top-right {
+    top: 0;
+    right: 0;
+    transform: translate(15%, -15%);
+}
+
+.status-bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: translate(15%, 15%);
+}
+
+.status-top-left {
+    top: 0;
+    left: 0;
+    transform: translate(-15%, -15%);
+}
+
+.status-bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: translate(-15%, 15%);
+}
+
+/* Status Colors */
+.status-online {
+    background-color: #10b981;
+}
+
+.status-offline {
+    background-color: #6b7280;
+}
+
+.status-away {
+    background-color: #f59e0b;
+}
+
+.status-busy {
+    background-color: #ef4444;
+}
+
+/* Status Sizes */
+.avatar-xs .avatar-status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-width: 1px;
+}
+
+.avatar-sm .avatar-status-dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-width: 1.5px;
+}
+
+.avatar-md .avatar-status-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-width: 2px;
+}
+
+.avatar-lg .avatar-status-dot {
+    width: 0.875rem;
+    height: 0.875rem;
+    border-width: 2px;
+}
+
+.avatar-xl .avatar-status-dot {
+    width: 1.125rem;
+    height: 1.125rem;
+    border-width: 2.5px;
+}
+
+.avatar-2xl .avatar-status-dot {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-width: 3px;
+}
+
+/* ── Ring/Extra ──────────────────────────────────────── */
+.avatar-ring {
+    box-shadow: 0 0 0 2px var(--primaryContainercolor, #fff), 0 0 0 4px var(--ring-color, var(--primaryColor, #f97316));
+}
+
+/* Hover Effect for AvatarGroup */
+.avatar-group-item {
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.avatar-group-item:hover {
+    transform: translateY(-4px);
+    z-index: 20 !important;
+}
