@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { LayoutDashboard, Users, Settings } from 'lucide-react';
 import { Tabs } from './tabs';
@@ -15,7 +16,7 @@ const tabs = [
     {
         id: 'overview',
         label: 'Overview',
-        icon: LayoutDashboard,
+        icon: <LayoutDashboard size={16} />,
         content: (
             <div className="p-4 bg-[var(--primaryContainercolor)] rounded-xl border border-[var(--borderColor)]">
                 <p className="text-[var(--textColor)] font-medium">Overview Content</p>
@@ -26,7 +27,7 @@ const tabs = [
     {
         id: 'users',
         label: 'Users',
-        icon: Users,
+        icon: <Users size={16} />,
         content: (
             <div className="p-4 bg-[var(--primaryContainercolor)] rounded-xl border border-[var(--borderColor)]">
                 <p className="text-[var(--textColor)] font-medium">Users Content</p>
@@ -37,7 +38,7 @@ const tabs = [
     {
         id: 'settings',
         label: 'Settings',
-        icon: Settings,
+        icon: <Settings size={16} />,
         content: (
             <div className="p-4 bg-[var(--primaryContainercolor)] rounded-xl border border-[var(--borderColor)]">
                 <p className="text-[var(--textColor)] font-medium">Settings Content</p>
@@ -48,7 +49,7 @@ const tabs = [
 ];
 
 export const Default: Story = {
-    args: { tabs, defaultTab: 'overview' },
+    render: () => <Tabs tabs={tabs} defaultTab="overview" />,
 };
 
 export const NoIcons: Story = {

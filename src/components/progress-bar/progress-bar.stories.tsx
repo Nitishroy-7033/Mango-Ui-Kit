@@ -7,7 +7,7 @@ const meta: Meta<typeof ProgressBar> = {
     parameters: { layout: 'padded' },
     tags: ['autodocs'],
     argTypes: {
-        progress: { control: { type: 'range', min: 0, max: 100, step: 1 } },
+        value: { control: { type: 'range', min: 0, max: 100, step: 1 } },
         color: { control: 'color' },
     },
 };
@@ -15,23 +15,23 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    args: { progress: 65, label: 'Progress', showPercentage: true },
+    args: { value: 65, label: 'Progress', showValue: true },
 };
 
 export const NoLabel: Story = {
-    args: { progress: 40, showPercentage: false },
+    args: { value: 40, showValue: false },
 };
 
 export const CustomColor: Story = {
-    args: { progress: 80, label: 'Custom Color', color: '#8b5cf6' },
+    args: { value: 80, label: 'Custom Color', color: '#8b5cf6' },
 };
 
 export const Multiple: Story = {
     render: () => (
         <div className="flex flex-col gap-4" style={{ width: 400 }}>
-            <ProgressBar progress={25} label="Storage" color="var(--primaryColor)" />
-            <ProgressBar progress={60} label="Memory" color="#8b5cf6" />
-            <ProgressBar progress={90} label="CPU" color="#ef4444" />
+            <ProgressBar value={25} label="Storage" color="var(--primaryColor)" />
+            <ProgressBar value={60} label="Memory" color="#8b5cf6" />
+            <ProgressBar value={90} label="CPU" color="#ef4444" />
         </div>
     ),
 };

@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { LayoutDashboard, Users, Settings, Bell } from 'lucide-react';
 import { Sidebar } from './sidebar';

@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Users, DollarSign, TrendingUp, ShoppingCart } from 'lucide-react';
 import { StatCard } from './stat-card';
@@ -13,42 +14,43 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
     args: {
-        label: 'Total Users',
+        title: 'Total Users',
         value: '12,430',
         icon: Users,
-        trend: 12,
-        trendLabel: 'from last month',
+        trend: 'up',
+        trendValue: 12,
     },
 };
 
 export const Negative: Story = {
     args: {
-        label: 'Revenue',
+        title: 'Revenue',
         value: '$48,295',
         icon: DollarSign,
-        trend: -4,
-        trendLabel: 'from last month',
-        variant: 'error',
+        trend: 'down',
+        trendValue: 4,
+        color: '#ef4444',
     },
 };
 
-export const WithVariant: Story = {
+export const WithDescription: Story = {
     args: {
-        label: 'Monthly Sales',
+        title: 'Monthly Sales',
         value: '3,821',
         icon: ShoppingCart,
-        trend: 8,
-        variant: 'success',
+        trend: 'up',
+        trendValue: 8,
+        description: 'Compared to last month',
     },
 };
 
 export const Grid: Story = {
     render: () => (
         <div className="grid grid-cols-2 gap-4" style={{ width: 600 }}>
-            <StatCard label="Total Users" value="12,430" icon={Users} trend={12} variant="primary" />
-            <StatCard label="Revenue" value="$48,295" icon={DollarSign} trend={8} variant="secondary" />
-            <StatCard label="Growth" value="+24%" icon={TrendingUp} trend={3} variant="success" />
-            <StatCard label="Orders" value="1,029" icon={ShoppingCart} trend={-2} variant="error" />
+            <StatCard title="Total Users" value="12,430" icon={Users} trend="up" trendValue={12} />
+            <StatCard title="Revenue" value="$48,295" icon={DollarSign} trend="up" trendValue={8} color="#8b5cf6" />
+            <StatCard title="Growth" value="+24%" icon={TrendingUp} trend="up" trendValue={3} color="#10b981" />
+            <StatCard title="Orders" value="1,029" icon={ShoppingCart} trend="down" trendValue={2} color="#ef4444" />
         </div>
     ),
 };

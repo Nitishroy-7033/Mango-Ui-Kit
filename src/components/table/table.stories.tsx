@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Table } from './table';
 
@@ -21,10 +22,11 @@ const columns = [
         accessor: 'status' as keyof User,
         render: (value: unknown) => (
             <span
-                className={`px-2 py-0.5 rounded-full text-xs font-semibold ${value === 'Active'
+                className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
+                    value === 'Active'
                         ? 'bg-green-100 text-green-700'
                         : 'bg-red-100 text-red-600'
-                    }`}
+                }`}
             >
                 {String(value)}
             </span>
