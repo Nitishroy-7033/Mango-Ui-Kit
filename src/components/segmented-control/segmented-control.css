@@ -1,0 +1,126 @@
+.mango-segmented-control {
+    display: inline-flex;
+    position: relative;
+    background-color: var(--secondaryColor, #f3f4f6);
+    padding: 4px;
+    border-radius: 12px;
+    user-select: none;
+    transition: all 0.3s ease;
+    --segment-active-bg: white;
+    --segment-active-text: var(--primaryColor, #ffc107);
+    --segment-text: var(--labelSecondaryColor, #4b5563);
+    --segment-radius: 8px;
+    --segment-height: 40px;
+}
+
+.mango-segmented-control.variant-pill {
+    border-radius: 100px;
+    --segment-radius: 100px;
+}
+
+.mango-segmented-control.is-full-width {
+    display: flex;
+    width: 100%;
+}
+
+.mango-segmented-control.is-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ── Active Indicator (The sliding background) ── */
+.mango-segmented-indicator {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 0;
+    z-index: 1;
+    background-color: var(--segment-active-bg);
+    border-radius: var(--segment-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Individual Segment ── */
+.mango-segmented-item {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    height: var(--segment-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--segment-text);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    border-radius: var(--segment-radius);
+    white-space: nowrap;
+}
+
+.mango-segmented-item.is-active {
+    color: var(--segment-active-text);
+}
+
+.mango-segmented-item.is-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.mango-segmented-item:hover:not(.is-active):not(.is-disabled) {
+    color: var(--textColor);
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* ── Icons ── */
+.mango-segmented-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.mango-segmented-item.is-active .mango-segmented-icon {
+    opacity: 1;
+}
+
+/* ── Sizes ── */
+.mango-segmented-size-sm {
+    --segment-height: 32px;
+    padding: 3px;
+    border-radius: 10px;
+    --segment-radius: 7px;
+}
+
+.mango-segmented-size-sm .mango-segmented-item {
+    font-size: 0.82rem;
+    padding: 0 12px;
+}
+
+.mango-segmented-size-sm .mango-segmented-indicator {
+    top: 3px;
+    bottom: 3px;
+}
+
+.mango-segmented-size-lg {
+    --segment-height: 52px;
+    padding: 5px;
+    border-radius: 16px;
+    --segment-radius: 11px;
+}
+
+.mango-segmented-size-lg .mango-segmented-item {
+    font-size: 1rem;
+    padding: 0 24px;
+}
+
+.mango-segmented-size-lg .mango-segmented-indicator {
+    top: 5px;
+    bottom: 5px;
+}
+
+/* ── Specific Dark Mode Adjustments if needed ── */
+/* (Assuming consumer will handle theme via CSS variables) */

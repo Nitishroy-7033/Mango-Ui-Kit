@@ -1,0 +1,198 @@
+.mango-checkbox-container {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: all 0.2s ease;
+    --checkbox-primary: var(--primaryColor, #ffc107);
+    --checkbox-bg: var(--primaryContainercolor, #fff9e6);
+    --checkbox-border: var(--borderColor, #e5e7eb);
+    --checkbox-text: var(--textColor, #1f2937);
+    --checkbox-label: var(--labelSecondaryColor, #4b5563);
+    --checkbox-size: 20px;
+    --checkbox-radius: 6px;
+}
+
+.mango-checkbox-container.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ── Hidden Input ─────────────────── */
+.mango-checkbox-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* ── Checkbox Box ─────────────────── */
+.mango-checkbox-box {
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    border-radius: var(--checkbox-radius);
+    border: 2px solid var(--checkbox-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: transparent;
+    flex-shrink: 0;
+    position: relative;
+    margin-top: 2px;
+}
+
+/* ── Variants ───────────────────── */
+
+/* Solid Variant */
+.mango-checkbox-variant-solid .mango-checkbox-box {
+    background-color: white;
+}
+
+.mango-checkbox-container.is-checked.mango-checkbox-variant-solid .mango-checkbox-box {
+    background-color: var(--checkbox-primary);
+    border-color: var(--checkbox-primary);
+}
+
+/* Outlined Variant */
+.mango-checkbox-variant-outlined .mango-checkbox-box {
+    background-color: transparent;
+    border-width: 2px;
+}
+
+.mango-checkbox-container.is-checked.mango-checkbox-variant-outlined .mango-checkbox-box {
+    border-color: var(--checkbox-primary);
+}
+
+/* Soft Variant */
+.mango-checkbox-variant-soft .mango-checkbox-box {
+    background-color: var(--checkbox-bg);
+    border-color: transparent;
+}
+
+.mango-checkbox-container.is-checked.mango-checkbox-variant-soft .mango-checkbox-box {
+    background-color: var(--checkbox-bg);
+    color: var(--checkbox-primary);
+}
+
+/* ── Check Mark Icon ──────────────── */
+.mango-checkbox-icon {
+    color: white;
+    transform: scale(0);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mango-checkbox-variant-outlined .mango-checkbox-icon,
+.mango-checkbox-variant-soft .mango-checkbox-icon {
+    color: var(--checkbox-primary);
+}
+
+.mango-checkbox-container.is-checked .mango-checkbox-icon {
+    transform: scale(1);
+}
+
+.mango-checkbox-container.is-indeterminate .mango-checkbox-icon {
+    transform: scale(1);
+}
+
+/* ── Animations ───────────────────── */
+.mango-checkbox-container:hover:not(.is-disabled) .mango-checkbox-box {
+    border-color: var(--checkbox-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.mango-checkbox-container:active:not(.is-disabled) .mango-checkbox-box {
+    transform: scale(0.92);
+}
+
+/* ── Sizes ────────────────────────── */
+.mango-checkbox-size-sm {
+    --checkbox-size: 16px;
+    --checkbox-radius: 4px;
+}
+
+.mango-checkbox-size-md {
+    --checkbox-size: 20px;
+    --checkbox-radius: 6px;
+}
+
+.mango-checkbox-size-lg {
+    --checkbox-size: 24px;
+    --checkbox-radius: 8px;
+}
+
+/* ── Label Block ──────────────────── */
+.mango-checkbox-label-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.mango-checkbox-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--checkbox-text);
+    line-height: 1.5;
+}
+
+.mango-checkbox-description {
+    font-size: 0.8rem;
+    color: var(--checkbox-label);
+    margin-top: 2px;
+}
+
+/* Size specific label adjustments */
+.mango-checkbox-size-sm .mango-checkbox-label {
+    font-size: 0.85rem;
+}
+
+.mango-checkbox-size-lg .mango-checkbox-label {
+    font-size: 1rem;
+}
+
+/* ── Error State ──────────────────── */
+.has-error .mango-checkbox-box {
+    border-color: #ef4444 !important;
+}
+
+.mango-checkbox-error-message {
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: 4px;
+}
+
+/* ── Checkbox Group ────────────────── */
+.mango-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mango-checkbox-group-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--checkbox-text);
+    margin-bottom: 4px;
+}
+
+.mango-checkbox-group-description {
+    font-size: 0.85rem;
+    color: var(--checkbox-label);
+    margin-bottom: 12px;
+}
+
+.mango-checkbox-group-items {
+    display: flex;
+    gap: inherit;
+}
+
+.mango-checkbox-group-vertical {
+    flex-direction: column;
+}
+
+.mango-checkbox-group-horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+}

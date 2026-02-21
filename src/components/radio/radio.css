@@ -1,0 +1,186 @@
+.mango-radio-container {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: all 0.2s ease;
+    --radio-primary: var(--primaryColor, #ffc107);
+    --radio-bg: var(--primaryContainercolor, #fff9e6);
+    --radio-border: var(--borderColor, #e5e7eb);
+    --radio-text: var(--textColor, #1f2937);
+    --radio-label: var(--labelSecondaryColor, #4b5563);
+    --radio-size: 20px;
+}
+
+.mango-radio-container.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ── Hidden Input ─────────────────── */
+.mango-radio-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* ── Radio Circle ─────────────────── */
+.mango-radio-circle {
+    width: var(--radio-size);
+    height: var(--radio-size);
+    border-radius: 50%;
+    border: 2px solid var(--radio-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: transparent;
+    flex-shrink: 0;
+    position: relative;
+    margin-top: 2px;
+}
+
+/* ── Variants ───────────────────── */
+
+/* Solid Variant */
+.mango-radio-variant-solid .mango-radio-circle {
+    background-color: white;
+}
+
+.mango-radio-container.is-checked.mango-radio-variant-solid .mango-radio-circle {
+    border-color: var(--radio-primary);
+}
+
+/* Outlined Variant */
+.mango-radio-variant-outlined .mango-radio-circle {
+    background-color: transparent;
+    border-width: 2px;
+}
+
+.mango-radio-container.is-checked.mango-radio-variant-outlined .mango-radio-circle {
+    border-color: var(--radio-primary);
+}
+
+/* Soft Variant */
+.mango-radio-variant-soft .mango-radio-circle {
+    background-color: var(--radio-bg);
+    border-color: transparent;
+}
+
+.mango-radio-container.is-checked.mango-radio-variant-soft .mango-radio-circle {
+    background-color: var(--radio-bg);
+}
+
+/* ── Dot Indicator ───────────────── */
+.mango-radio-dot {
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    background-color: var(--radio-primary);
+    transform: scale(0);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mango-radio-container.is-checked .mango-radio-dot {
+    transform: scale(1);
+}
+
+/* ── Animations ───────────────────── */
+.mango-radio-container:hover:not(.is-disabled) .mango-radio-circle {
+    border-color: var(--radio-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.mango-radio-container:active:not(.is-disabled) .mango-radio-circle {
+    transform: scale(0.92);
+}
+
+/* ── Sizes ────────────────────────── */
+.mango-radio-size-sm {
+    --radio-size: 16px;
+}
+
+.mango-radio-size-md {
+    --radio-size: 20px;
+}
+
+.mango-radio-size-lg {
+    --radio-size: 24px;
+}
+
+/* ── Label Block ──────────────────── */
+.mango-radio-label-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.mango-radio-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--radio-text);
+    line-height: 1.5;
+}
+
+.mango-radio-description {
+    font-size: 0.8rem;
+    color: var(--radio-label);
+    margin-top: 2px;
+}
+
+/* Size specific label adjustments */
+.mango-radio-size-sm .mango-radio-label {
+    font-size: 0.85rem;
+}
+
+.mango-radio-size-lg .mango-radio-label {
+    font-size: 1rem;
+}
+
+/* ── Error State ──────────────────── */
+.has-error .mango-radio-circle {
+    border-color: #ef4444 !important;
+}
+
+.mango-radio-error-message {
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: 4px;
+}
+
+/* ── Radio Group ────────────────── */
+.mango-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mango-radio-group-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--radio-text);
+    margin-bottom: 4px;
+}
+
+.mango-radio-group-description {
+    font-size: 0.85rem;
+    color: var(--radio-label);
+    margin-bottom: 12px;
+}
+
+.mango-radio-group-items {
+    display: flex;
+    gap: inherit;
+}
+
+.mango-radio-group-vertical {
+    flex-direction: column;
+}
+
+.mango-radio-group-horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+}

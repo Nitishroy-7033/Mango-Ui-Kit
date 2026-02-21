@@ -36,6 +36,9 @@ export * from './components/tooltip';
 export * from './components/otp-input';
 export * from './components/dialog';
 export * from './components/media-uploader';
+export * from './components/checkbox';
+export * from './components/radio';
+export * from './components/segmented-control';
 
 export * from './hooks';
 export * from './utils';
