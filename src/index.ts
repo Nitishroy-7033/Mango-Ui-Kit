@@ -11,9 +11,11 @@ export * from './components/toggle';
 
 // New components
 export * from './components/accordion';
+export * from './components/alert';
 export * from './components/app-bar';
 export * from './components/avatar-group';
 export * from './components/breadcrumbs';
+export * from './components/chip';
 export * from './components/drawer';
 export * from './components/dropdown';
 export * from './components/multi-select';

@@ -1,13 +1,18 @@
 .mango-pagination {
     --pagination-active-bg: var(--primaryColor, #fa8029);
     --pagination-active-text: #ffffff;
-    --pagination-item-bg: var(--primaryContainercolor, #ffffff);
-    --pagination-item-hover: rgba(var(--primaryColor-rgb, 250, 128, 41), 0.08);
+    --pagination-item-bg: var(--secondaryColor, #f3f4f6);
+    --pagination-item-hover: var(--lightPrimaryColor, rgba(250, 128, 41, 0.1));
     --pagination-border: var(--borderColor, #e2e8f0);
-    --pagination-text: var(--textColor, #1e293b);
+    --pagination-text: var(--textColor, #383838);
 
     display: flex;
     width: 100%;
+}
+
+/* If a custom color is provided, we try to derive the hover color using color-mix */
+.mango-pagination[style*="--pagination-active-bg"] {
+    --pagination-item-hover: color-mix(in srgb, var(--pagination-active-bg), transparent 90%);
 }
 
 .mango-pagination.align-left {
@@ -28,7 +33,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: 8px;
+    gap: 6px;
 }
 
 .pagination-btn {
@@ -41,6 +46,7 @@
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     font-weight: 600;
+    font-family: inherit;
     user-select: none;
 }
 
@@ -52,15 +58,16 @@
 }
 
 .pagination-btn:disabled {
-    opacity: 0.4;
+    opacity: 0.35;
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 .pagination-btn.is-active {
     background: var(--pagination-active-bg);
     border-color: var(--pagination-active-bg);
     color: var(--pagination-active-text);
-    box-shadow: 0 4px 12px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.25);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--pagination-active-bg), transparent 75%);
 }
 
 .pagination-item.dots {
@@ -123,7 +130,12 @@
 /* Modern (Default) */
 .is-modern .pagination-btn {
     border-color: transparent;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.is-modern .pagination-btn:not(.is-active):hover:not(:disabled) {
+    border-color: var(--pagination-active-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Classic */
@@ -140,10 +152,18 @@
 .is-minimal .pagination-btn {
     border: none;
     background: transparent;
+    color: var(--textColor, #383838);
 }
 
 .is-minimal .pagination-btn:hover:not(:disabled) {
     background: var(--pagination-item-hover);
+    color: var(--pagination-active-bg);
+}
+
+.is-minimal .pagination-btn.is-active {
+    background: var(--pagination-active-bg);
+    color: #ffffff;
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--pagination-active-bg), transparent 70%);
 }
 
 /* Simple */
@@ -172,26 +192,49 @@
 /* Ghost */
 .is-ghost .pagination-btn {
     background: transparent;
-    border: 1px solid var(--pagination-border);
+    border: 1px solid var(--borderColor, #e2e8f0);
+    color: var(--textColor, #383838);
 }
 
 .is-ghost .pagination-btn.is-active {
-    background: rgba(var(--primaryColor-rgb), 0.1);
+    background: color-mix(in srgb, var(--pagination-active-bg), transparent 88%);
+    border-color: var(--pagination-active-bg);
     color: var(--pagination-active-bg);
+    box-shadow: none;
 }
 
 /* ── Dark Mode ─────────────────────────────────────── */
 
-[data-theme='dark'] .pagination-btn {
-    background: rgba(255, 255, 255, 0.03);
+/* In dark mode, --secondaryColor is #2d2f33, which already renders correct.
+   We only need to enforce the text and border colour for clarity. */
+
+[data-theme='dark'] .pagination-btn:not(.is-active) {
+    color: var(--textColor);
+    border-color: var(--borderColor);
 }
 
-[data-theme='dark'] .is-minimal .pagination-btn {
+[data-theme='dark'] .pagination-btn:hover:not(:disabled):not(.is-active) {
+    background: color-mix(in srgb, var(--pagination-active-bg), transparent 85%);
+    border-color: var(--pagination-active-bg);
+    color: var(--pagination-active-bg);
+}
+
+[data-theme='dark'] .is-modern .pagination-btn:not(.is-active) {
+    border-color: transparent;
+}
+
+[data-theme='dark'] .is-minimal .pagination-btn:not(.is-active) {
+    background: transparent;
+    border-color: transparent;
+}
+
+[data-theme='dark'] .is-ghost .pagination-btn:not(.is-active) {
     background: transparent;
 }
 
-[data-theme='dark'] .pagination-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.08);
+[data-theme='dark'] .is-simple .pagination-list {
+    background: var(--secondaryColor);
+    border-color: var(--borderColor);
 }
 
 /* ── Responsive ────────────────────────────────────── */
