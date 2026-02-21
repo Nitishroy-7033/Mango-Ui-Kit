@@ -11,10 +11,10 @@
 
   <br />
 
-  <a href="https://nitishroy.com/mango-ui-kit/storybook">
+  <a href="https://mango-ui-kit.onrender.com/">
     <img src="https://img.shields.io/badge/View_Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white" alt="Storybook" />
   </a>
-  <a href="https://nitishroy.com/mango-ui-kit">
+  <a href="https://mango-ui-kit.onrender.com/">
     <img src="https://img.shields.io/badge/Live_Demo-fa8029?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Website" />
   </a>
   <a href="https://twitter.com/nitishroy">
@@ -205,6 +205,6 @@ We are looking for contributors! If you have a component idea or a bug fix:
 
   Developed by [Nitish Roy](https://github.com/Nitishroy-7033). If you find this useful, please consider giving us a ⭐ on GitHub!
 
-  [Privacy Policy](https://nitishroy.com/privacy) • [Terms of Service](https://nitishroy.com/terms) • [Discord Community](https://discord.gg/mango)
+  [Privacy Policy](https://mango-ui-kit.onrender.com/privacy) • [Terms of Service](https://mango-ui-kit.onrender.com/terms) • [Discord Community](https://discord.gg/mango)
 
 </div>
