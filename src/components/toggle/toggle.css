@@ -1,79 +1,157 @@
-.toggle-container {
+.mango-toggle-container {
     display: inline-flex;
     align-items: center;
     gap: 12px;
     cursor: pointer;
     user-select: none;
+    transition: opacity 0.2s;
 }
 
-.toggle-root {
-    width: 44px;
-    height: 24px;
-    background: var(--borderColor);
-    border-radius: 99px;
-    padding: 2px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.mango-toggle-container.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.mango-toggle-root {
     position: relative;
     display: flex;
     align-items: center;
+    background: var(--borderColor, #e2e8f0);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
-.toggle-root.checked {
-    background: var(--primaryColor);
-}
-
-.toggle-thumb {
-    width: 20px;
-    height: 20px;
-    background: white;
+.mango-toggle-thumb {
+    position: absolute;
+    left: 4px;
+    background: #ffffff;
     border-radius: 50%;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
 }
 
-.toggle-root.checked .toggle-thumb {
+.mango-toggle-icon {
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+    display: flex;
+}
+
+.mango-toggle-icon.is-visible {
+    opacity: 1;
+}
+
+/* ── Sizes ─────────────────────────────────────────── */
+
+.toggle-sm .mango-toggle-root {
+    width: 32px;
+    height: 18px;
+    border-radius: 9px;
+}
+
+.toggle-sm .mango-toggle-thumb {
+    width: 14px;
+    height: 14px;
+}
+
+.toggle-sm.checked .mango-toggle-thumb {
+    transform: translateX(14px);
+}
+
+.toggle-md .mango-toggle-root {
+    width: 44px;
+    height: 24px;
+    border-radius: 12px;
+}
+
+.toggle-md .mango-toggle-thumb {
+    width: 20px;
+    height: 20px;
+}
+
+.toggle-md.checked .mango-toggle-thumb {
     transform: translateX(20px);
 }
 
-.toggle-label {
+.toggle-lg .mango-toggle-root {
+    width: 56px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+.toggle-lg .mango-toggle-thumb {
+    width: 28px;
+    height: 28px;
+}
+
+.toggle-lg.checked .mango-toggle-thumb {
+    transform: translateX(24px);
+}
+
+/* ── Variants ─────────────────────────────────────── */
+
+/* 1. Solid (Modern Mango) */
+.mango-toggle-root.is-solid.checked {
+    background: var(--toggle-color, var(--primaryColor, #fa8029));
+}
+
+/* 2. iOS Style */
+.mango-toggle-root.is-ios {
+    background: #e9e9ea;
+}
+
+.mango-toggle-root.is-ios.checked {
+    background: #34c759;
+    /* Standard iOS Green */
+}
+
+/* 3. Modern Minimal */
+.mango-toggle-root.is-modern {
+    background: transparent;
+    border: 2px solid var(--borderColor);
+}
+
+.mango-toggle-root.is-modern .mango-toggle-thumb {
+    background: var(--borderColor);
+    box-shadow: none;
+}
+
+.mango-toggle-root.is-modern.checked {
+    border-color: var(--toggle-color, var(--primaryColor));
+}
+
+.mango-toggle-root.is-modern.checked .mango-toggle-thumb {
+    background: var(--toggle-color, var(--primaryColor));
+}
+
+/* 4. Glassmorphism */
+.mango-toggle-root.is-glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mango-toggle-root.is-glass.checked {
+    background: rgba(250, 128, 41, 0.2);
+    border-color: rgba(250, 128, 41, 0.3);
+}
+
+/* ── Label & UI ────────────────────────────────────── */
+
+.mango-toggle-label {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--textColor);
 }
 
-.toggle-root.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+/* Dark Mode Adjustments */
+[data-theme='dark'] .mango-toggle-root:not(.checked) {
+    background: rgba(255, 255, 255, 0.08);
 }
 
-/* Sizes */
-.toggle-sm .toggle-root {
-    width: 32px;
-    height: 18px;
-}
-
-.toggle-sm .toggle-thumb {
-    width: 14px;
-    height: 14px;
-}
-
-.toggle-sm.checked .toggle-thumb {
-    transform: translateX(14px);
-}
-
-.toggle-lg .toggle-root {
-    width: 56px;
-    height: 30px;
-}
-
-.toggle-lg .toggle-thumb {
-    width: 26px;
-    height: 26px;
-}
-
-.toggle-lg.checked .toggle-thumb {
-    transform: translateX(26px);
+[data-theme='dark'] .mango-toggle-thumb {
+    background: #e2e8f0;
 }

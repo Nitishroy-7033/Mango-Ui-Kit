@@ -1,15 +1,19 @@
-.skeleton-root {
-    background: var(--borderColor);
+.mango-skeleton {
+    background: rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
-    opacity: 0.5;
+    display: block;
 }
 
-.skeleton-root.animate {
-    animation: skeleton-pulse 1.5s ease-in-out infinite;
+[data-theme='dark'] .mango-skeleton {
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.skeleton-shimmer {
+.mango-skeleton.animate-pulse {
+    animation: mango-skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.mango-skeleton-shimmer {
     position: absolute;
     top: 0;
     left: 0;
@@ -17,26 +21,31 @@
     bottom: 0;
     background: linear-gradient(90deg,
             transparent,
-            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0.08),
             transparent);
-    animation: skeleton-shimmer 2s infinite;
+    animation: mango-skeleton-shimmer 2s infinite;
 }
 
-@keyframes skeleton-pulse {
-    0% {
-        opacity: 0.3;
+[data-theme='dark'] .mango-skeleton-shimmer {
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.03),
+            transparent);
+}
+
+@keyframes mango-skeleton-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
     }
 
     50% {
-        opacity: 0.6;
-    }
-
-    100% {
-        opacity: 0.3;
+        opacity: 0.5;
     }
 }
 
-@keyframes skeleton-shimmer {
+@keyframes mango-skeleton-shimmer {
     0% {
         transform: translateX(-100%);
     }
@@ -47,14 +56,19 @@
 }
 
 /* Variants */
-.skeleton-text {
+.mango-skeleton.is-text {
     border-radius: 4px;
+    height: 1em;
 }
 
-.skeleton-circular {
+.mango-skeleton.is-circular {
     border-radius: 50%;
 }
 
-.skeleton-rectangular {
+.mango-skeleton.is-rectangular {
+    border-radius: 4px;
+}
+
+.mango-skeleton.is-rounded {
     border-radius: 12px;
 }

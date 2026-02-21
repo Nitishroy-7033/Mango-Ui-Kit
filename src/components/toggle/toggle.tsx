@@ -8,18 +8,61 @@ export const Toggle: React.FC<ToggleProps> = ({
     onChange,
     disabled = false,
     label,
+    labelPosition = 'right',
     size = 'md',
+    variant = 'solid',
+    color,
+    activeIcon,
+    inactiveIcon,
     className = '',
+    style,
 }) => {
+    const handleToggle = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (!disabled && onChange) {
+            onChange(!checked);
+        }
+    };
+
+    const containerStyle = {
+        ...style,
+        '--toggle-color': color,
+    } as React.CSSProperties;
+
     return (
         <div
-            className={cn('toggle-container', `toggle-${size}`, className)}
-            onClick={() => !disabled && onChange?.(!checked)}
+            className={cn(
+                'mango-toggle-container',
+                `toggle-${size}`,
+                checked && 'checked',
+                disabled && 'is-disabled',
+                className
+            )}
+            onClick={handleToggle}
+            style={containerStyle}
         >
-            <div className={cn('toggle-root', checked && 'checked', disabled && 'disabled')}>
-                <div className="toggle-thumb" />
+            {label && labelPosition === 'left' && (
+                <span className="mango-toggle-label">{label}</span>
+            )}
+
+            <div className={cn('mango-toggle-root', `is-${variant}`, checked && 'checked')}>
+                <div className="mango-toggle-thumb">
+                    {activeIcon && (
+                        <span className={cn('mango-toggle-icon', checked && 'is-visible')}>
+                            {activeIcon}
+                        </span>
+                    )}
+                    {inactiveIcon && (
+                        <span className={cn('mango-toggle-icon', !checked && 'is-visible')}>
+                            {inactiveIcon}
+                        </span>
+                    )}
+                </div>
             </div>
-            {label && <span className="toggle-label">{label}</span>}
+
+            {label && labelPosition === 'right' && (
+                <span className="mango-toggle-label">{label}</span>
+            )}
         </div>
     );
 };

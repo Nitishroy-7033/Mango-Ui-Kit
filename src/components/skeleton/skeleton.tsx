@@ -7,22 +7,37 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   variant = 'rectangular',
   width,
   height,
+  borderRadius,
   className = '',
+  count = 1,
   animate = true,
   shimmer = true,
 }) => {
+  const skeletons = Array.from({ length: count });
+
   return (
-    <div
-      className={cn(
-        'skeleton-root',
-        `skeleton-${variant}`,
-        animate && 'animate',
-        className
-      )}
-      style={{ width, height }}
-    >
-      {shimmer && <div className="skeleton-shimmer" />}
-    </div>
+    <>
+      {skeletons.map((_, index) => (
+        <div
+          key={index}
+          className={cn(
+            'mango-skeleton',
+            `is-${variant}`,
+            animate && 'animate-pulse',
+            shimmer && 'has-shimmer',
+            className
+          )}
+          style={{
+            width,
+            height,
+            borderRadius: borderRadius,
+            marginBottom: count > 1 ? '0.5rem' : 0
+          }}
+        >
+          {shimmer && <div className="mango-skeleton-shimmer" />}
+        </div>
+      ))}
+    </>
   );
 };
 

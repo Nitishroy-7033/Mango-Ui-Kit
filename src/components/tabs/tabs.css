@@ -1,56 +1,258 @@
-.tabs-container {
+.mango-tabs-container {
     width: 100%;
-}
-
-.tabs-list {
     display: flex;
-    gap: 8px;
-    padding: 6px;
-    background: var(--secondaryColor);
-    border-radius: 14px;
-    margin-bottom: 20px;
+    flex-direction: column;
 }
 
-.tab-trigger {
-    flex: 1;
+.mango-tabs-list-wrapper {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    display: flex;
+}
+
+.mango-tabs-list-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.mango-tabs-list {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+    min-height: 48px;
+    /* Consistent height */
+}
+
+.mango-tabs-list.is-centered {
+    margin: 0 auto;
+}
+
+.mango-tabs-trigger {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 10px 16px;
+    gap: 10px;
+    padding: 0 20px;
+    height: 100%;
     border: none;
     background: transparent;
-    color: var(--labelSecondaryColor);
-    font-size: 0.9rem;
+    color: var(--labelSecondaryColor, #64748b);
+    font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
-    border-radius: 10px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    min-height: 40px;
 }
 
-.tab-trigger:hover {
+.mango-tabs-trigger:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.mango-tabs-trigger:hover:not(:disabled) {
     color: var(--textColor);
-    background: rgba(255, 255, 255, 0.02);
 }
 
-.tab-trigger.active {
-    background: var(--primaryContainercolor);
-    color: var(--primaryColor);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.mango-tabs-trigger.active {
+    color: var(--tabs-active-color, var(--primaryColor, #fa8029));
 }
 
-.tab-panel {
-    animation: tabFadeIn 0.3s ease-out;
+.mango-tabs-indicator {
+    position: absolute;
+    border-radius: 12px;
+    background: var(--tabs-active-bg, var(--primaryContainercolor, #fff));
+    transition: all 0.33s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 0;
 }
 
-@keyframes tabFadeIn {
+/* ── Variants ─────────────────────────────────────── */
+
+/* 1. Underlying Underline style */
+.mango-tabs-list.is-underline {
+    border-bottom: 2px solid var(--borderColor, #e2e8f0);
+}
+
+.mango-tabs-list.is-underline .mango-tabs-indicator {
+    bottom: -2px;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    background: var(--tabs-active-color, var(--primaryColor, #fa8029));
+}
+
+/* 2. Pills style */
+.mango-tabs-list.is-pills {
+    background: var(--secondaryColor, #f1f5f9);
+    border-radius: 16px;
+    padding: 6px;
+}
+
+.mango-tabs-list.is-pills .mango-tabs-indicator {
+    height: calc(100% - 12px);
+    top: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* 3. Solid style */
+.mango-tabs-list.is-solid {
+    background: var(--secondaryColor, #f1f5f9);
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.mango-tabs-list.is-solid .mango-tabs-indicator {
+    height: calc(100% - 8px);
+    top: 4px;
+    background: var(--tabs-active-color, var(--primaryColor, #fa8029));
+}
+
+.mango-tabs-list.is-solid .mango-tabs-trigger.active {
+    color: #fff;
+}
+
+/* 4. Hybrid (From Image) */
+.mango-tabs-list.is-hybrid {
+    gap: 8px;
+    padding-bottom: 10px;
+}
+
+.mango-tabs-list.is-hybrid .mango-tabs-indicator {
+    height: calc(100% - 14px);
+    top: 4px;
+    border-radius: 14px;
+    background: var(--tabs-active-light, rgba(250, 128, 41, 0.08));
+}
+
+.mango-tabs-list.is-hybrid .mango-tabs-trigger.active::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 4px;
+    right: 4px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--tabs-active-color, var(--primaryColor, #fa8029));
+    animation: hybridUnderline 0.3s ease;
+}
+
+@keyframes hybridUnderline {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* 5. Flat */
+.mango-tabs-list.is-flat .mango-tabs-indicator {
+    opacity: 0;
+}
+
+/* ── Sizes ─────────────────────────────────────────── */
+
+.mango-tabs-trigger.is-sm {
+    padding: 0 14px;
+    font-size: 0.82rem;
+    min-height: 32px;
+}
+
+.mango-tabs-trigger.is-md {
+    padding: 0 20px;
+    font-size: 0.92rem;
+    min-height: 40px;
+}
+
+.mango-tabs-trigger.is-lg {
+    padding: 0 28px;
+    font-size: 1.05rem;
+    min-height: 48px;
+}
+
+.mango-tabs-list.is-lg {
+    min-height: 56px;
+}
+
+.mango-tabs-list.is-sm {
+    min-height: 40px;
+}
+
+/* ── Decorative Elements ───────────────────────────── */
+
+.mango-tab-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 6px;
+    min-width: 18px;
+    height: 18px;
+    font-size: 10px;
+    border-radius: 9px;
+    background: var(--tabs-active-color, var(--primaryColor, #fa8029));
+    color: #fff;
+    font-weight: 800;
+}
+
+.mango-tabs-trigger:not(.active) .mango-tab-badge {
+    background: var(--borderColor, #e2e8f0);
+    color: var(--labelSecondaryColor);
+}
+
+.mango-tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Content Panel ────────────────────────────────── */
+
+.mango-tab-panel {
+    padding: 24px 0;
+    width: 100%;
+    animation: tabSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tabSlideUp {
     from {
         opacity: 0;
-        transform: translateY(4px);
+        transform: translateY(10px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* ── Full Width ────────────────────────────────────── */
+
+.is-full-width {
+    width: 100%;
+}
+
+.is-full-width .mango-tabs-trigger {
+    flex: 1;
+}
+
+/* Dark Mode Overrides */
+[data-theme='dark'] .mango-tabs-list.is-pills,
+[data-theme='dark'] .mango-tabs-list.is-solid {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .mango-tabs-indicator {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 640px) {
+    .mango-tabs-trigger {
+        padding: 0 16px;
     }
 }
