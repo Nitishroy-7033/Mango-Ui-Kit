@@ -1,169 +1,365 @@
-.sidebar {
-    width: 260px;
-    height: calc(100vh - 10px);
-    background-color: var(--primaryContainercolor);
-    color: var(--textColor);
-    padding: 1.5rem 1.5rem;
+.mango-sidebar {
+    height: 100vh;
+    background: var(--primaryContainercolor, #ffffff);
+    border-right: 1px solid var(--borderColor, #e2e8f0);
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
-    margin: 5px;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: var(--sidebar-width, 280px);
+    position: relative;
+    z-index: 100;
+    color: var(--textColor, #1e293b);
+    border-radius: var(--sidebar-radius, 0);
+}
+
+.mango-sidebar.is-collapsed {
+    width: var(--sidebar-collapsed-width, 80px);
+}
+
+/* ── Header ─────────────────────────────────────────── */
+
+.mango-sidebar-header {
+    height: 72px;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 12px;
+}
+
+.mango-sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
     overflow: hidden;
 }
 
-.sidebar-scroll {
+.mango-sidebar.is-collapsed .mango-sidebar-brand {
+    justify-content: center;
+}
+
+.mango-sidebar-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.mango-sidebar-brand-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+    color: var(--sidebar-active-color, var(--primaryColor));
+}
+
+/* ── Toggle Button ──────────────────────────────────── */
+
+.mango-sidebar-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--labelSecondaryColor, #94a3b8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.2s;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+.mango-sidebar-toggle:hover {
+    background: var(--sidebar-active-bg, var(--lightPrimaryColor));
+    color: var(--sidebar-active-color, var(--primaryColor));
+}
+
+.mango-sidebar-toggle.is-float {
+    position: absolute;
+    top: 72px;
+    right: -18px;
+    background: var(--primaryContainercolor, #fff);
+    border: 1px solid var(--borderColor);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 8px;
+}
+
+.mango-sidebar-toggle.is-bottom {
+    margin: 8px 10px;
+    width: calc(100% - 20px);
+    justify-content: flex-start;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--labelSecondaryColor);
+}
+
+.is-collapsed .mango-sidebar-toggle.is-bottom {
+    justify-content: center;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.toggle-text {
+    animation: fade-in 0.3s ease-out;
+}
+
+/* ── Content ────────────────────────────────────────── */
+
+.mango-sidebar-top-content {
+    padding: 0 12px;
+}
+
+.is-collapsed .mango-sidebar-top-content {
+    padding: 0;
+}
+
+.mango-sidebar-content {
     flex: 1;
     overflow-y: auto;
-    padding-right: 5px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    padding: 8px 10px;
 }
 
-.sidebar-scroll::-webkit-scrollbar {
-    display: none;
+.mango-sidebar.is-collapsed .mango-sidebar-content {
+    padding: 16px 0;
 }
 
-.sidebar-header {
-    margin-bottom: 2.5rem;
+.mango-sidebar-category {
+    margin-bottom: 12px;
+}
+
+.is-collapsed .mango-sidebar-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mango-sidebar-category-title {
+    padding: 0 16px;
+    margin-bottom: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--labelSecondaryColor, #94a3b8);
+    opacity: 0.7;
+}
+
+.mango-sidebar-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.mango-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px;
+    border-radius: var(--sidebar-item-radius, 10px);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    min-height: 34px;
+}
+
+.is-collapsed .mango-sidebar-item {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.mango-sidebar-item:hover {
+    background: var(--secondaryColor, #f1f5f9);
+}
+
+.mango-sidebar-item.is-active {
+    background: var(--sidebar-active-bg, var(--lightPrimaryColor));
+    color: var(--sidebar-active-color, var(--primaryColor));
+}
+
+.mango-sidebar-item.is-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    height: 70%;
+    width: 3px;
+    background: var(--sidebar-active-color, var(--primaryColor));
+    border-radius: 0 4px 4px 0;
+}
+
+.is-collapsed .mango-sidebar-item.is-active::before {
+    left: 2px;
+}
+
+.mango-sidebar-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.mango-sidebar-item-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mango-sidebar-item-suffix {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mango-sidebar-chevron {
+    transition: transform 0.2s ease;
+    color: var(--labelSecondaryColor);
+}
+
+.mango-sidebar-chevron.rotated {
+    transform: rotate(90deg);
+}
+
+/* ── Sub Items ──────────────────────────────────────── */
+
+.mango-sidebar-sub-items {
+    padding-left: 28px;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    position: relative;
+}
+
+.mango-sidebar-sub-items.show-tree::before {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 0;
+    bottom: 12px;
+    width: 1px;
+    background: var(--borderColor);
+}
+
+.mango-sidebar-sub-item {
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--labelColor, #64748b);
+    transition: all 0.2s;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.sidebar-section {
-    margin-bottom: 2rem;
-}
-
-.section-title {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--labelColor);
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.nav-item {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    margin-bottom: 0.3rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    text-decoration: none;
-}
-
-.nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.nav-item.active {
-    background-color: var(--lightPrimaryColor);
-}
-
-.nav-icon {
-    margin-right: 12px;
-    color: var(--labelColor);
-    display: flex;
-    align-items: center;
-}
-
-.nav-item.active .nav-icon {
-    color: var(--primaryColor);
-}
-
-.nav-item.active .nav-label {
-    color: var(--primaryColor);
-}
-
-.nav-label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--labelColor);
-}
-
-.nav-badge {
+.mango-sidebar-sub-items.show-tree .mango-sidebar-sub-item::before {
+    content: '';
     position: absolute;
-    right: 1rem;
-    background-color: var(--primaryColor);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    min-width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 6px;
+    left: -11px;
+    top: 50%;
+    width: 10px;
+    height: 1px;
+    background: var(--borderColor);
 }
 
-.sidebar-footer {
-    padding-top: 1.5rem;
-    margin-top: auto;
-    border-top: 1px solid var(--borderColor);
-}
-
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 998;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.sidebar-overlay.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.sidebar-close-btn {
-    display: none;
-    background: none;
-    border: none;
+.mango-sidebar-sub-item:hover {
+    background: var(--secondaryColor, #f1f5f9);
     color: var(--textColor);
-    cursor: pointer;
-    padding: 5px;
 }
 
-@media (max-width: 1024px) {
-    .sidebar {
-        position: fixed;
-        left: -300px;
-        top: 0;
-        bottom: 0;
-        z-index: 999;
-        margin: 0 !important;
-        height: 100vh;
-        border-radius: 0;
-        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
+.mango-sidebar-sub-item.is-active {
+    color: var(--sidebar-active-color, var(--primaryColor));
+    font-weight: 600;
+}
+
+/* ── Badges ─────────────────────────────────────────── */
+
+.mango-sidebar-badge {
+    background: var(--secondaryColor);
+    color: var(--labelColor);
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 5px;
+    border-radius: 6px;
+    min-width: 18px;
+    text-align: center;
+}
+
+.badge-primary {
+    background: var(--primaryColor);
+    color: #fff;
+}
+
+.badge-success {
+    background: #22c55e;
+    color: #fff;
+}
+
+.badge-warning {
+    background: #f59e0b;
+    color: #fff;
+}
+
+.badge-error {
+    background: #ef4444;
+    color: #fff;
+}
+
+/* ── Footer ─────────────────────────────────────────── */
+
+.mango-sidebar-footer-wrapper {
+    margin-top: auto;
+    border-top: 1px solid var(--borderColor, #e2e8f0);
+}
+
+.mango-sidebar-footer {
+    padding: 16px;
+}
+
+.is-collapsed .mango-sidebar-footer {
+    padding: 16px 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* ── Animations ─────────────────────────────────────── */
+
+.animate-fade-in {
+    animation: fade-in 0.2s ease-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(-4px);
     }
 
-    .sidebar.open {
-        left: 0;
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
+}
 
-    .sidebar-close-btn {
-        display: block;
-    }
+/* ── Scrollbar ── */
+.mango-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
 
-    .logo-container {
-        flex: 1;
-    }
+.mango-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--borderColor);
+    border-radius: 10px;
 }
