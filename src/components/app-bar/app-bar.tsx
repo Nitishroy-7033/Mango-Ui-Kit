@@ -106,7 +106,7 @@ export const AppBar: React.FC<AppBarProps> = ({
           </div>
 
           {showUserMenu && (
-            <div className="user-dropdown-menu animate-fade-in">
+            <div className="user-dropdown-menu">
               <div className="dropdown-header">
                 <div className="dropdown-user-info">
                   <span className="dropdown-name">{user?.fullName || 'User'}</span>
