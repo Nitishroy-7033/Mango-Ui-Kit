@@ -17,6 +17,7 @@ export * from './components/breadcrumbs';
 export * from './components/drawer';
 export * from './components/dropdown';
 export * from './components/multi-select';
+export * from './components/pagination';
 export * from './components/progress-bar';
 export * from './components/rating';
 export * from './components/sidebar';

@@ -1,0 +1,208 @@
+.mango-pagination {
+    --pagination-active-bg: var(--primaryColor, #fa8029);
+    --pagination-active-text: #ffffff;
+    --pagination-item-bg: var(--primaryContainercolor, #ffffff);
+    --pagination-item-hover: rgba(var(--primaryColor-rgb, 250, 128, 41), 0.08);
+    --pagination-border: var(--borderColor, #e2e8f0);
+    --pagination-text: var(--textColor, #1e293b);
+
+    display: flex;
+    width: 100%;
+}
+
+.mango-pagination.align-left {
+    justify-content: flex-start;
+}
+
+.mango-pagination.align-center {
+    justify-content: center;
+}
+
+.mango-pagination.align-right {
+    justify-content: flex-end;
+}
+
+.pagination-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 8px;
+}
+
+.pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pagination-item-bg);
+    border: 1px solid var(--pagination-border);
+    color: var(--pagination-text);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    font-weight: 600;
+    user-select: none;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    border-color: var(--pagination-active-bg);
+    color: var(--pagination-active-bg);
+    background: var(--pagination-item-hover);
+    transform: translateY(-1px);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-btn.is-active {
+    background: var(--pagination-active-bg);
+    border-color: var(--pagination-active-bg);
+    color: var(--pagination-active-text);
+    box-shadow: 0 4px 12px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.25);
+}
+
+.pagination-item.dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: var(--labelSecondaryColor);
+}
+
+.btn-text {
+    margin: 0 8px;
+    font-size: 0.9rem;
+}
+
+/* ── Sizes ─────────────────────────────────────────── */
+
+.size-sm .pagination-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+}
+
+.size-md .pagination-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+.size-lg .pagination-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+    border-radius: 12px;
+}
+
+.size-sm .nav-btn {
+    width: auto;
+    min-width: 32px;
+    padding: 0 4px;
+}
+
+.size-md .nav-btn {
+    width: auto;
+    min-width: 40px;
+    padding: 0 8px;
+}
+
+.size-lg .nav-btn {
+    width: auto;
+    min-width: 50px;
+    padding: 0 12px;
+}
+
+/* ── Variants ──────────────────────────────────────── */
+
+/* Modern (Default) */
+.is-modern .pagination-btn {
+    border-color: transparent;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Classic */
+.is-classic .pagination-btn {
+    border-radius: 4px;
+}
+
+/* Pills */
+.is-pills .pagination-btn {
+    border-radius: 999px;
+}
+
+/* Minimal */
+.is-minimal .pagination-btn {
+    border: none;
+    background: transparent;
+}
+
+.is-minimal .pagination-btn:hover:not(:disabled) {
+    background: var(--pagination-item-hover);
+}
+
+/* Simple */
+.is-simple .pagination-list {
+    gap: 0;
+    border: 1px solid var(--pagination-border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--pagination-item-bg);
+}
+
+.is-simple .pagination-btn {
+    border: none;
+    border-radius: 0;
+    border-right: 1px solid var(--pagination-border);
+}
+
+.is-simple .pagination-item:last-child .pagination-btn {
+    border-right: none;
+}
+
+.is-simple .pagination-btn.is-active {
+    box-shadow: none;
+}
+
+/* Ghost */
+.is-ghost .pagination-btn {
+    background: transparent;
+    border: 1px solid var(--pagination-border);
+}
+
+.is-ghost .pagination-btn.is-active {
+    background: rgba(var(--primaryColor-rgb), 0.1);
+    color: var(--pagination-active-bg);
+}
+
+/* ── Dark Mode ─────────────────────────────────────── */
+
+[data-theme='dark'] .pagination-btn {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme='dark'] .is-minimal .pagination-btn {
+    background: transparent;
+}
+
+[data-theme='dark'] .pagination-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Responsive ────────────────────────────────────── */
+
+@media (max-width: 520px) {
+    .pagination-list {
+        gap: 4px;
+    }
+
+    .size-md .pagination-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
