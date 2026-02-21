@@ -39,6 +39,7 @@ export * from './components/media-uploader';
 export * from './components/checkbox';
 export * from './components/radio';
 export * from './components/segmented-control';
+export * from './components/slider';
 
 export * from './hooks';
 export * from './utils';

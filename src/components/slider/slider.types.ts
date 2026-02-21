@@ -12,6 +12,8 @@ export interface SliderProps {
     value?: number;
     /** Callback for single value change */
     onChange?: (value: number) => void;
+    /** Default value */
+    defaultValue?: number;
     /** Range mode — [min, max] */
     rangeValue?: [number, number];
     /** Callback for range change */
