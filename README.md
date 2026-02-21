@@ -36,17 +36,33 @@ function App() {
 
 ## Theming
 
-Mango UI Kit comes with a built-in `ThemeProvider` that manages light and dark modes and persists the selection in `localStorage`.
+Mango UI Kit includes a powerful `ThemeProvider` that manages both theme modes (light/dark) and the entire color scheme.
 
-### Theme Provider
-Wrap your application with the `ThemeProvider` to enable dark mode support:
+### Programmatic Customization
+
+Instead of manual CSS overrides, you can pass a `theme` object to the `ThemeProvider`. JavaScript users can pass a plain object, while TypeScript users can use the `ThemeConfig` type for autocompletion.
 
 ```tsx
 import { ThemeProvider } from 'mango-ui-kit';
 
+// For TypeScript users (optional):
+// import type { ThemeConfig } from 'mango-ui-kit';
+
+const myBrandTheme = {
+  light: {
+    primaryColor: '#7c3aed',         // Vibrant Purple
+    lightPrimaryColor: '#f5f3ff',    // Pale Purple
+    shadowColor: '124, 58, 237',     // RGB values of primary (for shadows)
+  },
+  dark: {
+    primaryColor: '#a78bfa',
+    background: '#0f172a',           // Deep Slate
+  }
+};
+
 function Root() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="my-app-theme">
+    <ThemeProvider theme={myBrandTheme} defaultThemeMode="dark">
       <App />
     </ThemeProvider>
   );
@@ -54,38 +70,34 @@ function Root() {
 ```
 
 ### Toggle Theme
-You can use the `useTheme` hook to access the current theme and toggle between light and dark modes:
+
+Use the `useTheme` hook to access the current mode and toggle function:
 
 ```tsx
 import { useTheme, Button } from 'mango-ui-kit';
 
 function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
+  const { themeMode, toggleTheme } = useTheme();
   
   return (
     <Button onClick={toggleTheme}>
-      Current Theme: {theme}
+      Current Mode: {themeMode}
     </Button>
   );
 }
 ```
 
-### CSS Customization
-Mango UI uses CSS variables for all its colors. You can easily override the primary color and other tokens by defining them in your own CSS:
+### CSS Token Mapping
 
-```css
-:root {
-  /* Override the default orange primary color to a custom purple */
-  --primaryColor: #8b5cf6;
-  --secondaryContainercolor: #8b5cf6;
-  --lightPrimaryColor: rgba(139, 92, 246, 0.1);
-  --font-family: 'Inter', sans-serif;
-}
+If you prefer CSS overrides, Mango UI reactively updates these variables on `:root`.
 
-[data-theme='dark'] {
-  --primaryColor: #a78bfa;
-}
-```
+| Token | Description |
+| --- | --- |
+| `--primaryColor` | Main brand color |
+| `--background` | Background of the page |
+| `--textColor` | Primary text color |
+| `--borderColor` | Global border color |
+| `--shadowColorRGB` | RGB triplets (e.g. `124, 58, 237`) used for dynamic shadows |
 
 | Variable | Description |
 | --- | --- |
