@@ -16,7 +16,6 @@ export * from './components/avatar-group';
 export * from './components/breadcrumbs';
 export * from './components/drawer';
 export * from './components/dropdown';
-export * from './components/file-dropzone';
 export * from './components/multi-select';
 export * from './components/progress-bar';
 export * from './components/rating';
@@ -33,6 +32,7 @@ export * from './components/theme-provider';
 export * from './components/tooltip';
 export * from './components/otp-input';
 export * from './components/dialog';
+export * from './components/media-uploader';
 
 export * from './hooks';
 export * from './utils';
