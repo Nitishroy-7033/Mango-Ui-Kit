@@ -10,9 +10,26 @@ const config: Config = {
         extend: {
             colors: {
                 ...colors,
+                // Theme-aware CSS variable colors
+                background: 'var(--background)',
+                primary: 'var(--primaryColor)',
+                'primary-light': 'var(--lightPrimaryColor)',
+                secondary: 'var(--secondaryColor)',
+                'container-primary': 'var(--primaryContainercolor)',
+                'container-secondary': 'var(--secondaryContainercolor)',
+                text: 'var(--textColor)',
+                'text-secondary': 'var(--textSecondaryColor)',
+                label: 'var(--labelColor)',
+                'label-secondary': 'var(--labelSecondaryColor)',
+                border: 'var(--borderColor)',
+                accent: 'var(--accent)',
+                'accent-foreground': 'var(--accent-foreground)',
             },
             fontFamily: {
-                sans: ['Inter', 'system-ui', 'sans-serif'],
+                sans: ['General Sans', 'Inter', 'system-ui', 'sans-serif'],
+            },
+            transitionDuration: {
+                theme: 'var(--transition-speed)',
             },
         },
     },

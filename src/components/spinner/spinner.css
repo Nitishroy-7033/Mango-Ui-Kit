@@ -1,0 +1,20 @@
+.spinner-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner-icon {
+    animation: spin 0.8s linear infinite;
+    color: var(--primaryColor);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,6 +1,51 @@
 @import './tailwind.css';
 
 :root {
-    --mango-primary: #ffc107;
-    --mango-secondary: #ff9800;
+  --font-family: 'General Sans', sans-serif;
+  --accent: #fa8029;
+  --accent-foreground: #ffffff;
+  --transition-speed: 0.3s;
+}
+
+[data-theme='light'] {
+  --background: #f2f7fa;
+  --primaryColor: #fa8029;
+  --lightPrimaryColor: #fa80291a;
+  --secondaryColor: #f3f4f6;
+  --primaryContainercolor: #ffffff;
+  --secondaryContainercolor: #fa8029;
+  --textColor: #383838;
+  --textSecondaryColor: #7bff00;
+  --labelColor: #475569;
+  --labelSecondaryColor: #94a3b8;
+  --borderColor: #e2e8f0;
+}
+
+[data-theme='dark'] {
+  --background: #1f2124;
+  --primaryColor: #fa8029;
+  --lightPrimaryColor: #fa80294f;
+  --secondaryColor: #2d2f33;
+  --primaryContainercolor: #191a1b;
+  --secondaryContainercolor: #fa8029;
+  --textColor: #ffffff;
+  --textSecondaryColor: #8e9196;
+  --labelColor: #8e9196;
+  --labelSecondaryColor: #8e9196;
+  --borderColor: #3d3f43;
+}
+
+/* Default to light theme */
+:root:not([data-theme]) {
+  --background: #f2f7fa;
+  --primaryColor: #fa8029;
+  --lightPrimaryColor: #fa80291a;
+  --secondaryColor: #f3f4f6;
+  --primaryContainercolor: #ffffff;
+  --secondaryContainercolor: #fa8029;
+  --textColor: #383838;
+  --textSecondaryColor: #7bff00;
+  --labelColor: #475569;
+  --labelSecondaryColor: #94a3b8;
+  --borderColor: #e2e8f0;
 }

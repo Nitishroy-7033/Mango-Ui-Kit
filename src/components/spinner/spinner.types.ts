@@ -1,0 +1,6 @@
+export interface SpinnerProps {
+  size?: number;
+  color?: string;
+  thickness?: number;
+  className?: string;
+}

@@ -1,0 +1,79 @@
+.toggle-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-root {
+    width: 44px;
+    height: 24px;
+    background: var(--borderColor);
+    border-radius: 99px;
+    padding: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-root.checked {
+    background: var(--primaryColor);
+}
+
+.toggle-thumb {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-root.checked .toggle-thumb {
+    transform: translateX(20px);
+}
+
+.toggle-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--textColor);
+}
+
+.toggle-root.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Sizes */
+.toggle-sm .toggle-root {
+    width: 32px;
+    height: 18px;
+}
+
+.toggle-sm .toggle-thumb {
+    width: 14px;
+    height: 14px;
+}
+
+.toggle-sm.checked .toggle-thumb {
+    transform: translateX(14px);
+}
+
+.toggle-lg .toggle-root {
+    width: 56px;
+    height: 30px;
+}
+
+.toggle-lg .toggle-thumb {
+    width: 26px;
+    height: 26px;
+}
+
+.toggle-lg.checked .toggle-thumb {
+    transform: translateX(26px);
+}

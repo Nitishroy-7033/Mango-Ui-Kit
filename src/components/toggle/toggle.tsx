@@ -1,27 +1,26 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
+import type { ToggleProps } from './toggle.types';
+import './toggle.css';
 
-export interface ToggleProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    label?: string;
-}
-
-export const Toggle = ({ label, className, ...props }: ToggleProps) => {
+export const Toggle: React.FC<ToggleProps> = ({
+    checked = false,
+    onChange,
+    disabled = false,
+    label,
+    size = 'md',
+    className = '',
+}) => {
     return (
-        <label className={cn("flex items-center gap-3 cursor-pointer select-none", props.disabled && "opacity-50 cursor-not-allowed", className)}>
-            {label && <span className="text-sm font-medium text-neutral-300">{label}</span>}
-            <div className="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mango-400 focus-visible:ring-offset-2 bg-neutral-700 peer-checked:bg-mango-400">
-                <input
-                    type="checkbox"
-                    className="peer sr-only"
-                    {...props}
-                />
-                <span 
-                    className={cn(
-                        "pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform translate-x-0.5 peer-checked:translate-x-5"
-                    )} 
-                />
+        <div
+            className={cn('toggle-container', `toggle-${size}`, className)}
+            onClick={() => !disabled && onChange?.(!checked)}
+        >
+            <div className={cn('toggle-root', checked && 'checked', disabled && 'disabled')}>
+                <div className="toggle-thumb" />
             </div>
-        </label>
+            {label && <span className="toggle-label">{label}</span>}
+        </div>
     );
 };
 

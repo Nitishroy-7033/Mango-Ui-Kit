@@ -1,0 +1,121 @@
+.stat-card-premium {
+    position: relative;
+    background: var(--primaryContainercolor);
+    border: 1px solid var(--borderColor);
+    border-radius: 24px;
+    padding: 24px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.stat-card-premium:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+.stat-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 1;
+}
+
+.stat-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--labelSecondaryColor);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--textColor);
+    margin: 0;
+}
+
+.stat-description {
+    font-size: 0.8rem;
+    color: var(--labelSecondaryColor);
+    margin: 4px 0 0 0;
+}
+
+.stat-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background: var(--lightPrimaryColor);
+    color: var(--accent-color);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.stat-card-premium:hover .stat-icon-wrapper {
+    background: var(--accent-color);
+    color: white;
+    transform: rotate(10deg);
+}
+
+.stat-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1;
+}
+
+.trend-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.trend-indicator.positive {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+}
+
+.trend-indicator.negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.trend-label {
+    font-size: 0.75rem;
+    color: var(--labelSecondaryColor);
+    font-weight: 600;
+}
+
+.stat-glass-effect {
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+    opacity: 0.03;
+    filter: blur(40px);
+    pointer-events: none;
+    transition: all 0.5s;
+}
+
+.stat-card-premium:hover .stat-glass-effect {
+    opacity: 0.08;
+    transform: scale(1.5);
+}

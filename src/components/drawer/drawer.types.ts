@@ -1,0 +1,12 @@
+import { ReactNode } from 'react';
+
+export interface DrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: string;
+  subtitle?: string;
+  children: ReactNode;
+  footer?: ReactNode;
+  width?: string;
+  className?: string;
+}
