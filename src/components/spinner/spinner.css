@@ -1,20 +1,232 @@
-.spinner-container {
+.mango-spinner {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    --spinner-color: var(--primaryColor, #fa8029);
+    --spinner-speed: 0.8s;
 }
 
-.spinner-icon {
-    animation: spin 0.8s linear infinite;
-    color: var(--primaryColor);
+/* ── Circular (Classic) ──────────────────────────────── */
+
+.mango-spinner-circular {
+    animation: mango-spin var(--spinner-speed) linear infinite;
+    color: var(--spinner-color);
 }
 
-@keyframes spin {
+@keyframes mango-spin {
     from {
         transform: rotate(0deg);
     }
 
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* ── Dots (Bouncing) ─────────────────────────────────── */
+
+.mango-spinner-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.mango-spinner-dots span {
+    width: 25%;
+    height: 100%;
+    background-color: var(--spinner-color);
+    border-radius: 50%;
+    animation: mango-dots var(--spinner-speed) ease-in-out infinite;
+}
+
+.mango-spinner-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.mango-spinner-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes mango-dots {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translateY(-30%);
+        opacity: 1;
+    }
+}
+
+/* ── Pulse ────────────────────────────────────────── */
+
+.mango-spinner-pulse {
+    background-color: var(--spinner-color);
+    border-radius: 50%;
+    animation: mango-pulse var(--spinner-speed) ease-in-out infinite;
+}
+
+@keyframes mango-pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+}
+
+/* ── Ring ─────────────────────────────────────────── */
+
+.mango-spinner-ring {
+    border: var(--spinner-thickness, 3px) solid rgba(15, 23, 42, 0.1);
+    border-top-color: var(--spinner-color);
+    border-radius: 50%;
+    animation: mango-spin var(--spinner-speed) linear infinite;
+}
+
+/* ── Waves ────────────────────────────────────────── */
+
+.mango-spinner-waves {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mango-spinner-waves span {
+    width: 15%;
+    height: 80%;
+    background-color: var(--spinner-color);
+    border-radius: 4px;
+    animation: mango-waves var(--spinner-speed) ease-in-out infinite;
+}
+
+.mango-spinner-waves span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.mango-spinner-waves span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.mango-spinner-waves span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+@keyframes mango-waves {
+
+    0%,
+    100% {
+        height: 40%;
+    }
+
+    50% {
+        height: 100%;
+    }
+}
+
+/* ── Bouncing ─────────────────────────────────────── */
+
+.mango-spinner-bouncing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+.mango-spinner-bouncing span {
+    width: 30%;
+    height: 30%;
+    background-color: var(--spinner-color);
+    border-radius: 50%;
+    animation: mango-bouncing var(--spinner-speed) alternate infinite;
+}
+
+.mango-spinner-bouncing span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.mango-spinner-bouncing span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes mango-bouncing {
+    from {
+        transform: scale(0.2);
+        opacity: 0.2;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ── Gear ─────────────────────────────────────────── */
+
+.mango-spinner-gear {
+    color: var(--spinner-color);
+    animation: mango-gear-spin calc(var(--spinner-speed) * 2) linear infinite;
+}
+
+@keyframes mango-gear-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Icon Variants ─────────────────────────────────── */
+
+.mango-spinner-icon-pulse {
+    animation: mango-icon-pulse var(--spinner-speed) ease-in-out infinite;
+}
+
+@keyframes mango-icon-pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+}
+
+.mango-spinner-icon-spin {
+    animation: mango-spin var(--spinner-speed) linear infinite;
+}
+
+.mango-spinner-icon-bounce {
+    animation: mango-icon-bounce var(--spinner-speed) ease-in-out infinite;
+}
+
+@keyframes mango-icon-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20%);
     }
 }
