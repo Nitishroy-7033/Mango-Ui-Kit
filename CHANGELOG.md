@@ -11,6 +11,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and
 ### ✨ Added
 - **List & ListItem** — Feature-rich list system with support for thumbnails, descriptions, actions, dividers, and various hover effects.
 - **Speed Dial** — Floating Action Button (FAB) that "explodes" with secondary actions. Supports multiple directions, staggered animations, and glassmorphism.
+- **Report Metrics Card** — Premium KPI dashboard card with integrated trend visualization.
+- **Charts Integration** — Integrated `recharts` for professional, high-performance sparklines and analytics visualization.
 - **Grid View** — Highly responsive grid system with customizable columns, gaps, and breakpoints.
 - **Async Features** — Built-in support for **Shimmering Skeleton** loading and **Infinite Scroll** for both List and Grid views.
 - **Numeric Pagination** — Out-of-the-box numeric pagination controls for both List and Grid components.
