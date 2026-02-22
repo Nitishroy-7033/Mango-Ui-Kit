@@ -73,13 +73,13 @@
 
 ```bash
 # npm
-npm install mango-ui-kit lucide-react clsx tailwind-merge
+npm install mango-ui-kit
 
 # yarn
-yarn add mango-ui-kit lucide-react clsx tailwind-merge
+yarn add mango-ui-kit
 
 # pnpm
-pnpm add mango-ui-kit lucide-react clsx tailwind-merge
+pnpm add mango-ui-kit
 ```
 
 ### 2. Import base styles

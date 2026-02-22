@@ -76,9 +76,17 @@ export interface RowProps extends BoxProps {
     fullWidth?: boolean;
 }
 
+export interface ResponsiveSpan {
+    xs?: number;
+    sm?: number;
+    md?: number;
+    lg?: number;
+    xl?: number;
+}
+
 export interface ColProps extends BoxProps {
-    /** Span (out of 12 columns) */
-    span?: number;
+    /** Span (out of 12 columns). Can be a number or an object for responsiveness. */
+    span?: number | ResponsiveSpan;
     /** Custom flex property */
     flex?: string | number;
     /** Order */

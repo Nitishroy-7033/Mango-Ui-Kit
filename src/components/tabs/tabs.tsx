@@ -33,7 +33,6 @@ export const Tabs: React.FC<TabsProps> = ({
   useEffect(() => {
     if (activeTabRef.current && tabsListRef.current) {
       const activeElement = activeTabRef.current;
-
       const { offsetLeft, offsetWidth } = activeElement;
 
       setIndicatorStyle({
@@ -41,7 +40,6 @@ export const Tabs: React.FC<TabsProps> = ({
         transform: `translateX(${offsetLeft}px)`,
       });
 
-      // Scroll active tab into view if needed
       activeElement.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
@@ -50,12 +48,31 @@ export const Tabs: React.FC<TabsProps> = ({
     }
   }, [activeTabId, tabs, variant]);
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const currentIndex = tabs.findIndex(t => t.id === activeTabId);
+    let nextIndex: number | null = null;
+
+    if (e.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+    if (e.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+
+    if (nextIndex !== null) {
+      const nextTab = tabs[nextIndex];
+      if (!nextTab.disabled) {
+        handleTabClick(nextTab.id);
+        setTimeout(() => {
+          const buttons = tabsListRef.current?.querySelectorAll('button');
+          buttons?.[nextIndex as number]?.focus();
+        }, 0);
+      }
+    }
+  };
+
   const activeContent = tabs.find((tab) => tab.id === activeTabId)?.content;
 
   const containerStyle = {
     ...style,
     '--tabs-active-color': color,
-    '--tabs-active-light': color ? `${color}14` : undefined, // 8% opacity for hybrid bg
+    '--tabs-active-light': color ? `${color}14` : undefined,
   } as React.CSSProperties;
 
   return (
@@ -70,6 +87,7 @@ export const Tabs: React.FC<TabsProps> = ({
             centered && 'is-centered'
           )}
           role="tablist"
+          onKeyDown={handleKeyDown}
         >
           {/* Animated Indicator */}
           <div className="mango-tabs-indicator" style={indicatorStyle} />
@@ -83,6 +101,9 @@ export const Tabs: React.FC<TabsProps> = ({
                 ref={isActive ? activeTabRef : null}
                 role="tab"
                 aria-selected={isActive}
+                aria-controls={`mango-tab-panel-${tab.id}`}
+                id={`mango-tab-${tab.id}`}
+                tabIndex={isActive ? 0 : -1}
                 disabled={tab.disabled}
                 className={cn(
                   'mango-tabs-trigger',
@@ -109,7 +130,12 @@ export const Tabs: React.FC<TabsProps> = ({
       </div>
 
       {showContent && (
-        <div className="mango-tab-panel" role="tabpanel">
+        <div
+          className="mango-tab-panel"
+          role="tabpanel"
+          id={`mango-tab-panel-${activeTabId}`}
+          aria-labelledby={`mango-tab-${activeTabId}`}
+        >
           {activeContent || placeholder}
         </div>
       )}

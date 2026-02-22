@@ -1,0 +1,104 @@
+.mango-typography {
+    margin: 0;
+    font-family: var(--font-family, 'General Sans', sans-serif);
+    color: var(--textColor, #111827);
+    line-height: 1.5;
+}
+
+/* Variants */
+.mango-variant-h1 {
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.mango-variant-h2 {
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.mango-variant-h3 {
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+.mango-variant-h4 {
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+.mango-variant-h5 {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.mango-variant-h6 {
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.mango-variant-body-lg {
+    font-size: 18px;
+}
+
+.mango-variant-body-md {
+    font-size: 16px;
+}
+
+.mango-variant-body-sm {
+    font-size: 14px;
+}
+
+.mango-variant-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--labelColor, #374151);
+}
+
+.mango-variant-caption {
+    font-size: 12px;
+    color: var(--labelSecondaryColor, #6b7280);
+}
+
+/* Weights */
+.mango-weight-thin {
+    font-weight: 100;
+}
+
+.mango-weight-light {
+    font-weight: 300;
+}
+
+.mango-weight-normal {
+    font-weight: 400;
+}
+
+.mango-weight-medium {
+    font-weight: 500;
+}
+
+.mango-weight-semibold {
+    font-weight: 600;
+}
+
+.mango-weight-bold {
+    font-weight: 700;
+}
+
+.mango-weight-black {
+    font-weight: 900;
+}
+
+/* Truncation */
+.mango-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mango-line-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

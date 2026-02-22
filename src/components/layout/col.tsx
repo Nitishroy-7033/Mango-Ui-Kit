@@ -52,12 +52,24 @@ export const Col = forwardRef<HTMLDivElement, ColProps>(
             ...style,
         };
 
+        const getSpanClasses = () => {
+            if (!span) return '';
+            if (typeof span === 'number') return `mango-col-${span}`;
+
+            return Object.entries(span)
+                .map(([breakpoint, value]) => {
+                    const prefix = breakpoint === 'xs' ? '' : `-${breakpoint}`;
+                    return `mango-col${prefix}-${value}`;
+                })
+                .join(' ');
+        };
+
         return (
             <div
                 ref={ref}
                 className={cn(
                     'mango-col',
-                    span && `mango-col-${span}`,
+                    getSpanClasses(),
                     className
                 )}
                 style={colStyle}

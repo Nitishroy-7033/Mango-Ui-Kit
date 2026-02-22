@@ -21,12 +21,11 @@ export default defineConfig({
       fileName: (format) => (format === 'es' ? 'mango-ui-kit.js' : 'mango-ui-kit.umd.cjs'),
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'tailwindcss'],
+      external: ['react', 'react-dom'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          tailwindcss: 'tailwindcss',
         },
       },
     },

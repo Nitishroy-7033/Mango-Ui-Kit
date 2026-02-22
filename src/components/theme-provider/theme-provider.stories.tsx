@@ -1,11 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { ThemeProvider, useTheme } from './theme-provider';
 import type { ThemeConfig } from './theme-provider';
 
-const meta: Meta = {
+const meta: Meta<typeof ThemeProvider> = {
     title: 'System/ThemeProvider',
+    component: ThemeProvider,
     parameters: { layout: 'padded' },
 };
+
 export default meta;
 
 // ── Demo component that consumes the theme ────────────────────────────────────
@@ -76,7 +79,7 @@ const ThemeShowcase = () => {
                         Custom Tokens
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12, marginBottom: 32 }}>
-                        {Object.entries(custom).map(([key, value]) => (
+                        {(Object.entries(custom) as [string, string][]).map(([key, value]) => (
                             <div key={key} style={{
                                 background: tokens.primaryContainercolor,
                                 border: `1px solid ${tokens.borderColor}`,
@@ -123,7 +126,7 @@ const ThemeShowcase = () => {
 
 // ── Stories ───────────────────────────────────────────────────────────────────
 
-export const Default: StoryObj = {
+export const Default: StoryObj<typeof ThemeProvider> = {
     render: () => (
         <ThemeProvider defaultThemeMode="light">
             <ThemeShowcase />
@@ -173,7 +176,7 @@ const purpleTheme: Partial<ThemeConfig> = {
     },
 };
 
-export const CustomPurpleTheme: StoryObj = {
+export const CustomPurpleTheme: StoryObj<typeof ThemeProvider> = {
     render: () => (
         <ThemeProvider defaultThemeMode="light" theme={purpleTheme}>
             <ThemeShowcase />
@@ -181,7 +184,7 @@ export const CustomPurpleTheme: StoryObj = {
     ),
 };
 
-export const StartsInDarkMode: StoryObj = {
+export const StartsInDarkMode: StoryObj<typeof ThemeProvider> = {
     render: () => (
         <ThemeProvider defaultThemeMode="dark">
             <ThemeShowcase />

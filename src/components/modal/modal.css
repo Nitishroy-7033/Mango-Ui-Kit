@@ -1,0 +1,84 @@
+.mango-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.mango-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+}
+
+.mango-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--primaryContainercolor, #ffffff);
+    border: 1px solid var(--borderColor, #e5e7eb);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: mango-modal-zoom 0.2s ease-out;
+}
+
+.mango-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.mango-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--textColor, #111827);
+    margin: 0;
+}
+
+.mango-modal-close {
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 50%;
+    color: var(--labelSecondaryColor, #9ca3af);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mango-modal-close:hover {
+    background-color: var(--secondaryColor, #f3f4f6);
+    color: var(--textColor, #111827);
+}
+
+.mango-modal-close svg {
+    width: 20px;
+    height: 20px;
+}
+
+.mango-modal-body {
+    color: var(--textSecondaryColor, #4b5563);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+@keyframes mango-modal-zoom {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
