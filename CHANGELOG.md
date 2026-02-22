@@ -6,6 +6,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and
 
 ---
 
+## [3.2.0] — 2026-02-22
+
+### ✨ Added
+- **Bottom Navigation Bar** — Premium, mobile-first navigation with 6 variants (Classic, Floating, Bubble, etc.), custom positioning, and center CTA support.
+- **Number Input (Spinner)** — Precision numeric entry with increment/decrement controls, value clamping, and sizing support.
+
+---
+
 ## [3.1.0] — 2026-02-22
 
 ### ✨ Added

@@ -1,31 +1,87 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import { cn } from '../../utils/cn';
 import type { BadgeProps } from './badge.types';
 import './badge.css';
 
-export const Badge: React.FC<BadgeProps> = ({
-    children,
-    variant = 'primary',
-    size = 'md',
-    pill = false,
-    icon: Icon,
-    className = '',
-}) => {
-    return (
-        <span
-            className={cn(
-                'badge-root',
-                `badge-${variant}`,
-                `badge-${size}`,
-                pill && 'badge-pill',
-                className
-            )}
-        >
-            {Icon && <Icon size={14} className="badge-icon" />}
-            {children}
-        </span>
-    );
-};
+/**
+ * Badge component for tags, counts, and status indicators.
+ * Can be used as a standalone tag or an anchored overlay on children.
+ */
+export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
+    (
+        {
+            children,
+            badgeContent,
+            variant = 'primary',
+            size = 'md',
+            dot = false,
+            pill = true, // Default to true for overlap style
+            maxCount = 99,
+            showZero = false,
+            position = 'top-right',
+            offset,
+            pulse = false,
+            icon: Icon,
+            className,
+            style,
+            ...props
+        },
+        ref
+    ) => {
+        // Logic for content formatting
+        let displayContent = badgeContent;
+        if (typeof badgeContent === 'number') {
+            if (badgeContent > maxCount) {
+                displayContent = `${maxCount}+`;
+            } else if (badgeContent === 0 && !showZero) {
+                return <>{children}</>;
+            }
+        }
+
+        // If it's a dot, no content
+        if (dot) {
+            displayContent = null;
+        }
+
+        const badgeElement = (
+            <span
+                ref={!children ? ref : undefined}
+                className={cn(
+                    'mango-badge',
+                    `badge-${variant}`,
+                    `badge-${size}`,
+                    pill && 'badge-pill',
+                    dot && 'badge-dot',
+                    children && 'badge-anchored',
+                    children && `pos-${position}`,
+                    pulse && 'is-pulsing',
+                    className
+                )}
+                style={{
+                    ...(offset && {
+                        transform: `translate(${offset[0]}px, ${offset[1]}px)`,
+                    }),
+                    ...style,
+                }}
+                {...props}
+            >
+                {Icon && <Icon className="badge-icon" />}
+                {displayContent}
+            </span>
+        );
+
+        if (!children) {
+            return badgeElement;
+        }
+
+        return (
+            <div className="mango-badge-container">
+                {children}
+                {badgeElement}
+            </div>
+        );
+    }
+);
 
 Badge.displayName = 'Badge';
 export default Badge;

@@ -1,30 +1,60 @@
-# Badge 🥭
+# Badge
 
-Small status indicators used to highlight items or display count/status information.
+A highly versatile component for status labeling, counting, and anchored indicators.
 
-## Features
-- ✨ **8 Variants**: primary, secondary, outline, ghost, danger, success, warning, info.
-- 📏 **3 Sizes**: sm, md, lg.
-- 💊 **Pill Style**: Optional fully rounded corners.
-- 🔘 **Icon Support**: Inline icon support within the badge.
+## ✨ Features
 
-## Usage
+- **🏷️ Tag Mode**: Standalone label for categorization.
+- **🛶 Overlap Mode**: Automatically anchors to children (top-right, etc.).
+- **🔢 Count Formatting**: Handles overflow (e.g., `99+`) and zero-value visibility control.
+- **🔴 Dot Indicators**: Small minimalist status dots.
+- **✨ Pulse Effect**: Optional attention-grabbing pulsing animation.
+- **📱 Responsive Sizes**: From tiny `xs` for dots to prominent `lg` tags.
 
+---
+
+## 🚀 Usage
+
+### Standalone Tag
 ```tsx
-import { Badge } from 'mango-ui-kit';
-import { Star } from 'lucide-react';
+<Badge badgeContent="Beta" variant="primary" />
+```
 
-<Badge variant="success" pill icon={Star}>
-  Verified
+### Indicator Overlap
+```tsx
+import { Mail } from 'lucide-react';
+
+<Badge badgeContent={5} variant="danger">
+  <Mail size={24} />
 </Badge>
 ```
 
-## Props
+### Dot Indicator
+```tsx
+<Badge dot variant="success" position="bottom-right">
+  <Avatar src="..." />
+</Badge>
+```
+
+### Max Count Formatting
+```tsx
+<Badge badgeContent={120} maxCount={99} variant="danger" /> // Renders 99+
+```
+
+---
+
+## 🛠 Props
 
 | Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `variant` | `string` | `'primary'` | Visual style of the badge. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the badge. |
-| `pill` | `boolean` | `false` | If true, badge will have fully rounded corners. |
-| `icon` | `ElementType` | - | Optional icon to display inside the badge. |
-| `children` | `ReactNode` | - | The label/content of the badge. |
+| :--- | :--- | :--- | :--- |
+| `badgeContent` | `ReactNode` | — | The content inside the badge |
+| `variant` | `BadgeVariant` | `'primary'` | Visual style |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Size of the badge |
+| `children` | `ReactNode` | — | If provided, the badge will overlay this content |
+| `dot` | `boolean` | `false` | Show as a small dot without content |
+| `position` | `BadgePosition` | `'top-right'` | Overlay position relative to children |
+| `maxCount` | `number` | `99` | Max value before appending `+` |
+| `showZero` | `boolean` | `false` | Whether to display if value is 0 |
+| `pulse` | `boolean` | `false` | Add a pulsing shadow animation |
+| `icon` | `ElementType` | — | Icon to show inside the badge |
+| `offset` | `[number, number]` | — | Pixels to shift the anchored badge |
