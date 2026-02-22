@@ -23,6 +23,10 @@ export interface BadgeProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 
     showZero?: boolean;
     /** Position relative to the wrapped element */
     position?: BadgePosition;
+    /** Whether to show a dot inside the badge (on the left) */
+    showDot?: boolean;
+    /** Color of the inner dot */
+    dotColor?: string;
     /** Adjust the badge position (e.g. [10, -5]) */
     offset?: [number, number];
     /** If true, the badge will pulsate */

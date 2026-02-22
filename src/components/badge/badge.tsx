@@ -21,6 +21,8 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
             position = 'top-right',
             offset,
             pulse = false,
+            showDot = false,
+            dotColor,
             icon: Icon,
             className,
             style,
@@ -38,7 +40,6 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
             }
         }
 
-        // If it's a dot, no content
         if (dot) {
             displayContent = null;
         }
@@ -52,6 +53,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
                     `badge-${size}`,
                     pill && 'badge-pill',
                     dot && 'badge-dot',
+                    showDot && 'has-inner-dot',
                     children && 'badge-anchored',
                     children && `pos-${position}`,
                     pulse && 'is-pulsing',
@@ -65,6 +67,12 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
                 }}
                 {...props}
             >
+                {showDot && (
+                    <span
+                        className="badge-inner-dot"
+                        style={{ backgroundColor: dotColor }}
+                    />
+                )}
                 {Icon && <Icon className="badge-icon" />}
                 {displayContent}
             </span>

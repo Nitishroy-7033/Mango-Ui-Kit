@@ -193,6 +193,37 @@ export const InfiniteScroll: Story = {
     }
 };
 
+export const DashboardTable: Story = {
+    render: () => {
+        const [page, setPage] = useState(1);
+
+        return (
+            <div style={{ padding: '40px', background: '#f9fafb', minHeight: '100vh' }}>
+                <Table
+                    title="Team members"
+                    description="A list of all users in your account including their name, title, email and role."
+                    badgeContent="100 users"
+                    showHeader
+                    showFooter
+                    columns={columns.slice(1, 8)} // Name, Age, Email, Company, Address, Phone, Tags
+                    dataSource={dataSource}
+                    rowKey="id"
+                    rowSelection={{
+                        selectedRowKeys: [],
+                        onChange: () => { },
+                    }}
+                    pagination={{
+                        current: page,
+                        pageSize: 5,
+                        total: 100,
+                        onChange: (p) => setPage(p),
+                    }}
+                />
+            </div>
+        );
+    }
+};
+
 export const LoadingState: Story = {
     args: {
         columns: columns,

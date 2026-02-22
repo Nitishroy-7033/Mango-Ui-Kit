@@ -5,12 +5,16 @@ import {
   ArrowUp,
   ArrowDown,
   Search,
-  ArrowUpDown
+  ArrowUpDown,
+  MoreVertical
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import type { TableProps, TableColumn, SortOrder } from './table.types';
 import { Spinner } from '../spinner';
 import { Dropdown } from '../dropdown';
+import { Badge } from '../badge/badge';
+import { Button } from '../button/button';
+import { Pagination } from '../pagination/pagination';
 import './table.css';
 
 export const Table = <T extends Record<string, any>>({
@@ -19,6 +23,16 @@ export const Table = <T extends Record<string, any>>({
   loading = false,
   rowSelection,
   pagination,
+  title,
+  description,
+  badgeContent,
+  badgeVariant = 'secondary',
+  headerActions = [],
+  showHeader = false, // Default to false for backward compatibility
+  showFooter = false, // Default to false for backward compatibility
+  showPageCount = true,
+  showPaginationLabels = true,
+  footer,
   infiniteScroll = false,
   scrollThreshold = 0.8,
   onLoadMore,
@@ -349,6 +363,81 @@ export const Table = <T extends Record<string, any>>({
     );
   };
 
+  // ── Card / DataTable Rendering ─────────────────────────
+  const renderTableCardHeader = () => {
+    if (!showHeader) return null;
+    if (!title && !badgeContent && headerActions.length === 0) return null;
+
+    return (
+      <div className="mango-table-card-header">
+        <div className="header-left">
+          <div className="title-row">
+            {title && <h3 className="table-card-title">{title}</h3>}
+            {badgeContent && (
+              <Badge variant={badgeVariant} size="sm" className="title-badge">
+                {badgeContent}
+              </Badge>
+            )}
+          </div>
+          {description && <p className="table-card-description">{description}</p>}
+        </div>
+        <div className="header-right">
+          <div className="action-group">
+            {headerActions.map((action) => (
+              <Button
+                key={action.id}
+                variant={action.variant || 'outline'}
+                size="sm"
+                icon={action.icon}
+                onClick={action.onClick}
+              >
+                {action.label}
+              </Button>
+            ))}
+          </div>
+          <button className="header-more-btn">
+            <MoreVertical size={18} />
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const renderTableCardFooter = () => {
+    if (footer) return <div className="mango-table-card-footer">{footer}</div>;
+    if (!showFooter || pagination === false || !pagination) return null;
+
+    const { current = 1, pageSize = 10, total = 0 } = pagination;
+    const totalPages = Math.ceil(total / pageSize);
+
+    return (
+      <div className="mango-table-card-footer">
+        <div className="footer-left">
+          {showPageCount && (
+            <span className="page-count-text">
+              Page {current} of {totalPages}
+            </span>
+          )}
+        </div>
+        <div className="footer-right">
+          <Pagination
+            currentPage={current}
+            totalPages={totalPages}
+            onPageChange={(page) => pagination.onChange?.(page, pageSize)}
+            showLabels={showPaginationLabels}
+            variant="modern"
+            size="sm"
+            showFirstLast={false}
+            labels={{
+              prev: <span className="prev-next-text">Previous</span>,
+              next: <span className="prev-next-text">Next</span>
+            }}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div
       className={cn(
@@ -356,6 +445,7 @@ export const Table = <T extends Record<string, any>>({
         `table-variant-${variant}`,
         `table-size-${size}`,
         stickyHeader && 'sticky-header',
+        (showHeader || showFooter) && 'is-card-layout',
         className
       )}
       style={{
@@ -368,6 +458,8 @@ export const Table = <T extends Record<string, any>>({
         '--table-text-color': colors?.textColor,
       } as any}
     >
+      {renderTableCardHeader()}
+
       <div
         className="table-scroll-wrapper"
         ref={scrollRef}
@@ -467,7 +559,8 @@ export const Table = <T extends Record<string, any>>({
         </table>
       </div>
 
-      {renderPagination()}
+      {renderTableCardFooter()}
+      {(!showHeader && !showFooter) && renderPagination()}
     </div>
   );
 };

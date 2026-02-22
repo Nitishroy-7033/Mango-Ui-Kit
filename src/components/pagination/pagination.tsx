@@ -106,7 +106,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                         title="Previous Page"
                     >
                         {labels?.prev || <ChevronLeft size={size === 'lg' ? 20 : 16} />}
-                        {showLabels && <span className="btn-text">Prev</span>}
+                        {(showLabels && !labels?.prev) && <span className="btn-text">Prev</span>}
                     </button>
                 </li>
 
@@ -142,7 +142,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                         disabled={currentPage === totalPages || disabled}
                         title="Next Page"
                     >
-                        {showLabels && <span className="btn-text">Next</span>}
+                        {(showLabels && !labels?.next) && <span className="btn-text">Next</span>}
                         {labels?.next || <ChevronRight size={size === 'lg' ? 20 : 16} />}
                     </button>
                 </li>

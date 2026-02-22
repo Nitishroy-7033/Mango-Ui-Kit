@@ -53,6 +53,17 @@ export interface TableSelection<T = any> {
   type?: 'checkbox' | 'radio';
 }
 
+export type TableVariant = 'default' | 'bordered' | 'ghost' | 'plain';
+export type TableSize = 'sm' | 'md' | 'lg';
+
+export interface TableAction {
+  id: string;
+  label?: string;
+  icon?: ReactNode;
+  onClick?: () => void;
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+}
+
 export interface TableProps<T = any> {
   /** Array of columns */
   columns: TableColumn<T>[];
@@ -64,6 +75,29 @@ export interface TableProps<T = any> {
   rowSelection?: TableSelection<T>;
   /** Pagination config */
   pagination?: PaginationConfig | false;
+
+  // Card / DataTable props
+  /** Main title of the table card */
+  title?: string;
+  /** Subtitle or description */
+  description?: string;
+  /** Content for the badge next to title */
+  badgeContent?: string | number;
+  /** Variant for the title badge */
+  badgeVariant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success' | 'warning' | 'info';
+  /** Actions in the top right corner */
+  headerActions?: TableAction[];
+  /** Whether to show the header section */
+  showHeader?: boolean;
+  /** Whether to show the footer section */
+  showFooter?: boolean;
+  /** Whether to show 'Page X of Y' text in footer */
+  showPageCount?: boolean;
+  /** Whether to show 'Previous' and 'Next' labels on pagination buttons */
+  showPaginationLabels?: boolean;
+  /** Custom footer element (overrides default pagination if provided) */
+  footer?: ReactNode;
+
   /** Enable infinite scroll */
   infiniteScroll?: boolean;
   /** Threshold for infinite scroll (0-1) */
@@ -83,9 +117,9 @@ export interface TableProps<T = any> {
   /** Row hover callback */
   onRow?: (record: T, index: number) => object;
   /** Table variant */
-  variant?: 'default' | 'bordered' | 'ghost' | 'plain';
+  variant?: TableVariant;
   /** Visual density */
-  size?: 'sm' | 'md' | 'lg';
+  size?: TableSize;
   /** Theming */
   colors?: {
     headerBg?: string;
