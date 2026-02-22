@@ -6,7 +6,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and
 
 ---
 
+## [3.3.0] — 2026-02-22
+
+### ✨ Added
+- **List & ListItem** — Feature-rich list system with support for thumbnails, descriptions, actions, dividers, and various hover effects.
+- **Async List Features** — Built-in support for **Shimmering Skeleton** loading and **Infinite Scroll** detection.
+- **Numeric Pagination** — Out-of-the-box numeric pagination controls for the List component.
+
+---
+
 ## [3.2.0] — 2026-02-22
+
 
 ### ✨ Added
 - **Bottom Navigation Bar** — Premium, mobile-first navigation with 6 variants (Classic, Floating, Bubble, etc.), custom positioning, and center CTA support.
