@@ -1,0 +1,252 @@
+.mango-code-snippet {
+    --snippet-bg: #ffffff;
+    --snippet-border: var(--borderColor, #e2e8f0);
+    --snippet-header-bg: #f8fafc;
+    --snippet-footer-bg: #f8fafc;
+    --snippet-text: #1e293b;
+    --snippet-line-number: #94a3b8;
+    --snippet-primary: var(--primaryColor, #fa8029);
+
+    /* Token Colors (Light) */
+    --token-keyword: #d73a49;
+    --token-string: #032f62;
+    --token-comment: #6a737d;
+    --token-number: #005cc5;
+    --token-function: #6f42c1;
+
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border: 1px solid var(--snippet-border);
+    background: var(--snippet-bg);
+    overflow: hidden;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.snippet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: var(--snippet-header-bg);
+    border-bottom: 1px solid var(--snippet-border);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.terminal-icon {
+    color: var(--snippet-line-number);
+}
+
+.header-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--snippet-line-number);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.copy-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--snippet-line-number);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.copy-button:hover {
+    background: rgba(var(--primaryColor-rgb, 250, 128, 41), 0.05);
+    color: var(--snippet-primary);
+}
+
+.snippet-body {
+    display: flex;
+    overflow-x: auto;
+    padding: 16px 0;
+}
+
+.code-container {
+    display: flex;
+    min-width: 100%;
+}
+
+.line-numbers {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0 12px 0 2px;
+    border-right: 1px solid var(--snippet-border);
+    user-select: none;
+    min-width: 24px;
+}
+
+.line-number {
+    font-size: 13px;
+    color: var(--snippet-line-number);
+    line-height: inherit;
+}
+
+.code-editor-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.code-textarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 12px;
+    border: none;
+    background: transparent;
+    color: var(--snippet-text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: inherit;
+    resize: none;
+    outline: none;
+    white-space: pre;
+    overflow: hidden;
+    z-index: 1;
+    /* Transparent text so we can see the highlighted pre underneath */
+    /* Only if we want to show highlight while typing, but sync is hard without library. 
+       Let's use a standard editor feel where textarea is slightly opaque on focus */
+}
+
+.mango-code-snippet.is-editable .code-content {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.mango-code-snippet.is-editable .code-textarea:focus {
+    background: rgba(var(--primaryColor-rgb, 250, 128, 41), 0.02);
+}
+
+.code-content {
+    margin: 0;
+    padding: 0 12px;
+    flex: 1;
+}
+
+.code-line {
+    display: block;
+    font-size: 14px;
+    line-height: inherit;
+    color: var(--snippet-text);
+    white-space: pre;
+}
+
+/* Spacing Variants */
+.mango-code-snippet.spacing-compact .line-number,
+.mango-code-snippet.spacing-compact .code-line,
+.mango-code-snippet.spacing-compact .code-textarea {
+    line-height: 1.4;
+}
+
+.mango-code-snippet.spacing-normal .line-number,
+.mango-code-snippet.spacing-normal .code-line,
+.mango-code-snippet.spacing-normal .code-textarea {
+    line-height: 1.6;
+}
+
+.mango-code-snippet.spacing-relaxed .line-number,
+.mango-code-snippet.spacing-relaxed .code-line,
+.mango-code-snippet.spacing-relaxed .code-textarea {
+    line-height: 2.0;
+}
+
+.edit-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--snippet-primary);
+    background: rgba(var(--primaryColor-rgb, 250, 128, 41), 0.1);
+    margin-left: 8px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.snippet-footer {
+    padding: 8px 16px;
+    background: var(--snippet-footer-bg);
+    border-top: 1px solid var(--snippet-border);
+}
+
+.footer-title {
+    font-size: 12px;
+    color: var(--snippet-line-number);
+    font-style: italic;
+}
+
+/* Token Styling */
+.token-comment {
+    color: var(--token-comment);
+    font-style: italic;
+}
+
+.token-keyword {
+    color: var(--token-keyword);
+    font-weight: 600;
+}
+
+.token-string {
+    color: var(--token-string);
+}
+
+.token-number {
+    color: var(--token-number);
+}
+
+.token-function {
+    color: var(--token-function);
+}
+
+/* Dark Mode Support */
+[data-theme='dark'] .mango-code-snippet {
+    --snippet-bg: #0f172a;
+    --snippet-border: #1e293b;
+    --snippet-header-bg: #1e293b;
+    --snippet-footer-bg: #1e293b;
+    --snippet-text: #e2e8f0;
+    --snippet-line-number: #64748b;
+
+    /* Token Colors (Dark) */
+    --token-keyword: #ff7b72;
+    --token-string: #a5d6ff;
+    --token-comment: #8b949e;
+    --token-number: #79c0ff;
+    --token-function: #d2a8ff;
+}
+
+.snippet-body::-webkit-scrollbar {
+    height: 8px;
+}
+
+.snippet-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.snippet-body::-webkit-scrollbar-thumb {
+    background: var(--snippet-border);
+    border-radius: 4px;
+}
+
+.snippet-body::-webkit-scrollbar-thumb:hover {
+    background: var(--snippet-line-number);
+}

@@ -58,6 +58,7 @@ export * from './components/layout';
 export * from './components/box';
 export * from './components/selection-toolbar';
 export * from './components/tags-input';
+export * from './components/code-snippet';
 
 export * from './hooks';
 export * from './utils';
