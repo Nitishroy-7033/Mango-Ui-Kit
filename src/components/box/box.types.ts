@@ -1,4 +1,4 @@
-import { BoxProps } from '../layout/layout.types';
+import type { BoxProps } from '../layout/layout.types';
 
 export type BoxVariant =
     | 'default'
