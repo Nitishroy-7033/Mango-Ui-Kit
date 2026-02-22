@@ -1,6 +1,6 @@
 {
   "name": "mango-ui-kit",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A premium, modern React component library with a built-in zero-dependency theme engine. 40+ components, TypeScript-first, dark mode ready.",
   "keywords": [
     "react",
@@ -36,7 +36,8 @@
       "import": "./dist/mango-ui-kit.js",
       "require": "./dist/mango-ui-kit.umd.cjs"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./dist/mango-ui-kit.css": "./dist/mango-ui-kit.css",
+    "./style.css": "./dist/mango-ui-kit.css"
   },
   "files": [
     "dist"

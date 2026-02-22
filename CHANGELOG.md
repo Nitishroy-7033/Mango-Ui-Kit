@@ -6,6 +6,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and
 
 ---
 
+## [3.0.1] — 2026-02-22
+
+### 🔧 Fixed
+- **CSS Resolution** — Fixed missing specifier for `mango-ui-kit.css` in `package.json` exports. Users can now import styles using `mango-ui-kit/dist/mango-ui-kit.css` or the cleaner `mango-ui-kit/style.css`.
+
+---
+
 ## [3.0.0] — 2026-02-22
 
 ### ✨ Added

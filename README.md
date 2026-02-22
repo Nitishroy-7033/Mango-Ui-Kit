@@ -87,7 +87,7 @@ pnpm add mango-ui-kit
 Add this once in your entry file (`main.tsx`, `index.ts`, or `_app.tsx`):
 
 ```tsx
-import 'mango-ui-kit/dist/style.css';
+import 'mango-ui-kit/dist/mango-ui-kit.css';
 ```
 
 ### 3. Start using components
@@ -126,7 +126,7 @@ It manages:
 ```tsx
 // main.tsx
 import { ThemeProvider } from 'mango-ui-kit';
-import 'mango-ui-kit/dist/style.css';
+import 'mango-ui-kit/dist/mango-ui-kit.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ThemeProvider defaultThemeMode="light" storageKey="my-app-theme">
