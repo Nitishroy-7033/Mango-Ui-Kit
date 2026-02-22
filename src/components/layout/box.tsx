@@ -16,7 +16,7 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
             shadow, display, position,
             blur, gradient, opacity, zIndex, overflow,
             pointerEvents, cursor, transition,
-            justify, align, flexDirection, gap,
+            justify, align, flexDirection, gap, flex,
             className, style, children,
             ...props
         },
@@ -78,6 +78,7 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
             alignItems: getFlexAlign(align),
             flexDirection,
             gap,
+            flex,
             backdropFilter: blur ? `blur(${typeof blur === 'number' ? `${blur}px` : blur})` : undefined,
             boxShadow: getShadow(shadow),
             ...style,

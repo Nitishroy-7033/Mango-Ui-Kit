@@ -590,21 +590,22 @@ import { OtpInput } from 'mango-ui-kit';
 
 ## 🛶 Layout System
 
-Build complex, responsive grid layouts using `Box`, `Row`, and `Col`.
+Build complex, responsive grid layouts using `Box`, `Row`, `Column`, and `Col`. Inspired by Flutter's layout model.
 
 ```tsx
-import { Row, Col, Box } from 'mango-ui-kit';
+import { Row, Column, Col, Box } from 'mango-ui-kit';
 
-<Row justify="between" align="center" gap="20px">
-  <Col span={8}>
+<Row mainAxisAlignment="spaceBetween" crossAxisAlignment="center" gap="20px">
+  <Col span={{ xs: 12, md: 8 }}>
     <Box bg="var(--primaryContainercolor)" shadow="lg" p="40px" radius="20px">
       Main Content
     </Box>
   </Col>
-  <Col span={4}>
-    <Box bg="var(--secondaryContainercolor)" p="20px" radius="12px">
-      Sidebar
-    </Box>
+  <Col span={{ xs: 12, md: 4 }}>
+    <Column gap="12px">
+      <Box bg="var(--secondaryContainercolor)" p="20px" radius="12px">Side Top</Box>
+      <Box bg="var(--secondaryContainercolor)" p="20px" radius="12px">Side Bottom</Box>
+    </Column>
   </Col>
 </Row>
 ```

@@ -2,6 +2,12 @@ import type React from 'react';
 
 export type SpacingValue = number | string;
 
+export type MainAxisAlignment = 'start' | 'end' | 'center' | 'spaceBetween' | 'between' | 'around' | 'evenly';
+export type CrossAxisAlignment = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
+
+export type JustifyContent = MainAxisAlignment;
+export type AlignItems = CrossAxisAlignment;
+
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Change the underlying element */
     as?: React.ElementType;
@@ -49,6 +55,8 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
     pointerEvents?: React.CSSProperties['pointerEvents'];
     cursor?: React.CSSProperties['cursor'];
     transition?: string;
+    /** Flex property */
+    flex?: string | number;
     /** Flex alignment shorthand */
     justify?: JustifyContent;
     align?: AlignItems;
@@ -56,14 +64,28 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
     gap?: SpacingValue;
 }
 
-export type JustifyContent = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly';
-export type AlignItems = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
-
 export interface RowProps extends BoxProps {
-    /** Flex justify-content */
-    justify?: JustifyContent;
-    /** Flex align-items */
-    align?: AlignItems;
+    /** Main axis alignment (horizontal) */
+    mainAxisAlignment?: MainAxisAlignment;
+    /** Cross axis alignment (vertical) */
+    crossAxisAlignment?: CrossAxisAlignment;
+    /** Gap between elements */
+    gap?: SpacingValue;
+    /** Vertical gap */
+    rowGap?: SpacingValue;
+    /** Horizontal gap */
+    columnGap?: SpacingValue;
+    /** Flex wrap */
+    wrap?: 'wrap' | 'nowrap' | 'wrap-reverse';
+    /** Whether to take full width */
+    fullWidth?: boolean;
+}
+
+export interface ColumnProps extends BoxProps {
+    /** Main axis alignment (vertical) */
+    mainAxisAlignment?: MainAxisAlignment;
+    /** Cross axis alignment (horizontal) */
+    crossAxisAlignment?: CrossAxisAlignment;
     /** Gap between elements */
     gap?: SpacingValue;
     /** Vertical gap */

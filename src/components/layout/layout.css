@@ -5,61 +5,78 @@
 /* Row Component */
 .mango-row {
     display: flex;
+    flex-direction: row;
     box-sizing: border-box;
     width: 100%;
 }
 
-.mango-row.is-full-width {
+/* Column Component (Vertical Flex) */
+.mango-column {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
     width: 100%;
 }
 
-/* Justify Content */
-.mango-row.justify-start {
+.is-full-width {
+    width: 100%;
+}
+
+/* Common Alignment Utilities for Row and Column */
+
+/* Justify Content (Main Axis for both) */
+.justify-start {
     justify-content: flex-start;
 }
 
-.mango-row.justify-end {
+.justify-end {
     justify-content: flex-end;
 }
 
-.mango-row.justify-center {
+.justify-center {
     justify-content: center;
 }
 
-.mango-row.justify-between {
+.justify-between {
     justify-content: space-between;
 }
 
-.mango-row.justify-around {
+.justify-around {
     justify-content: space-around;
 }
 
-.mango-row.justify-evenly {
+.justify-evenly {
     justify-content: space-evenly;
 }
 
-/* Align Items */
-.mango-row.align-start {
+.justify-spaceBetween {
+    justify-content: space-between;
+}
+
+/* flutter alias */
+
+/* Align Items (Cross Axis for both) */
+.align-start {
     align-items: flex-start;
 }
 
-.mango-row.align-end {
+.align-end {
     align-items: flex-end;
 }
 
-.mango-row.align-center {
+.align-center {
     align-items: center;
 }
 
-.mango-row.align-baseline {
+.align-baseline {
     align-items: baseline;
 }
 
-.mango-row.align-stretch {
+.align-stretch {
     align-items: stretch;
 }
 
-/* Column Component */
+/* Grid Column Component (Col) */
 .mango-col {
     box-sizing: border-box;
     min-height: 1px;
@@ -128,6 +145,15 @@
 .mango-col-12 {
     flex: 0 0 100%;
     max-width: 100%;
+}
+
+/* Responsive basics */
+@media (max-width: 768px) {
+    /* 
+       Note: We don't automatically stack rows here because 
+       users might want horizontal rows on mobile. 
+       They should use Col with span={{xs: 12}} for stacking.
+    */
 }
 
 /* Small (sm) - 576px */

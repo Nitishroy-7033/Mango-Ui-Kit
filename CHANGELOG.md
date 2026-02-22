@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and
 
 ---
 
+## [3.1.0] — 2026-02-22
+
+### ✨ Added
+- **Flutter-inspired Column** — New `Column` component for vertical flex layouts with intuitive alignment.
+- **Improved Alignment Props** — `Row` and `Column` now support `mainAxisAlignment` and `crossAxisAlignment` props, matching Flutter's layout model.
+- **Standardized Flex Utilities** — CSS utilities for `start`, `end`, `center`, `spaceBetween`, `around`, and `evenly` are now consistent across both components.
+
+---
+
 ## [3.0.1] — 2026-02-22
 
 ### 🔧 Fixed

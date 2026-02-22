@@ -1,17 +1,17 @@
 import React, { forwardRef } from 'react';
 import { cn } from '../../utils/cn';
-import type { RowProps } from './layout.types';
+import type { ColumnProps } from './layout.types';
 import './layout.css';
 
 /**
- * Row is a flexbox container for organizing elements in a horizontal line.
- * Inspired by Flutter's Row widget.
+ * Column is a flexbox container for organizing elements in a vertical line.
+ * Inspired by Flutter's Column widget.
  */
-export const Row = forwardRef<HTMLDivElement, RowProps>(
+export const Column = forwardRef<HTMLDivElement, ColumnProps>(
     (
         {
             mainAxisAlignment = 'start',
-            crossAxisAlignment = 'center',
+            crossAxisAlignment = 'stretch',
             justify,
             align,
             gap,
@@ -34,7 +34,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(
         const finalMainAxis = justify || mainAxisAlignment;
         const finalCrossAxis = align || crossAxisAlignment;
 
-        const rowStyle: React.CSSProperties = {
+        const columnStyle: React.CSSProperties = {
             gap,
             rowGap,
             columnGap,
@@ -50,7 +50,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(
             marginTop: mt || my,
             marginBottom: mb || my,
             width,
-            height,
+            height: height || 'auto',
             backgroundColor: bg,
             color,
             borderRadius: radius,
@@ -70,13 +70,13 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(
             <div
                 ref={ref}
                 className={cn(
-                    'mango-row',
+                    'mango-column',
                     `justify-${finalMainAxis}`,
                     `align-${finalCrossAxis}`,
                     fullWidth && 'is-full-width',
                     className
                 )}
-                style={rowStyle}
+                style={columnStyle}
                 {...props}
             >
                 {children}
@@ -85,4 +85,4 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(
     }
 );
 
-Row.displayName = 'Row';
+Column.displayName = 'Column';
