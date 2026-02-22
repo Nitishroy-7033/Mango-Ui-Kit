@@ -42,6 +42,8 @@ export * from './components/segmented-control';
 export * from './components/slider';
 export * from './components/toast';
 export * from './components/command-palette';
+export * from './components/layout';
+export * from './components/box';
 
 export * from './hooks';
 export * from './utils';

@@ -1,0 +1,141 @@
+.mango-box {
+    box-sizing: border-box;
+}
+
+/* Row Component */
+.mango-row {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.mango-row.is-full-width {
+    width: 100%;
+}
+
+/* Justify Content */
+.mango-row.justify-start {
+    justify-content: flex-start;
+}
+
+.mango-row.justify-end {
+    justify-content: flex-end;
+}
+
+.mango-row.justify-center {
+    justify-content: center;
+}
+
+.mango-row.justify-between {
+    justify-content: space-between;
+}
+
+.mango-row.justify-around {
+    justify-content: space-around;
+}
+
+.mango-row.justify-evenly {
+    justify-content: space-evenly;
+}
+
+/* Align Items */
+.mango-row.align-start {
+    align-items: flex-start;
+}
+
+.mango-row.align-end {
+    align-items: flex-end;
+}
+
+.mango-row.align-center {
+    align-items: center;
+}
+
+.mango-row.align-baseline {
+    align-items: baseline;
+}
+
+.mango-row.align-stretch {
+    align-items: stretch;
+}
+
+/* Column Component */
+.mango-col {
+    box-sizing: border-box;
+    min-height: 1px;
+    position: relative;
+    max-width: 100%;
+}
+
+/* 12-Column Grid System */
+.mango-col-1 {
+    flex: 0 0 calc(100% / 12 * 1);
+    max-width: calc(100% / 12 * 1);
+}
+
+.mango-col-2 {
+    flex: 0 0 calc(100% / 12 * 2);
+    max-width: calc(100% / 12 * 2);
+}
+
+.mango-col-3 {
+    flex: 0 0 calc(100% / 12 * 3);
+    max-width: calc(100% / 12 * 3);
+}
+
+.mango-col-4 {
+    flex: 0 0 calc(100% / 12 * 4);
+    max-width: calc(100% / 12 * 4);
+}
+
+.mango-col-5 {
+    flex: 0 0 calc(100% / 12 * 5);
+    max-width: calc(100% / 12 * 5);
+}
+
+.mango-col-6 {
+    flex: 0 0 calc(100% / 12 * 6);
+    max-width: calc(100% / 12 * 6);
+}
+
+.mango-col-7 {
+    flex: 0 0 calc(100% / 12 * 7);
+    max-width: calc(100% / 12 * 7);
+}
+
+.mango-col-8 {
+    flex: 0 0 calc(100% / 12 * 8);
+    max-width: calc(100% / 12 * 8);
+}
+
+.mango-col-9 {
+    flex: 0 0 calc(100% / 12 * 9);
+    max-width: calc(100% / 12 * 9);
+}
+
+.mango-col-10 {
+    flex: 0 0 calc(100% / 12 * 10);
+    max-width: calc(100% / 12 * 10);
+}
+
+.mango-col-11 {
+    flex: 0 0 calc(100% / 12 * 11);
+    max-width: calc(100% / 12 * 11);
+}
+
+.mango-col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+/* Responsive basics */
+@media (max-width: 768px) {
+    .mango-row {
+        flex-direction: column;
+    }
+
+    .mango-col {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+}

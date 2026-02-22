@@ -1,0 +1,4 @@
+/* MangoBox is now completely static by default */
+.mango-specialized-box {
+    box-sizing: border-box;
+}
