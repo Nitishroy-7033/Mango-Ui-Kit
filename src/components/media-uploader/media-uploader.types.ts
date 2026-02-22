@@ -24,12 +24,20 @@ export interface MediaUploaderProps {
     onFilesAdded?: (files: UploadedFile[]) => void;
     /** Callback when a file is removed */
     onFileRemoved?: (id: string) => void;
+    /** Callback to retry a failed upload */
+    onRetry?: (id: string) => void;
     /** Initial list of files */
     files?: UploadedFile[];
     /** Customize the trigger button/area */
     trigger?: 'button' | 'dropzone' | 'avatar' | 'card' | 'link' | 'icon-only' | 'compact';
     /** How to display the uploaded files */
     layout?: 'list' | 'grid' | 'compact';
+    /** Show small file icon previews above the dropzone */
+    showFileGrid?: boolean;
+    /** Section title */
+    title?: ReactNode;
+    /** Sub-label or description */
+    description?: ReactNode;
     /** Custom label for the button/area */
     label?: ReactNode;
     /** Whether the component is disabled */
