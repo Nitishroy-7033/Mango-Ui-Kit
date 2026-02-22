@@ -6,7 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and
 
 ---
 
-## [2.4.0] — 2026-02-22
+## [3.0.0] — 2026-02-22
 
 ### ✨ Added
 - **Responsive Grid System** — `Col` component now supports responsive spans via an object (e.g., `span={{ xs: 12, md: 6 }}`).
