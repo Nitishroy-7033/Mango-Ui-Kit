@@ -1,0 +1,157 @@
+.mango-tags-input-root {
+    --tags-input-primary: var(--primaryColor, #fa8029);
+    --tags-input-border: var(--borderColor, #e2e8f0);
+    --tags-input-bg: var(--primaryContainercolor, #ffffff);
+    --tags-input-text: var(--textColor, #383838);
+    --tags-input-label: var(--labelSecondaryColor, #94a3b8);
+    --tags-input-item-bg: #ffffff;
+    --tags-input-item-border: #e2e8f0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    font-family: inherit;
+}
+
+.mango-tags-input-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--textColor);
+    margin-bottom: 2px;
+}
+
+.mango-tags-input-label[data-disabled] {
+    opacity: 0.5;
+}
+
+.mango-tags-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--tags-input-bg);
+    border: 1px solid var(--tags-input-border);
+    border-radius: 12px;
+    min-height: 44px;
+    transition: all 0.2s ease;
+}
+
+.mango-tags-input-root:focus-within .mango-tags-input-container {
+    border-color: var(--tags-input-primary);
+    box-shadow: 0 0 0 2px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.1);
+}
+
+.mango-tags-input-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--tags-input-item-bg);
+    border: 1px solid var(--tags-input-item-border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--tags-input-text);
+    transition: all 0.2s ease;
+    cursor: default;
+    user-select: none;
+}
+
+.mango-tags-input-item[data-state='active'] {
+    border-color: var(--tags-input-primary);
+    background: rgba(var(--primaryColor-rgb, 250, 128, 41), 0.05);
+}
+
+.mango-tags-input-item-text {
+    white-space: nowrap;
+}
+
+.mango-tags-input-item-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.mango-tags-input-item-delete:hover {
+    color: #ef4444;
+    background: #fee2e2;
+}
+
+.mango-tags-input-field {
+    flex: 1;
+    min-width: 120px;
+    border: none;
+    background: transparent;
+    padding: 2px 4px;
+    font-size: 14px;
+    color: var(--tags-input-text);
+    outline: none;
+}
+
+.mango-tags-input-field::placeholder {
+    color: #94a3b8;
+}
+
+.mango-tags-input-description {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.mango-tags-input-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 12px;
+    width: 100%;
+    background: var(--tags-input-bg);
+    border: 1px solid var(--tags-input-border);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--textColor);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mango-tags-input-clear:hover:not(:disabled) {
+    background: var(--secondaryColor);
+    border-color: var(--tags-input-primary);
+}
+
+.mango-tags-input-clear:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Dark Mode Support */
+[data-theme='dark'] .mango-tags-input-root {
+    --tags-input-item-bg: #1f2937;
+    --tags-input-item-border: #374151;
+}
+
+[data-theme='dark'] .mango-tags-input-container {
+    background: #111827;
+}
+
+[data-theme='dark'] .mango-tags-input-item {
+    color: #f3f4f6;
+}
+
+[data-theme='dark'] .mango-tags-input-field {
+    color: #f3f4f6;
+}
+
+[data-theme='dark'] .mango-tags-input-clear {
+    background: #111827;
+}
