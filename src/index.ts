@@ -9,6 +9,7 @@ export * from './components/number-input';
 export * from './components/card';
 export * from './components/modal';
 export * from './components/toggle';
+export * from './components/option-menu';
 export * from './components/bottom-nav-bar';
 
 // New components
