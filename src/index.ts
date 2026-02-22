@@ -56,6 +56,7 @@ export * from './components/toast';
 export * from './components/command-palette';
 export * from './components/layout';
 export * from './components/box';
+export * from './components/selection-toolbar';
 
 export * from './hooks';
 export * from './utils';

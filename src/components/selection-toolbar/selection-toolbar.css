@@ -1,0 +1,137 @@
+.mango-selection-container {
+    position: relative;
+    width: 100%;
+}
+
+.mango-selection-toolbar {
+    position: absolute;
+    z-index: 1000;
+    pointer-events: auto;
+    animation: selectionFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes selectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+.toolbar-inner {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+}
+
+.toolbar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+}
+
+.toolbar-btn:hover {
+    background: #f3f4f6;
+    color: var(--primaryColor, #fa8029);
+}
+
+.toolbar-divider {
+    width: 1px;
+    height: 20px;
+    background: #e5e7eb;
+    margin: 0 4px;
+}
+
+/* Variants */
+.mango-selection-toolbar.variant-outline .toolbar-inner {
+    background: #ffffff;
+    border: 2px solid var(--primaryColor, #fa8029);
+}
+
+.mango-selection-toolbar.variant-ghost .toolbar-inner {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Selection Info Tracking Support (Demo usage) */
+.selection-info-card {
+    margin-top: 24px;
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #475569;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #1e293b;
+    margin-right: 8px;
+}
+
+.selected-text-preview {
+    margin-top: 12px;
+    font-style: italic;
+    color: #64748b;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Dark Mode Support */
+[data-theme='dark'] .toolbar-inner {
+    background: #111827;
+    border-color: #374151;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .toolbar-btn {
+    color: #d1d5db;
+}
+
+[data-theme='dark'] .toolbar-btn:hover {
+    background: #1f2937;
+    color: var(--primaryColor, #fa8029);
+}
+
+[data-theme='dark'] .toolbar-divider {
+    background: #374151;
+}
+
+[data-theme='dark'] .selection-info-card {
+    background: #0f172a;
+    border-color: #1e293b;
+    color: #94a3b8;
+}
+
+[data-theme='dark'] .info-label {
+    color: #f1f5f9;
+}
