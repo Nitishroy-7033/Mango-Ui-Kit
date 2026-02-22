@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '../../utils/cn';
+import { Tooltip } from '../tooltip';
 import type { SpeedDialProps } from './speed-dial.types';
 import './speed-dial.css';
 
@@ -76,28 +77,40 @@ export const SpeedDial: React.FC<SpeedDialProps> = ({
                 </button>
 
                 <div className="mango-speed-dial-actions">
-                    {actions.map((action) => (
-                        <div
-                            key={action.id}
-                            className={cn('mango-speed-dial-action-wrapper', action.className)}
-                        >
-                            <button
-                                className={cn(
-                                    'mango-speed-dial-action-btn',
-                                    `mango-variant-${action.variant || 'secondary'}`,
-                                    variant === 'glass' && 'action-glass'
-                                )}
-                                onClick={() => handleActionClick(action.id, action.onClick)}
-                                disabled={action.disabled}
-                                title={action.label}
+                    {actions.map((action) => {
+                        // Determine tooltip position based on dial direction and screen position
+                        let tooltipPos: any = 'left';
+                        if (direction === 'up' || direction === 'down') {
+                            tooltipPos = position.includes('right') ? 'left' : 'right';
+                        } else {
+                            tooltipPos = direction === 'left' ? 'top' : 'bottom';
+                        }
+
+                        return (
+                            <div
+                                key={action.id}
+                                className={cn('mango-speed-dial-action-wrapper', action.className)}
                             >
-                                {action.icon}
-                            </button>
-                            {showLabels && action.label && (
-                                <span className="mango-speed-dial-label">{action.label}</span>
-                            )}
-                        </div>
-                    ))}
+                                <Tooltip
+                                    content={showLabels ? action.label : undefined}
+                                    position={tooltipPos}
+                                    delay={200}
+                                >
+                                    <button
+                                        className={cn(
+                                            'mango-speed-dial-action-btn',
+                                            `mango-variant-${action.variant || 'secondary'}`,
+                                            variant === 'glass' && 'action-glass'
+                                        )}
+                                        onClick={() => handleActionClick(action.id, action.onClick)}
+                                        disabled={action.disabled}
+                                    >
+                                        {action.icon}
+                                    </button>
+                                </Tooltip>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>

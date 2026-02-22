@@ -201,39 +201,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.mango-speed-dial-label {
-    position: absolute;
-    background: var(--textColor, #1a1a1a);
-    color: var(--primaryContainerColor, #fff);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-[data-theme='dark'] .mango-speed-dial-label {
-    background: #fff;
-    color: #1a1a1a;
-}
-
-.direction-up .mango-speed-dial-label,
-.direction-down .mango-speed-dial-label {
-    right: 52px;
-}
-
-.direction-left .mango-speed-dial-label,
-.direction-right .mango-speed-dial-label {
-    top: 48px;
-}
-
-.mango-speed-dial-action-wrapper:hover .mango-speed-dial-label {
-    opacity: 1;
-}
-
 /* Glass Variants for actions */
 .action-glass {
     background: rgba(255, 255, 255, 0.7) !important;
