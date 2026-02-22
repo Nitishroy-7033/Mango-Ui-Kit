@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+
 import { ThemeProvider, useTheme } from './theme-provider';
 import type { ThemeConfig } from './theme-provider';
 
