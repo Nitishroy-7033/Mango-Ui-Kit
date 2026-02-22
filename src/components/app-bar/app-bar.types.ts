@@ -41,7 +41,6 @@ export interface AppBarProps {
   onLogout?: () => void;
   onUpgrade?: () => void;
   subscriptionPlan?: string;
-  notificationCount?: number;
   showThemeToggle?: boolean;
   theme?: 'light' | 'dark';
   onToggleTheme?: () => void;
@@ -50,10 +49,25 @@ export interface AppBarProps {
   showSidebarToggle?: boolean;
   onToggleSidebar?: () => void;
 
+  // Authentication
+  isAuthenticated?: boolean;
+  onLogin?: () => void;
+  loginText?: string;
+
   // Search
   showSearch?: boolean;
   searchPlaceholder?: string;
   onSearch?: (query: string) => void;
+
+  // Notifications
+  showNotifications?: boolean;
+  notificationCount?: number;
+
+  // Profile Menu Customization
+  profileMenuItems?: NavItem[];
+  profileText?: string;
+  settingsText?: string;
+  logoutText?: string;
 
   // Colors
   bgColor?: string;

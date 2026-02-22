@@ -56,7 +56,15 @@ export const AppBar: React.FC<AppBarProps> = ({
   user,
   onLogout,
   subscriptionPlan,
+  isAuthenticated = false,
+  onLogin,
+  loginText = 'Sign In',
+  showNotifications = true,
   notificationCount = 0,
+  profileMenuItems,
+  profileText = 'Profile',
+  settingsText = 'Settings',
+  logoutText = 'Logout',
   showThemeToggle = true,
   theme = 'light',
   onToggleTheme,
@@ -161,12 +169,14 @@ export const AppBar: React.FC<AppBarProps> = ({
             </button>
           )}
 
-          <button className="nav-link icon-only notification-btn">
-            <Bell size={20} />
-            {notificationCount > 0 && <span className="notification-badge">{notificationCount}</span>}
-          </button>
+          {showNotifications && (
+            <button className="nav-link icon-only notification-btn">
+              <Bell size={20} />
+              {notificationCount > 0 && <span className="notification-badge">{notificationCount}</span>}
+            </button>
+          )}
 
-          {user && (
+          {isAuthenticated && user ? (
             <div className="user-profile" ref={userMenuRef}>
               <button
                 className="user-profile-trigger"
@@ -189,13 +199,41 @@ export const AppBar: React.FC<AppBarProps> = ({
                     <p className="dropdown-email">{user.email}</p>
                   </div>
                   <div className="dropdown-divider" />
-                  <button className="dropdown-item"><User size={16} /> Profile</button>
-                  <button className="dropdown-item"><Settings size={16} /> Settings</button>
-                  <div className="dropdown-divider" />
-                  <button className="dropdown-item logout" onClick={onLogout}><LogOut size={16} /> Logout</button>
+
+                  {profileMenuItems ? (
+                    profileMenuItems.map((item, idx) => {
+                      const Icon = item.icon;
+                      return (
+                        <button
+                          key={idx}
+                          className={cn('dropdown-item', item.label.toLowerCase() === 'logout' && 'logout')}
+                          onClick={() => {
+                            item.onClick?.();
+                            setShowUserMenu(false);
+                          }}
+                        >
+                          {Icon && <Icon size={16} />}
+                          <span>{item.label}</span>
+                        </button>
+                      );
+                    })
+                  ) : (
+                    <>
+                      <button className="dropdown-item"><User size={16} /> {profileText}</button>
+                      <button className="dropdown-item"><Settings size={16} /> {settingsText}</button>
+                      <div className="dropdown-divider" />
+                      <button className="dropdown-item logout" onClick={onLogout}><LogOut size={16} /> {logoutText}</button>
+                    </>
+                  )}
                 </div>
               )}
             </div>
+          ) : (
+            !isAuthenticated && (
+              <button className="login-btn" onClick={onLogin}>
+                {loginText}
+              </button>
+            )
           )}
         </div>
       </div>

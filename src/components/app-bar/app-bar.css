@@ -416,3 +416,25 @@
     padding: 0 4px;
     border: 2px solid var(--primaryContainercolor);
 }
+.login-btn {
+    padding: 8px 18px;
+    background-color: var(--primaryColor);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.login-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
