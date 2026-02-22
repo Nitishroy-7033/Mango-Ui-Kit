@@ -12,7 +12,9 @@ export * from './components/toggle';
 export * from './components/option-menu';
 export * from './components/list';
 export * from './components/grid';
+export * from './components/speed-dial';
 export * from './components/bottom-nav-bar';
+
 
 
 // New components

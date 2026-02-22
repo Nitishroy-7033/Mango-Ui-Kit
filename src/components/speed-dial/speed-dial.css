@@ -1,0 +1,249 @@
+.mango-speed-dial-root {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* Positions */
+.mango-speed-dial-root.position-bottom-right {
+    bottom: 24px;
+    right: 24px;
+}
+
+.mango-speed-dial-root.position-bottom-left {
+    bottom: 24px;
+    left: 24px;
+}
+
+.mango-speed-dial-root.position-top-right {
+    top: 24px;
+    right: 24px;
+}
+
+.mango-speed-dial-root.position-top-left {
+    top: 24px;
+    left: 24px;
+}
+
+.mango-speed-dial-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+}
+
+.mango-speed-dial-container.direction-up {
+    flex-direction: column-reverse;
+}
+
+.mango-speed-dial-container.direction-down {
+    flex-direction: column;
+}
+
+.mango-speed-dial-container.direction-left {
+    flex-direction: row-reverse;
+}
+
+.mango-speed-dial-container.direction-right {
+    flex-direction: row;
+}
+
+/* Main Trigger Button */
+.mango-speed-dial-trigger {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+    color: white;
+}
+
+.mango-speed-dial-trigger.is-open {
+    transform: rotate(0deg);
+}
+
+/* Variants */
+.mango-variant-primary {
+    background: var(--primaryColor, #fa8029);
+    color: white;
+}
+
+.mango-variant-secondary {
+    background: var(--secondaryContainerColor, #f3f4f6);
+    color: var(--textColor, #1f2937);
+}
+
+[data-theme='dark'] .mango-variant-secondary {
+    background: #374151;
+    color: #f3f4f6;
+}
+
+.mango-variant-danger {
+    background: #ef4444;
+    color: white;
+}
+
+.mango-variant-black {
+    background: #1a1a1a;
+    color: white;
+}
+
+.mango-variant-info {
+    background: #3b82f6;
+    color: white;
+}
+
+.mango-variant-success {
+    background: #10b981;
+    color: white;
+}
+
+.mango-variant-glass {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    color: var(--textColor, #333);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme='dark'] .mango-variant-glass {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Actions List */
+.mango-speed-dial-actions {
+    display: flex;
+    gap: 12px;
+    transition: all 0.3s ease;
+    padding: 12px;
+}
+
+.mango-speed-dial-container.direction-up .mango-speed-dial-actions {
+    flex-direction: column-reverse;
+}
+
+.mango-speed-dial-container.direction-down .mango-speed-dial-actions {
+    flex-direction: column;
+}
+
+.mango-speed-dial-container.direction-left .mango-speed-dial-actions {
+    flex-direction: row-reverse;
+}
+
+.mango-speed-dial-container.direction-right .mango-speed-dial-actions {
+    flex-direction: row;
+}
+
+.mango-speed-dial-action-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.is-open .mango-speed-dial-action-wrapper {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+/* staggered animation */
+.is-open .mango-speed-dial-action-wrapper:nth-child(1) {
+    transition-delay: 50ms;
+}
+
+.is-open .mango-speed-dial-action-wrapper:nth-child(2) {
+    transition-delay: 100ms;
+}
+
+.is-open .mango-speed-dial-action-wrapper:nth-child(3) {
+    transition-delay: 150ms;
+}
+
+.is-open .mango-speed-dial-action-wrapper:nth-child(4) {
+    transition-delay: 200ms;
+}
+
+.is-open .mango-speed-dial-action-wrapper:nth-child(5) {
+    transition-delay: 250ms;
+}
+
+.mango-speed-dial-action-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.mango-speed-dial-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mango-speed-dial-label {
+    position: absolute;
+    background: var(--textColor, #1a1a1a);
+    color: var(--primaryContainerColor, #fff);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .mango-speed-dial-label {
+    background: #fff;
+    color: #1a1a1a;
+}
+
+.direction-up .mango-speed-dial-label,
+.direction-down .mango-speed-dial-label {
+    right: 52px;
+}
+
+.direction-left .mango-speed-dial-label,
+.direction-right .mango-speed-dial-label {
+    top: 48px;
+}
+
+.mango-speed-dial-action-wrapper:hover .mango-speed-dial-label {
+    opacity: 1;
+}
+
+/* Glass Variants for actions */
+.action-glass {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(8px);
+    color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+[data-theme='dark'] .action-glass {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
