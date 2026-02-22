@@ -1,0 +1,21 @@
+.mango-stepper {
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.mango-step {
+    box-sizing: border-box;
+}
+
+.mango-step.is-clickable:hover .mango-step-indicator {
+    opacity: 0.85;
+}
+
+.mango-step-indicator {
+    box-sizing: border-box;
+}
+
+.mango-step-connector {
+    box-sizing: border-box;
+    border-radius: 9999px;
+}

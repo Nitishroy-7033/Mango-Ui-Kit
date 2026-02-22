@@ -19,7 +19,7 @@ export const ShadowTypes: Story = {
         <Row gap="24px" wrap="wrap">
             {[1, 2, 3, 4, 5].map(i => (
                 <Col key={i} span={4}>
-                    <MangoBox variant="elevated" intensity={i as any} p="30px" interactive>
+                    <MangoBox variant="elevated" intensity={i as 1 | 2 | 3 | 4 | 5} p="30px">
                         <h4 style={{ margin: 0 }}>Elevation {i}</h4>
                         <p style={{ fontSize: '13px', color: '#666' }}>Shadow intensity level {i}</p>
                     </MangoBox>
@@ -33,13 +33,13 @@ export const BorderTypes: Story = {
     render: () => (
         <Row gap="24px" wrap="wrap">
             <Col span={6}>
-                <MangoBox variant="dashed" intensity={2} p="30px" interactive>
+                <MangoBox variant="dashed" intensity={2} p="30px">
                     <h4>Dashed Border</h4>
                     <p>Perfect for placeholder content or drop zones.</p>
                 </MangoBox>
             </Col>
             <Col span={6}>
-                <MangoBox variant="outline" intensity={1} p="30px" interactive>
+                <MangoBox variant="outline" intensity={1} p="30px">
                     <h4>Solid Outline</h4>
                     <p>Clean, minimalist border for subtle organization.</p>
                 </MangoBox>
@@ -52,19 +52,19 @@ export const PremiumTypes: Story = {
     render: () => (
         <Row gap="24px">
             <Col span={4}>
-                <MangoBox variant="glass" intensity={3} p="30px" interactive>
+                <MangoBox variant="glass" intensity={3} p="30px">
                     <h4 style={{ color: '#1a1a1a' }}>Glassmorphism</h4>
                     <p style={{ color: '#444' }}>Frosted glass effect with backdrop blur.</p>
                 </MangoBox>
             </Col>
             <Col span={4}>
-                <MangoBox variant="neon" intensity={2} p="30px" interactive>
+                <MangoBox variant="neon" intensity={2} p="30px">
                     <h4>Neon Glow</h4>
                     <p>Cyberpunk-inspired box with glow effect.</p>
                 </MangoBox>
             </Col>
             <Col span={4}>
-                <MangoBox variant="gradient" p="30px" interactive>
+                <MangoBox variant="gradient" p="30px">
                     <h4>Mango Gradient</h4>
                     <p>Vibrant brand-colored gradient background.</p>
                 </MangoBox>
@@ -97,7 +97,7 @@ export const DashboardLayout: Story = {
                 </Col>
             </Row>
 
-            <Row mt="20px" gap="20px">
+            <Row gap="20px" mt="20px">
                 <Col span={8}>
                     <MangoBox variant="outline" p="40px" height="200px" display="flex" align="center" justify="center">
                         Main Operational Chart Placeholder

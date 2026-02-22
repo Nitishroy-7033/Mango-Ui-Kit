@@ -12,13 +12,14 @@ export const MangoBox = forwardRef<HTMLElement, SpecializedBoxProps>(
 
         const getVariantStyles = (): Partial<SpecializedBoxProps> => {
             switch (variant) {
-                case 'elevated':
+                case 'elevated': {
                     const shadowSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
                     return {
                         shadow: shadowSizes[intensity - 1],
-                        bg: 'white',
+                        bg: 'var(--primaryContainercolor, white)',
                         radius: '16px',
                     };
+                }
                 case 'dashed':
                     return {
                         border: `${intensity}px dashed var(--borderColor, #e5e7eb)`,
@@ -28,7 +29,7 @@ export const MangoBox = forwardRef<HTMLElement, SpecializedBoxProps>(
                 case 'outline':
                     return {
                         border: `${intensity}px solid var(--borderColor, #e5e7eb)`,
-                        bg: 'white',
+                        bg: 'var(--primaryContainercolor, white)',
                         radius: '12px',
                     };
                 case 'glass':
@@ -39,26 +40,27 @@ export const MangoBox = forwardRef<HTMLElement, SpecializedBoxProps>(
                         radius: '20px',
                         shadow: 'sm',
                     };
-                case 'neon':
+                case 'neon': {
                     const neonColors = ['#ffc107', '#fa8029', '#10b981', '#3b82f6', '#ef4444'];
-                    const color = neonColors[intensity - 1];
+                    const neonColor = neonColors[intensity - 1];
                     return {
                         bg: '#1a1a1a',
-                        border: `1px solid ${color}44`,
-                        shadow: `0 0 ${intensity * 10}px ${color}33`,
+                        border: `1px solid ${neonColor}44`,
+                        shadow: `0 0 ${intensity * 10}px ${neonColor}33`,
                         radius: '12px',
-                        color: color,
+                        color: neonColor,
                     };
+                }
                 case 'gradient':
                     return {
-                        gradient: 'linear-gradient(135deg, #fa8029 0%, #ffb347 100%)',
+                        gradient: 'linear-gradient(135deg, var(--primaryColor, #fa8029) 0%, #ffb347 100%)',
                         color: 'white',
                         radius: '16px',
                         shadow: 'md',
                     };
                 case 'flat':
                     return {
-                        bg: '#f8fafc',
+                        bg: 'var(--secondaryContainercolor, #f8fafc)',
                         radius: '8px',
                         border: 'none',
                         shadow: 'none',
