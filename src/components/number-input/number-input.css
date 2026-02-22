@@ -1,0 +1,156 @@
+.mango-number-input-container {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: inherit;
+}
+
+.mango-number-input-container.full-width {
+    display: flex;
+    width: 100%;
+}
+
+.mango-number-input-wrapper {
+    display: flex;
+    align-items: stretch;
+    background: var(--primaryContainercolor, #ffffff);
+    border: 1px solid var(--borderColor, #e5e7eb);
+    border-radius: var(--radius-md, 8px);
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.mango-number-input-wrapper:focus-within {
+    border-color: var(--primaryColor, #fa8029);
+    box-shadow: 0 0 0 2px var(--lightPrimaryColor, rgba(250, 128, 41, 0.1));
+}
+
+.mango-number-input-wrapper.is-error {
+    border-color: #ef4444;
+}
+
+.mango-number-input-wrapper.is-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #f9fafb;
+}
+
+/* Controls */
+.mango-number-input-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--textColor, #1f2937);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    user-select: none;
+    padding: 0 16px;
+}
+
+.mango-number-input-btn:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.mango-number-input-btn:active:not(:disabled) {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.mango-number-input-btn:disabled {
+    color: #d1d5db;
+    cursor: not-allowed;
+}
+
+/* Vertical borders for segments */
+.mango-number-input-btn.btn-minus {
+    border-right: 1px solid var(--borderColor, #e5e7eb);
+}
+
+.mango-number-input-btn.btn-plus {
+    border-left: 1px solid var(--borderColor, #e5e7eb);
+}
+
+/* Input Field */
+.mango-number-input-field {
+    flex: 1;
+    min-width: 60px;
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--textColor, #1f2937);
+    outline: none;
+    padding: 8px 12px;
+}
+
+/* Hide browsers default arrows */
+.mango-number-input-field::-webkit-inner-spin-button,
+.mango-number-input-field::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.mango-number-input-field[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Icon prefix/suffix */
+.mango-number-input-icon-prefix,
+.mango-number-input-icon-suffix {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--labelSecondaryColor, #9ca3af);
+    padding: 0 8px;
+}
+
+.mango-number-input-icon-prefix {
+    padding-left: 12px;
+}
+
+.mango-number-input-icon-suffix {
+    padding-right: 12px;
+}
+
+/* Sizes */
+.size-sm .mango-number-input-field {
+    padding: 4px 8px;
+    font-size: 14px;
+    min-width: 40px;
+}
+
+.size-sm .mango-number-input-btn {
+    padding: 0 10px;
+}
+
+.size-lg .mango-number-input-field {
+    padding: 12px 20px;
+    font-size: 18px;
+    min-width: 80px;
+}
+
+.size-lg .mango-number-input-btn {
+    padding: 0 20px;
+}
+
+/* Label & Error Text */
+.mango-number-input-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--labelSecondaryColor, #4b5563);
+}
+
+.mango-number-input-error-text {
+    font-size: 12px;
+    color: #ef4444;
+}
+
+/* Dark theme specific adjustments if needed */
+[data-theme='dark'] .mango-number-input-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.05);
+}
