@@ -11,6 +11,7 @@ export * from './components/modal';
 export * from './components/toggle';
 export * from './components/option-menu';
 export * from './components/list';
+export * from './components/grid';
 export * from './components/bottom-nav-bar';
 
 
