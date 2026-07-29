@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SelectionToolbar } from './selection-toolbar';
 import { useState } from 'react';
-import { Search, Twitter, MessageSquare, Plus } from 'lucide-react';
+import { Search, MessageCircle, MessageSquare, Plus } from 'lucide-react';
 
 const meta: Meta<typeof SelectionToolbar> = {
     title: 'Components/SelectionToolbar',
@@ -83,7 +83,7 @@ export const CustomActions: Story = {
     args: {
         actions: [
             { id: 'search', icon: <Search size={16} />, onClick: (d) => window.open(`https://www.google.com/search?q=${d.text}`) },
-            { id: 'tweet', icon: <Twitter size={16} />, onClick: (d) => window.open(`https://twitter.com/intent/tweet?text=${d.text}`) },
+            { id: 'tweet', icon: <MessageCircle size={16} />, onClick: (d) => window.open(`https://twitter.com/intent/tweet?text=${d.text}`) },
             { id: 'comment', icon: <MessageSquare size={16} />, onClick: (d) => console.log('Comment on:', d.text) },
             { id: 'add', icon: <Plus size={16} />, onClick: (d) => console.log('Add to list:', d.text) }
         ]

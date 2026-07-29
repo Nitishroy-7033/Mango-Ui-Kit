@@ -135,3 +135,7 @@
 [data-theme='dark'] .info-label {
     color: #f1f5f9;
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .info-label {
+    margin-left: 8px;
+}

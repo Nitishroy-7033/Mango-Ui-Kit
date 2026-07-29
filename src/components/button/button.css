@@ -1,366 +1,320 @@
 /* ═══════════════════════════════════════════════════════════
-   MANGO UI – Button Styles
+   MANGO UI – Button Styles (Customizable via CSS Variables)
    ═══════════════════════════════════════════════════════════ */
 
 /* ── Base ──────────────────────────────────────────────── */
 .mango-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-family: var(--font-family, 'General Sans', sans-serif);
-    font-weight: 600;
-    border: 2px solid transparent;
-    cursor: pointer;
-    user-select: none;
-    white-space: nowrap;
-    position: relative;
-    overflow: hidden;
-    transition:
-        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.2s ease;
+  --btn-font-family: var(--font-sans, var(--font-family, 'General Sans', sans-serif));
+  --btn-font-weight: 600;
+  --btn-border-width: 2px;
+  --btn-transition-duration: 0.2s;
+  --btn-gap: 8px;
+  --btn-min-height: auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--btn-gap, 8px);
+  font-family: var(--btn-font-family);
+  font-weight: var(--btn-font-weight, 600);
+  border: var(--btn-border-width, 2px) solid transparent;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background-color var(--btn-transition-duration, 0.2s) cubic-bezier(0.4, 0, 0.2, 1),
+    border-color var(--btn-transition-duration, 0.2s) cubic-bezier(0.4, 0, 0.2, 1),
+    color var(--btn-transition-duration, 0.2s) cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow var(--btn-transition-duration, 0.2s) cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
+  min-height: var(--btn-min-height);
 }
 
 .mango-btn:active:not(:disabled) {
-    transform: scale(0.97);
+  transform: scale(0.97);
 }
 
 .mango-btn:focus-visible {
-    outline: 2px solid var(--primaryColor);
-    outline-offset: 2px;
+  outline: 2px solid var(--primaryColor, #fa8029);
+  outline-offset: 2px;
 }
 
 .mango-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* ── Sizes ─────────────────────────────────────────────── */
 .mango-btn-sm {
-    height: 32px;
-    padding: 0 12px;
-    font-size: 12px;
-    border-radius: 8px;
-    gap: 6px;
+  height: var(--btn-sm-height, 32px);
+  padding: var(--btn-sm-padding, 0 12px);
+  font-size: var(--btn-sm-font-size, 12px);
+  border-radius: var(--btn-sm-radius, 8px);
+  gap: var(--btn-sm-gap, 6px);
 }
 
 .mango-btn-md {
-    height: 40px;
-    padding: 0 18px;
-    font-size: 14px;
-    border-radius: 10px;
-    gap: 8px;
+  height: var(--btn-md-height, 40px);
+  padding: var(--btn-md-padding, 0 18px);
+  font-size: var(--btn-md-font-size, 14px);
+  border-radius: var(--btn-md-radius, 10px);
+  gap: var(--btn-md-gap, 8px);
 }
 
 .mango-btn-lg {
-    height: 48px;
-    padding: 0 24px;
-    font-size: 16px;
-    border-radius: 12px;
-    gap: 10px;
+  height: var(--btn-lg-height, 48px);
+  padding: var(--btn-lg-padding, 0 24px);
+  font-size: var(--btn-lg-font-size, 16px);
+  border-radius: var(--btn-lg-radius, 12px);
+  gap: var(--btn-lg-gap, 10px);
 }
 
 /* ═══════ Variants ═══════════════════════════════════════ */
 
-/* Primary */
 .mango-btn-primary {
-    background-color: var(--primaryColor);
-    color: #ffffff;
-    border-color: var(--primaryColor);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  background-color: var(--btn-primary-bg, var(--primaryColor, #fa8029));
+  color: var(--btn-primary-color, #ffffff);
+  border-color: var(--btn-primary-border, var(--primaryColor, #fa8029));
+  box-shadow: var(--btn-primary-shadow, 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06));
 }
 
 .mango-btn-primary:hover:not(:disabled) {
-    filter: brightness(1.08);
-    box-shadow: 0 4px 14px rgba(var(--shadowColorRGB), var(--shadowOpacity));
+  background-color: var(--btn-primary-hover-bg);
+  filter: brightness(1.08);
+  box-shadow: 0 4px 14px rgba(var(--shadowColorRGB, 250, 128, 41), var(--shadowOpacity, 0.35));
 }
 
-/* Secondary */
 .mango-btn-secondary {
-    background-color: var(--secondaryColor);
-    color: var(--textColor);
-    border-color: var(--borderColor);
+  background-color: var(--btn-secondary-bg, var(--secondaryColor, #f3f4f6));
+  color: var(--btn-secondary-color, var(--textColor, #383838));
+  border-color: var(--btn-secondary-border, var(--borderColor, #e2e8f0));
 }
 
 .mango-btn-secondary:hover:not(:disabled) {
-    background-color: var(--borderColor);
+  background-color: var(--btn-secondary-hover-bg, var(--borderColor, #e2e8f0));
 }
 
-/* Outline */
 .mango-btn-outline {
-    background-color: transparent;
-    color: var(--primaryColor);
-    border-color: var(--primaryColor);
+  background-color: transparent;
+  color: var(--btn-outline-color, var(--primaryColor, #fa8029));
+  border-color: var(--btn-outline-border, var(--primaryColor, #fa8029));
 }
 
 .mango-btn-outline:hover:not(:disabled) {
-    background-color: var(--lightPrimaryColor);
+  background-color: var(--btn-outline-hover-bg, var(--lightPrimaryColor, rgba(250, 128, 41, 0.1)));
 }
 
-/* Ghost */
 .mango-btn-ghost {
-    background-color: transparent;
-    color: var(--textColor);
-    border-color: transparent;
+  background-color: transparent;
+  color: var(--btn-ghost-color, var(--textColor, #383838));
+  border-color: transparent;
 }
 
 .mango-btn-ghost:hover:not(:disabled) {
-    background-color: var(--secondaryColor);
+  background-color: var(--btn-ghost-hover-bg, var(--secondaryColor, #f3f4f6));
 }
 
-/* Danger */
 .mango-btn-danger {
-    background-color: var(--errorColor);
-    color: #ffffff;
-    border-color: var(--errorColor);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  background-color: var(--btn-danger-bg, var(--errorColor, #ef4444));
+  color: var(--btn-danger-color, #ffffff);
+  border-color: var(--btn-danger-border, var(--errorColor, #ef4444));
 }
 
 .mango-btn-danger:hover:not(:disabled) {
-    background-color: var(--errorColor);
-    filter: brightness(0.9);
-    box-shadow: 0 4px 14px rgba(var(--shadowColorRGB), var(--shadowOpacity));
+  filter: brightness(0.9);
 }
 
-/* ── NEW: Dashed ───────────────────────────────────────── */
 .mango-btn-dashed {
-    background-color: transparent;
-    color: var(--primaryColor);
-    border: 2px dashed var(--primaryColor);
+  background-color: transparent;
+  color: var(--btn-dashed-color, var(--primaryColor, #fa8029));
+  border: var(--btn-border-width, 2px) dashed var(--btn-dashed-border, var(--primaryColor, #fa8029));
 }
 
 .mango-btn-dashed:hover:not(:disabled) {
-    background-color: var(--lightPrimaryColor);
-    border-color: var(--primaryColor);
+  background-color: var(--btn-dashed-hover-bg, var(--lightPrimaryColor, rgba(250, 128, 41, 0.1)));
 }
 
-/* ── NEW: Link ─────────────────────────────────────────── */
 .mango-btn-link {
-    background-color: transparent;
-    color: var(--primaryColor);
-    border-color: transparent;
-    padding-left: 0;
-    padding-right: 0;
-    height: auto;
-    font-weight: 600;
-    text-decoration: none;
+  background-color: transparent;
+  color: var(--btn-link-color, var(--primaryColor, #fa8029));
+  border-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  height: auto;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .mango-btn-link:hover:not(:disabled) {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    opacity: 0.85;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.85;
 }
 
 .mango-btn-link:active:not(:disabled) {
-    transform: none;
+  transform: none;
 }
 
 /* ═══════ Modifiers ══════════════════════════════════════ */
 
-/* Icon Only */
 .mango-btn-icon-only {
-    padding: 0;
+  padding: 0;
 }
 
-.mango-btn-icon-only.mango-btn-sm {
-    width: 32px;
-    height: 32px;
-}
+.mango-btn-icon-only.mango-btn-sm { width: var(--btn-sm-height, 32px); height: var(--btn-sm-height, 32px); }
+.mango-btn-icon-only.mango-btn-md { width: var(--btn-md-height, 40px); height: var(--btn-md-height, 40px); }
+.mango-btn-icon-only.mango-btn-lg { width: var(--btn-lg-height, 48px); height: var(--btn-lg-height, 48px); }
 
-.mango-btn-icon-only.mango-btn-md {
-    width: 40px;
-    height: 40px;
-}
-
-.mango-btn-icon-only.mango-btn-lg {
-    width: 48px;
-    height: 48px;
-}
-
-/* Full Width */
-.mango-btn-full-width {
-    width: 100%;
-}
+.mango-btn-full-width { width: 100%; }
 
 /* ── Rounded ───────────────────────────────────────────── */
-.mango-btn-rounded-none {
-    border-radius: 0;
-}
-
-.mango-btn-rounded-sm {
-    border-radius: 6px;
-}
-
-.mango-btn-rounded-md {
-    border-radius: 10px;
-}
-
-.mango-btn-rounded-lg {
-    border-radius: 16px;
-}
-
-.mango-btn-rounded-xl {
-    border-radius: 20px;
-}
-
-.mango-btn-rounded-full {
-    border-radius: 9999px;
-}
+.mango-btn-rounded-none { border-radius: 0; }
+.mango-btn-rounded-sm { border-radius: var(--radius-sm, 6px); }
+.mango-btn-rounded-md { border-radius: var(--radius-md, 10px); }
+.mango-btn-rounded-lg { border-radius: var(--radius-lg, 16px); }
+.mango-btn-rounded-xl { border-radius: 20px; }
+.mango-btn-rounded-full { border-radius: var(--radius-full, 9999px); }
 
 /* ── Loading spinner ───────────────────────────────────── */
 .mango-btn .mango-btn-spinner {
-    animation: mango-spin 0.7s linear infinite;
+  animation: mango-spin 0.7s linear infinite;
 }
 
 @keyframes mango-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ── Icon wrappers ─────────────────────────────────────── */
 .mango-btn-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    line-height: 0;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ═══════ Hover Effects ═══════════════════════════════════ */
 
-/* Rotate Icon */
-.mango-btn-hover-rotate:hover .mango-btn-icon {
-    transform: rotate(15deg);
-}
-
-/* Slide Icon */
-.mango-btn-hover-slide:hover .mango-btn-icon {
-    transform: translateX(4px);
-}
-
-/* Scale Button */
-.mango-btn-hover-scale:hover {
-    transform: scale(1.05);
-}
-
-.mango-btn-hover-scale:active {
-    transform: scale(0.95);
-}
-
-/* Glow Effect */
+.mango-btn-hover-rotate:hover .mango-btn-icon { transform: rotate(15deg); }
+.mango-btn-hover-slide:hover .mango-btn-icon { transform: translateX(4px); }
+.mango-btn-hover-scale:hover { transform: scale(1.05); }
+.mango-btn-hover-scale:active { transform: scale(0.95); }
 .mango-btn-hover-glow:hover:not(:disabled) {
-    box-shadow: 0 0 20px rgba(var(--shadowColorRGB), 0.5);
-}
-
-.mango-btn-danger.mango-btn-hover-glow:hover:not(:disabled) {
-    box-shadow: 0 0 20px rgba(var(--shadowColorRGB), 0.5);
+  box-shadow: 0 0 20px rgba(var(--shadowColorRGB, 250, 128, 41), 0.5);
 }
 
 /* ═══════════════════════════════════════════════════════════
    SPLIT BUTTON
    ═══════════════════════════════════════════════════════════ */
 
-.split-btn-wrapper {
-    display: inline-flex;
-    position: relative;
-}
+.split-btn-wrapper { display: inline-flex; position: relative; }
 
 .split-btn-main {
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-    border-right: none !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right: none !important;
 }
 
 .split-btn-trigger {
-    border-top-left-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-    min-width: 36px;
-    border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  min-width: 36px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .split-btn-trigger.mango-btn-secondary,
 .split-btn-trigger.mango-btn-outline,
 .split-btn-trigger.mango-btn-ghost,
 .split-btn-trigger.mango-btn-dashed {
-    border-left: 1px solid var(--borderColor) !important;
+  border-left: 1px solid var(--borderColor, #e2e8f0) !important;
 }
 
-/* Dropdown */
 .split-btn-dropdown {
-    position: absolute;
-    top: calc(100% + 6px);
-    right: 0;
-    min-width: 180px;
-    background: var(--primaryContainercolor);
-    border: 1px solid var(--borderColor);
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
-    padding: 6px;
-    z-index: 100;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4px) scale(0.98);
-    transition:
-        opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-        visibility 0.18s;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 180px;
+  background: var(--primaryContainercolor, #ffffff);
+  border: 1px solid var(--borderColor, #e2e8f0);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 6px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px) scale(0.98);
+  transition:
+    opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.18s;
 }
 
 .split-btn-dropdown.split-btn-open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
 }
 
 .split-btn-action {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 9px 14px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: var(--font-family, 'General Sans', sans-serif);
-    color: var(--textColor);
-    background: none;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-    text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-sans, var(--font-family, 'General Sans', sans-serif));
+  color: var(--textColor, #383838);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  text-align: left;
 }
 
-.split-btn-action:hover {
-    background-color: var(--secondaryColor);
-}
+.split-btn-action:hover { background-color: var(--secondaryColor, #f3f4f6); }
 
-.split-btn-action-danger {
-    color: var(--errorColor);
-}
+.split-btn-action-danger { color: var(--errorColor, #ef4444); }
 
 .split-btn-action-danger:hover {
-    background-color: var(--errorColor);
-    filter: brightness(1.5);
-    /* Lighten slightly on hover */
-    color: #ffffff;
+  background-color: var(--errorColor, #ef4444);
+  filter: brightness(1.5);
+  color: #ffffff;
 }
 
-.split-btn-action-icon {
-    display: inline-flex;
-    opacity: 0.7;
-    flex-shrink: 0;
+.split-btn-action-icon { display: inline-flex; opacity: 0.7; flex-shrink: 0; }
+
+/* ── RTL ───────────────────────────────────────────────── */
+[dir="rtl"] .split-btn-dropdown { left: 0; right: auto; }
+[dir="rtl"] .mango-btn-hover-slide:hover .mango-btn-icon { transform: translateX(-4px); }
+[dir="rtl"] .mango-btn-link { padding-right: 0; padding-left: 0; }
+[dir="rtl"] .split-btn-trigger {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  padding-right: 8px !important;
+  padding-left: 8px !important;
+  border-left: none !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+[dir="rtl"] .split-btn-action { text-align: right; }
+[dir="rtl"] .split-btn-main {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-left: none !important;
+}
+[dir="rtl"] .split-btn-trigger.mango-btn-secondary,
+[dir="rtl"] .split-btn-trigger.mango-btn-outline,
+[dir="rtl"] .split-btn-trigger.mango-btn-ghost,
+[dir="rtl"] .split-btn-trigger.mango-btn-dashed {
+  border-left: none !important;
+  border-right: 1px solid var(--borderColor, #e2e8f0) !important;
 }

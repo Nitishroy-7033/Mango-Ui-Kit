@@ -392,3 +392,13 @@
 [data-theme='dark'] .mango-circular-pct {
     color: var(--textColor, #f8fafc);
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-stack-segment:not(:last-child) {
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+}
+[dir="rtl"] .mango-progress-inner-label {
+    padding-left: 8px;
+}
+[dir="rtl"] .mango-progress-buffer {
+    right: 0;
+}

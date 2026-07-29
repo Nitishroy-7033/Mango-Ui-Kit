@@ -161,8 +161,8 @@
 
 .badge-outline {
     background: transparent;
-    color: var(--primaryColor);
-    border: 1px solid var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
+    border: 1px solid var(--primaryColor, #fa8029);
 }
 
 /* Animations */
@@ -188,4 +188,12 @@
     margin-right: 4px;
     width: 1em;
     height: 1em;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .badge-icon {
+    margin-left: 4px;
+}
+[dir="rtl"] .mango-badge.has-inner-dot {
+    padding-right: 10px;
+    padding-left: 10px;
 }

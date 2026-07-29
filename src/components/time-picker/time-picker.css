@@ -8,7 +8,7 @@
 .picker-label {
     display: block;
     font-weight: 600;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     margin-bottom: 6px;
 }
 
@@ -27,7 +27,7 @@
 .picker-helper {
     margin-top: 5px;
     font-size: 0.8rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .picker-error {
@@ -43,7 +43,7 @@
     gap: 10px;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     font-weight: 500;
     position: relative;
     user-select: none;
@@ -70,13 +70,13 @@
 
 /* Variants */
 .time-trigger-default {
-    background: var(--secondaryColor);
-    border: 1px solid var(--borderColor);
+    background: var(--secondaryColor, #f3f4f6);
+    border: 1px solid var(--borderColor, #e2e8f0);
 }
 
 .time-trigger-filled {
-    background: var(--primaryColor);
-    border: 1px solid var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
+    border: 1px solid var(--primaryColor, #fa8029);
     color: #fff;
 }
 
@@ -87,7 +87,7 @@
 
 .time-trigger-outline {
     background: transparent;
-    border: 1.5px solid var(--borderColor);
+    border: 1.5px solid var(--borderColor, #e2e8f0);
 }
 
 .time-trigger-ghost {
@@ -96,24 +96,24 @@
 }
 
 .time-trigger-ghost:hover {
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
 }
 
 /* States */
 .time-input-trigger:hover:not(.is-disabled) {
-    border-color: var(--primaryColor);
-    background: var(--primaryContainercolor);
+    border-color: var(--primaryColor, #fa8029);
+    background: var(--primaryContainercolor, #ffffff);
 }
 
 .time-trigger-filled:hover:not(.is-disabled) {
     opacity: 0.92;
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
 }
 
 .time-input-trigger.active {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
     box-shadow: 0 0 0 3px rgba(250, 128, 41, 0.15);
-    background: var(--primaryContainercolor);
+    background: var(--primaryContainercolor, #ffffff);
 }
 
 .time-input-trigger.has-error {
@@ -128,13 +128,13 @@
 }
 
 .trigger-icon {
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     flex-shrink: 0;
     transition: color 0.2s;
 }
 
 .time-input-trigger:hover .trigger-icon {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 .trigger-text {
@@ -145,7 +145,7 @@
 }
 
 .trigger-placeholder {
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 /* Inner Label (compact uppercase label inside the trigger) - DEPRECATED for trigger */
@@ -177,7 +177,7 @@
     align-items: center;
     padding: 2px;
     border-radius: 4px;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     transition: all 0.2s;
     flex-shrink: 0;
 }
@@ -192,7 +192,7 @@
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    background: var(--primaryContainercolor);
+    background: var(--primaryContainercolor, #ffffff);
     padding: 0;
     /* padding handled inside sections */
     z-index: 10000;
@@ -215,7 +215,7 @@
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 /* ── Analog Clock ────────────────────────────────────── */
@@ -230,8 +230,8 @@
 .analog-clock-face {
     width: 200px;
     height: 200px;
-    background: var(--secondaryColor);
-    border: 1px solid var(--borderColor);
+    background: var(--secondaryColor, #f3f4f6);
+    border: 1px solid var(--borderColor, #e2e8f0);
     border-radius: 50%;
     position: relative;
     cursor: crosshair;
@@ -245,7 +245,7 @@
     left: 50%;
     width: 8px;
     height: 8px;
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
@@ -263,14 +263,14 @@
 .clock-hand-hour {
     width: 4px;
     height: 50px;
-    background: var(--textColor);
+    background: var(--textColor, #383838);
     z-index: 2;
 }
 
 .clock-hand-minute {
     width: 3px;
     height: 80px;
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     z-index: 3;
 }
 
@@ -278,12 +278,12 @@
     position: absolute;
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     transform: translate(-50%, -50%);
 }
 
 .clock-number.active {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     font-size: 1rem;
 }
 
@@ -306,7 +306,7 @@
 .time-nav-btn {
     background: transparent;
     border: none;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
@@ -317,35 +317,35 @@
 }
 
 .time-nav-btn:hover {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     background: rgba(250, 128, 41, 0.1);
 }
 
 .time-value {
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--textColor);
-    background: var(--secondaryColor);
+    color: var(--textColor, #383838);
+    background: var(--secondaryColor, #f3f4f6);
     width: 52px;
     height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    border: 1.5px solid var(--borderColor);
+    border: 1.5px solid var(--borderColor, #e2e8f0);
 }
 
 .time-separator {
     font-size: 1.2rem;
     font-weight: 800;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     margin-top: -18px;
 }
 
 .time-label {
     font-size: 0.6rem;
     font-weight: 700;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     letter-spacing: 0.1em;
 }
 
@@ -359,9 +359,9 @@
 .period-btn {
     padding: 6px 12px;
     border-radius: 8px;
-    border: 1px solid var(--borderColor);
-    background: var(--secondaryColor);
-    color: var(--labelSecondaryColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
+    background: var(--secondaryColor, #f3f4f6);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-size: 0.75rem;
     font-weight: 700;
     cursor: pointer;
@@ -369,15 +369,15 @@
 }
 
 .period-btn.active {
-    background: var(--primaryColor);
-    border-color: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
+    border-color: var(--primaryColor, #fa8029);
     color: white;
 }
 
 /* ── Footer ──────────────────────────────────────────── */
 .time-footer {
     padding: 12px 16px 14px;
-    border-top: 1px solid var(--borderColor);
+    border-top: 1px solid var(--borderColor, #e2e8f0);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -392,7 +392,7 @@
     border-radius: 20px;
     border: none;
     background: rgba(250, 128, 41, 0.1);
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
@@ -401,7 +401,7 @@
 }
 
 .time-quick-btn:hover {
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: white;
 }
 
@@ -413,9 +413,9 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid var(--borderColor);
-    background: var(--secondaryColor);
-    color: var(--labelSecondaryColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
+    background: var(--secondaryColor, #f3f4f6);
+    color: var(--labelSecondaryColor, #94a3b8);
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -441,4 +441,20 @@
 
 .animate-scale-in {
     animation: scaleIn 0.18s cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .clear-btn {
+    margin-right: auto;
+}
+[dir="rtl"] .time-dropdown {
+    right: 0;
+}
+[dir="rtl"] .clock-center-dot {
+    right: 50%;
+}
+[dir="rtl"] .time-close-btn {
+    margin-right: auto;
+}
+[dir="rtl"] .clock-hand {
+    right: 50%;
 }

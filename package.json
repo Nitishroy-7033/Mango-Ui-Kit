@@ -1,7 +1,7 @@
 {
   "name": "mango-ui-kit",
-  "version": "3.5.0",
-  "description": "A premium, modern React component library with a built-in zero-dependency theme engine. 40+ components, TypeScript-first, dark mode ready.",
+  "version": "4.0.0",
+  "description": "A premium, modern React component library with a built-in zero-dependency theme engine. 50+ components, TypeScript-first, dark mode ready, tree-shakeable.",
   "keywords": [
     "react",
     "ui",
@@ -14,7 +14,9 @@
     "theming",
     "css-variables",
     "premium-ui",
-    "mango"
+    "mango",
+    "react-components",
+    "component-library"
   ],
   "author": "Nitish Roy <nitishroy7033@gmail.com> (https://github.com/Nitishroy-7033)",
   "license": "MIT",
@@ -27,20 +29,312 @@
   },
   "homepage": "https://github.com/Nitishroy-7033/Mango-Ui-Kit#readme",
   "type": "module",
-  "main": "dist/mango-ui-kit.umd.cjs",
+  "main": "dist/mango-ui-kit.cjs",
   "module": "dist/mango-ui-kit.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/mango-ui-kit.js",
-      "require": "./dist/mango-ui-kit.umd.cjs"
+      "require": "./dist/mango-ui-kit.cjs"
     },
-    "./dist/mango-ui-kit.css": "./dist/mango-ui-kit.css",
-    "./style.css": "./dist/mango-ui-kit.css"
+    "./styles": "./dist/index.css",
+    "./style.css": "./dist/index.css",
+    "./button": {
+      "types": "./dist/button/index.d.ts",
+      "import": "./dist/button/index.js",
+      "require": "./dist/button/index.cjs"
+    },
+    "./button/styles": "./dist/button/index.css",
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "import": "./dist/input/index.js",
+      "require": "./dist/input/index.cjs"
+    },
+    "./input/styles": "./dist/input/index.css",
+    "./modal": {
+      "types": "./dist/modal/index.d.ts",
+      "import": "./dist/modal/index.js",
+      "require": "./dist/modal/index.cjs"
+    },
+    "./modal/styles": "./dist/modal/index.css",
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "import": "./dist/toast/index.js",
+      "require": "./dist/toast/index.cjs"
+    },
+    "./toast/styles": "./dist/toast/index.css",
+    "./table": {
+      "types": "./dist/table/index.d.ts",
+      "import": "./dist/table/index.js",
+      "require": "./dist/table/index.cjs"
+    },
+    "./table/styles": "./dist/table/index.css",
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "import": "./dist/checkbox/index.js",
+      "require": "./dist/checkbox/index.cjs"
+    },
+    "./checkbox/styles": "./dist/checkbox/index.css",
+    "./radio": {
+      "types": "./dist/radio/index.d.ts",
+      "import": "./dist/radio/index.js",
+      "require": "./dist/radio/index.cjs"
+    },
+    "./radio/styles": "./dist/radio/index.css",
+    "./toggle": {
+      "types": "./dist/toggle/index.d.ts",
+      "import": "./dist/toggle/index.js",
+      "require": "./dist/toggle/index.cjs"
+    },
+    "./toggle/styles": "./dist/toggle/index.css",
+    "./theme-provider": {
+      "types": "./dist/theme-provider/index.d.ts",
+      "import": "./dist/theme-provider/index.js",
+      "require": "./dist/theme-provider/index.cjs"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "import": "./dist/tooltip/index.js",
+      "require": "./dist/tooltip/index.cjs"
+    },
+    "./badge": {
+      "types": "./dist/badge/index.d.ts",
+      "import": "./dist/badge/index.js",
+      "require": "./dist/badge/index.cjs"
+    },
+    "./avatar": {
+      "types": "./dist/avatar/index.d.ts",
+      "import": "./dist/avatar/index.js",
+      "require": "./dist/avatar/index.cjs"
+    },
+    "./card": {
+      "types": "./dist/card/index.d.ts",
+      "import": "./dist/card/index.js",
+      "require": "./dist/card/index.cjs"
+    },
+    "./layout": {
+      "types": "./dist/layout/index.d.ts",
+      "import": "./dist/layout/index.js",
+      "require": "./dist/layout/index.cjs"
+    },
+    "./layout/styles": "./dist/layout/index.css",
+    "./box": {
+      "types": "./dist/box/index.d.ts",
+      "import": "./dist/box/index.js",
+      "require": "./dist/box/index.cjs"
+    },
+    "./accordion": {
+      "types": "./dist/accordion/index.d.ts",
+      "import": "./dist/accordion/index.js",
+      "require": "./dist/accordion/index.cjs"
+    },
+    "./alert": {
+      "types": "./dist/alert/index.d.ts",
+      "import": "./dist/alert/index.js",
+      "require": "./dist/alert/index.cjs"
+    },
+    "./app-bar": {
+      "types": "./dist/app-bar/index.d.ts",
+      "import": "./dist/app-bar/index.js",
+      "require": "./dist/app-bar/index.cjs"
+    },
+    "./avatar-group": {
+      "types": "./dist/avatar-group/index.d.ts",
+      "import": "./dist/avatar-group/index.js",
+      "require": "./dist/avatar-group/index.cjs"
+    },
+    "./bottom-nav-bar": {
+      "types": "./dist/bottom-nav-bar/index.d.ts",
+      "import": "./dist/bottom-nav-bar/index.js",
+      "require": "./dist/bottom-nav-bar/index.cjs"
+    },
+    "./breadcrumbs": {
+      "types": "./dist/breadcrumbs/index.d.ts",
+      "import": "./dist/breadcrumbs/index.js",
+      "require": "./dist/breadcrumbs/index.cjs"
+    },
+    "./calendar-date-picker": {
+      "types": "./dist/calendar-date-picker/index.d.ts",
+      "import": "./dist/calendar-date-picker/index.js",
+      "require": "./dist/calendar-date-picker/index.cjs"
+    },
+    "./chip": {
+      "types": "./dist/chip/index.d.ts",
+      "import": "./dist/chip/index.js",
+      "require": "./dist/chip/index.cjs"
+    },
+    "./code-snippet": {
+      "types": "./dist/code-snippet/index.d.ts",
+      "import": "./dist/code-snippet/index.js",
+      "require": "./dist/code-snippet/index.cjs"
+    },
+    "./command-palette": {
+      "types": "./dist/command-palette/index.d.ts",
+      "import": "./dist/command-palette/index.js",
+      "require": "./dist/command-palette/index.cjs"
+    },
+    "./date-range-picker": {
+      "types": "./dist/date-range-picker/index.d.ts",
+      "import": "./dist/date-range-picker/index.js",
+      "require": "./dist/date-range-picker/index.cjs"
+    },
+    "./dialog": {
+      "types": "./dist/dialog/index.d.ts",
+      "import": "./dist/dialog/index.js",
+      "require": "./dist/dialog/index.cjs"
+    },
+    "./drawer": {
+      "types": "./dist/drawer/index.d.ts",
+      "import": "./dist/drawer/index.js",
+      "require": "./dist/drawer/index.cjs"
+    },
+    "./dropdown": {
+      "types": "./dist/dropdown/index.d.ts",
+      "import": "./dist/dropdown/index.js",
+      "require": "./dist/dropdown/index.cjs"
+    },
+    "./grid": {
+      "types": "./dist/grid/index.d.ts",
+      "import": "./dist/grid/index.js",
+      "require": "./dist/grid/index.cjs"
+    },
+    "./list": {
+      "types": "./dist/list/index.d.ts",
+      "import": "./dist/list/index.js",
+      "require": "./dist/list/index.cjs"
+    },
+    "./media-uploader": {
+      "types": "./dist/media-uploader/index.d.ts",
+      "import": "./dist/media-uploader/index.js",
+      "require": "./dist/media-uploader/index.cjs"
+    },
+    "./multi-select": {
+      "types": "./dist/multi-select/index.d.ts",
+      "import": "./dist/multi-select/index.js",
+      "require": "./dist/multi-select/index.cjs"
+    },
+    "./number-input": {
+      "types": "./dist/number-input/index.d.ts",
+      "import": "./dist/number-input/index.js",
+      "require": "./dist/number-input/index.cjs"
+    },
+    "./option-menu": {
+      "types": "./dist/option-menu/index.d.ts",
+      "import": "./dist/option-menu/index.js",
+      "require": "./dist/option-menu/index.cjs"
+    },
+    "./otp-input": {
+      "types": "./dist/otp-input/index.d.ts",
+      "import": "./dist/otp-input/index.js",
+      "require": "./dist/otp-input/index.cjs"
+    },
+    "./pagination": {
+      "types": "./dist/pagination/index.d.ts",
+      "import": "./dist/pagination/index.js",
+      "require": "./dist/pagination/index.cjs"
+    },
+    "./progress-bar": {
+      "types": "./dist/progress-bar/index.d.ts",
+      "import": "./dist/progress-bar/index.js",
+      "require": "./dist/progress-bar/index.cjs"
+    },
+    "./rating": {
+      "types": "./dist/rating/index.d.ts",
+      "import": "./dist/rating/index.js",
+      "require": "./dist/rating/index.cjs"
+    },
+    "./report-metrics-card": {
+      "types": "./dist/report-metrics-card/index.d.ts",
+      "import": "./dist/report-metrics-card/index.js",
+      "require": "./dist/report-metrics-card/index.cjs"
+    },
+    "./segmented-control": {
+      "types": "./dist/segmented-control/index.d.ts",
+      "import": "./dist/segmented-control/index.js",
+      "require": "./dist/segmented-control/index.cjs"
+    },
+    "./selection-toolbar": {
+      "types": "./dist/selection-toolbar/index.d.ts",
+      "import": "./dist/selection-toolbar/index.js",
+      "require": "./dist/selection-toolbar/index.cjs"
+    },
+    "./sidebar": {
+      "types": "./dist/sidebar/index.d.ts",
+      "import": "./dist/sidebar/index.js",
+      "require": "./dist/sidebar/index.cjs"
+    },
+    "./skeleton": {
+      "types": "./dist/skeleton/index.d.ts",
+      "import": "./dist/skeleton/index.js",
+      "require": "./dist/skeleton/index.cjs"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "import": "./dist/slider/index.js",
+      "require": "./dist/slider/index.cjs"
+    },
+    "./speed-dial": {
+      "types": "./dist/speed-dial/index.d.ts",
+      "import": "./dist/speed-dial/index.js",
+      "require": "./dist/speed-dial/index.cjs"
+    },
+    "./spinner": {
+      "types": "./dist/spinner/index.d.ts",
+      "import": "./dist/spinner/index.js",
+      "require": "./dist/spinner/index.cjs"
+    },
+    "./stat-card": {
+      "types": "./dist/stat-card/index.d.ts",
+      "import": "./dist/stat-card/index.js",
+      "require": "./dist/stat-card/index.cjs"
+    },
+    "./stepper": {
+      "types": "./dist/stepper/index.d.ts",
+      "import": "./dist/stepper/index.js",
+      "require": "./dist/stepper/index.cjs"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "import": "./dist/tabs/index.js",
+      "require": "./dist/tabs/index.cjs"
+    },
+    "./tags-input": {
+      "types": "./dist/tags-input/index.d.ts",
+      "import": "./dist/tags-input/index.js",
+      "require": "./dist/tags-input/index.cjs"
+    },
+    "./time-picker": {
+      "types": "./dist/time-picker/index.d.ts",
+      "import": "./dist/time-picker/index.js",
+      "require": "./dist/time-picker/index.cjs"
+    },
+    "./typography": {
+      "types": "./dist/typography/index.d.ts",
+      "import": "./dist/typography/index.js",
+      "require": "./dist/typography/index.cjs"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.js",
+      "require": "./dist/hooks/index.cjs"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.js",
+      "require": "./dist/utils/index.cjs"
+    },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme/index.js",
+      "require": "./dist/theme/index.cjs"
+    }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "sideEffects": [
     "*.css"
@@ -52,11 +346,21 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepublishOnly": "npm run build"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "prepublishOnly": "npm run test && npm run build",
+    "size": "vite build --report",
+    "generate:component": "node scripts/generate-component.mjs"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",
@@ -67,6 +371,7 @@
     "@storybook/react-vite": "^10.2.10",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -81,7 +386,6 @@
     "eslint-plugin-storybook": "10.2.10",
     "globals": "^16.5.0",
     "jsdom": "^28.1.0",
-    "lucide-react": "^0.575.0",
     "minimatch": "^9.0.5",
     "postcss": "^8.5.6",
     "react": "^19.2.0",
@@ -96,6 +400,7 @@
     "vitest": "^4.0.18"
   },
   "dependencies": {
+    "lucide-react": "^1.27.0",
     "recharts": "^3.7.0"
   }
 }

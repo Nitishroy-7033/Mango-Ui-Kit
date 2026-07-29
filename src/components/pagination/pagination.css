@@ -76,7 +76,7 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .btn-text {
@@ -209,8 +209,8 @@
    We only need to enforce the text and border colour for clarity. */
 
 [data-theme='dark'] .pagination-btn:not(.is-active) {
-    color: var(--textColor);
-    border-color: var(--borderColor);
+    color: var(--textColor, #383838);
+    border-color: var(--borderColor, #e2e8f0);
 }
 
 [data-theme='dark'] .pagination-btn:hover:not(:disabled):not(.is-active) {
@@ -233,8 +233,8 @@
 }
 
 [data-theme='dark'] .is-simple .pagination-list {
-    background: var(--secondaryColor);
-    border-color: var(--borderColor);
+    background: var(--secondaryColor, #f3f4f6);
+    border-color: var(--borderColor, #e2e8f0);
 }
 
 /* ── Responsive ────────────────────────────────────── */
@@ -248,4 +248,11 @@
         width: 36px;
         height: 36px;
     }
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .is-simple .pagination-item:last-child .pagination-btn {
+    border-left: none;
+}
+[dir="rtl"] .is-simple .pagination-btn {
+    border-left: 1px solid var(--pagination-border);
 }

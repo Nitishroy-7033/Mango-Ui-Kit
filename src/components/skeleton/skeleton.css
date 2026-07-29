@@ -72,3 +72,8 @@
 .mango-skeleton.is-rounded {
     border-radius: 12px;
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-skeleton-shimmer {
+    right: 0;
+    left: 0;
+}

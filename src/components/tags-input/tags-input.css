@@ -17,7 +17,7 @@
 .mango-tags-input-label {
     font-size: 14px;
     font-weight: 600;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     margin-bottom: 2px;
 }
 
@@ -119,13 +119,13 @@
     border-radius: 12px;
     font-size: 15px;
     font-weight: 500;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .mango-tags-input-clear:hover:not(:disabled) {
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
     border-color: var(--tags-input-primary);
 }
 

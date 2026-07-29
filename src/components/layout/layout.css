@@ -407,3 +407,7 @@
         max-width: 100%;
     }
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-row {
+    flex-direction: row-reverse;
+}

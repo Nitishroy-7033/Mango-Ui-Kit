@@ -1,13 +1,52 @@
-import React, { useRef, useState } from 'react';
-import {
-    Upload, Trash2, File as FileIcon,
-    CheckCircle2, XCircle, CloudUpload, FileCode
-} from 'lucide-react';
+import React, { useRef, useState, forwardRef } from 'react';
 import { cn } from '../../utils/cn';
 import { Button } from '../button';
 import { ProgressBar } from '../progress-bar';
+import { generateId } from '../../utils/generate-id';
 import type { MediaUploaderProps, UploadedFile } from './media-uploader.types';
 import './media-uploader.css';
+
+const UploadIcon = ({ size }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 18} height={size ?? 18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
+    </svg>
+);
+
+const TrashIcon = ({ size }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 16} height={size ?? 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    </svg>
+);
+
+const FileIcon = ({ size, strokeWidth, color }: { size?: number; strokeWidth?: number; color?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 24} height={size ?? 24} viewBox="0 0 24 24" fill="none" stroke={color ?? "currentColor"} strokeWidth={strokeWidth ?? 2} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" />
+    </svg>
+);
+
+const CheckCircleIcon = ({ size }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 14} height={size ?? 14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+);
+
+const XCircleIcon = ({ size }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 16} height={size ?? 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" />
+    </svg>
+);
+
+const CloudUploadIcon = ({ size, className }: { size?: number; className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 24} height={size ?? 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M14 20H18a4 4 0 0 0 0-8h-.3A7.5 7.5 0 0 0 9 6.6" /><path d="M4 16.5A4.5 4.5 0 0 1 7.5 12c.8 0 1.5.2 2.2.6" /><polyline points="4 16.5 7.5 13 11 16.5" /><polyline points="8 10 12 14 8 18" />
+    </svg>
+);
+
+const FileCodeIcon = ({ size }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 10} height={size ?? 10} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="10" y2="13" /><line x1="16" y1="17" x2="10" y2="17" />
+    </svg>
+);
 
 const PremiumFileIcon: React.FC<{ file: UploadedFile; size?: 'sm' | 'md' }> = ({ file, size = 'md' }) => {
     const ext = file.name.split('.').pop()?.toUpperCase() || 'FILE';
@@ -26,13 +65,13 @@ const PremiumFileIcon: React.FC<{ file: UploadedFile; size?: 'sm' | 'md' }> = ({
                 <FileIcon size={size === 'sm' ? 24 : 32} strokeWidth={1} color="var(--borderColor, #d1d5db)" />
             </div>
             <div className="file-badge" style={{ backgroundColor: getBadgeColor() }}>
-                {ext === 'TS' ? <FileCode size={size === 'sm' ? 8 : 10} /> : ext}
+                {ext === 'TS' ? <FileCodeIcon size={size === 'sm' ? 8 : 10} /> : ext}
             </div>
         </div>
     );
 };
 
-export const MediaUploader: React.FC<MediaUploaderProps> = ({
+export const MediaUploader = forwardRef<HTMLDivElement, MediaUploaderProps>(({
     multiple = true,
     maxSize = 10,
     accept = '*',
@@ -50,7 +89,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
     className = '',
     showPreviews = true,
     style,
-}) => {
+}, ref) => {
     const [internalFiles, setInternalFiles] = useState<UploadedFile[]>([]);
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -66,7 +105,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
 
     const processFiles = (newFiles: File[]) => {
         const processed: UploadedFile[] = newFiles.map(file => {
-            const id = Math.random().toString(36).substr(2, 9);
+            const id = generateId('media-uploader');
             const isTooLarge = file.size > maxSize * 1024 * 1024;
 
             const uploadedFile: UploadedFile = {
@@ -173,7 +212,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
                     >
                         <div className="dropzone-inner">
                             <div className="dropzone-icon-box">
-                                <CloudUpload size={24} className="upload-icon" />
+                                <CloudUploadIcon size={24} className="upload-icon" />
                             </div>
                             <p className="dropzone-text">
                                 <span className="highlight">Click to upload</span> or drag and drop
@@ -185,7 +224,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
             // ... (other cases simplified for now as user only showed dropzone/list)
             default:
                 return (
-                    <Button variant="primary" onClick={handleClick} disabled={disabled} icon={<Upload size={18} />}>
+                    <Button variant="primary" onClick={handleClick} disabled={disabled} icon={<UploadIcon size={18} />}>
                         {label}
                     </Button>
                 );
@@ -193,7 +232,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
     };
 
     return (
-        <div className={cn('mango-media-uploader', className)} style={style}>
+        <div ref={ref} className={cn('mango-media-uploader', className)} style={style}>
             <input
                 type="file"
                 ref={fileInputRef}
@@ -242,7 +281,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
                                     className="compact-remove"
                                     onClick={(e) => { e.stopPropagation(); removeFile(file.id); }}
                                 >
-                                    <XCircle size={16} />
+                                    <XCircleIcon size={16} />
                                 </button>
                             </div>
                         ) : (
@@ -264,7 +303,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
                                             className="item-remove-mini"
                                             onClick={() => removeFile(file.id)}
                                         >
-                                            <Trash2 size={16} />
+                                            <TrashIcon size={16} />
                                         </button>
                                     </div>
                                     <div className="item-status-row">
@@ -272,13 +311,13 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
                                         <span className="status-separator">|</span>
                                         <div className={cn('status-indicator', `is-${file.status}`)}>
                                             {file.status === 'uploading' && (
-                                                <><CloudUpload size={14} className="spin-slow" /> Uploading...</>
+                                                <><CloudUploadIcon size={14} className="spin-slow" /> Uploading...</>
                                             )}
                                             {file.status === 'success' && (
-                                                <><CheckCircle2 size={14} /> Complete</>
+                                                <><CheckCircleIcon size={14} /> Complete</>
                                             )}
                                             {file.status === 'error' && (
-                                                <><XCircle size={14} /> Failed</>
+                                                <><XCircleIcon size={14} /> Failed</>
                                             )}
                                         </div>
                                     </div>
@@ -310,6 +349,6 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
             {description && <div className="mango-uploader-description">{description}</div>}
         </div>
     );
-};
+});
 
 MediaUploader.displayName = 'MediaUploader';

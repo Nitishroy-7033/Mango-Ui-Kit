@@ -182,5 +182,29 @@
     justify-content: space-between;
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-slider-thumb {
+    transform: translateX(50%);
+}
+[dir="rtl"] .mango-slider-thumb:active {
+    transform: translateX(50%) scale(0.95);
+}
+[dir="rtl"] .mango-slider-tooltip {
+    right: 50%;
+    transform: translateX(50%) translateY(10px);
+}
+[dir="rtl"] .mango-slider-thumb:hover .mango-slider-tooltip, .mango-slider-thumb:active .mango-slider-tooltip {
+    transform: translateX(50%) translateY(0);
+}
+[dir="rtl"] .mango-slider-thumb:hover {
+    transform: translateX(50%) scale(1.1);
+}
+[dir="rtl"] .mango-slider-tooltip::after {
+    right: 50%;
+    transform: translateX(50%);
+}
+[dir="rtl"] .mango-slider-mark {
+    transform: translateX(50%);
 }

@@ -114,7 +114,7 @@
 }
 
 .mango-input-variant-filled .mango-input-wrapper:hover {
-    background: var(--borderColor);
+    background: var(--borderColor, #e2e8f0);
 }
 
 .mango-input-variant-borderless .mango-input-wrapper {
@@ -139,16 +139,16 @@
 
 .mango-input-container.is-focused {
     box-shadow: 0 0 0 3px var(--input-focus-ring);
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
 }
 
 .mango-input-container.is-focused .mango-input-wrapper,
 .mango-input-container.is-focused .mango-input-addon {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
 }
 
 .mango-input-container.is-focused .mango-input-wrapper {
-    background: var(--primaryContainercolor);
+    background: var(--primaryContainercolor, #ffffff);
     z-index: 2;
 }
 
@@ -248,14 +248,14 @@
 }
 
 .mango-input-container.is-focused .mango-input-icon {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 /* ── Action Button ────────────────────────────────────── */
 
 .mango-input-action-btn {
     border: none;
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: white;
     font-weight: 700;
     padding: 0 24px;
@@ -277,7 +277,7 @@
 }
 
 .mango-input-action-btn-secondary {
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
     color: var(--input-text);
     border-left: 1.5px solid var(--input-border);
 }
@@ -322,12 +322,12 @@
 
 .mango-country-selector:hover {
     background: rgba(0, 0, 0, 0.05);
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 .mango-country-selector.active {
-    background: var(--primaryContainercolor);
-    color: var(--primaryColor);
+    background: var(--primaryContainercolor, #ffffff);
+    color: var(--primaryColor, #fa8029);
 }
 
 .mango-country-flag {
@@ -357,7 +357,7 @@
     top: calc(100% + 8px);
     left: 0;
     background: white;
-    border: 1px solid var(--borderColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
     z-index: 100;
@@ -371,8 +371,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    border-bottom: 1px solid var(--borderColor);
-    background: var(--secondaryColor);
+    border-bottom: 1px solid var(--borderColor, #e2e8f0);
+    background: var(--secondaryColor, #f3f4f6);
 }
 
 .mango-country-search input {
@@ -381,7 +381,7 @@
     outline: none;
     font-size: 0.85rem;
     width: 100%;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
 }
 
 .mango-country-list {
@@ -401,12 +401,12 @@
 }
 
 .mango-country-item:hover {
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
 }
 
 .mango-country-item.selected {
-    background: var(--primaryContainercolor);
-    color: var(--primaryColor);
+    background: var(--primaryContainercolor, #ffffff);
+    color: var(--primaryColor, #fa8029);
 }
 
 .item-flag {
@@ -430,14 +430,14 @@
 }
 
 .item-check {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 .mango-country-no-results {
     padding: 20px;
     text-align: center;
     font-size: 0.85rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     opacity: 0.7;
 }
 
@@ -451,7 +451,7 @@
 }
 
 .mango-country-list::-webkit-scrollbar-thumb {
-    background: var(--borderColor);
+    background: var(--borderColor, #e2e8f0);
     border-radius: 10px;
 }
 
@@ -509,7 +509,7 @@
     width: 16px;
     height: 16px;
     border: 2px solid rgba(0, 0, 0, 0.1);
-    border-top-color: var(--primaryColor);
+    border-top-color: var(--primaryColor, #fa8029);
     border-radius: 50%;
     animation: mango-spin 0.8s linear infinite;
     margin-right: 12px;
@@ -529,5 +529,64 @@
 }
 
 .mango-input-container.is-disabled .mango-input-wrapper {
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-input-count-outside {
+    text-align: left;
+    margin-left: 4px;
+}
+[dir="rtl"] .mango-input-count-inside {
+    left: 12px;
+}
+[dir="rtl"] .mango-input-label {
+    margin-right: 2px;
+}
+[dir="rtl"] .mango-input-container>*:not(:last-child) {
+    border-left: none !important;
+}
+[dir="rtl"] .mango-input-container>*:last-child {
+    border-top-left-radius: inherit !important;
+    border-bottom-left-radius: inherit !important;
+}
+[dir="rtl"] .mango-input-loading-spinner {
+    margin-left: 12px;
+}
+[dir="rtl"] .mango-country-selector {
+    border-left: 1.5px solid var(--input-border);
+}
+[dir="rtl"] .mango-input-suffix {
+    margin-left: 12px;
+}
+[dir="rtl"] .mango-input-action-btn-secondary {
+    border-right: 1.5px solid var(--input-border);
+}
+[dir="rtl"] .mango-input-password-toggle {
+    margin-left: 8px;
+}
+[dir="rtl"] .mango-input-helper, .mango-input-error {
+    margin-right: 4px;
+}
+[dir="rtl"] Case: Secondary action button DOES have a border, so it joins perfectly with the wrapper. */ .mango-input-action-btn-secondary {
+    border-right: 1.5px solid var(--input-border) !important;
+}
+[dir="rtl"] .mango-input-prefix {
+    margin-right: 12px;
+}
+[dir="rtl"] .mango-input-variant-underlined .mango-input-wrapper {
+    border-right: none;
+    border-left: none;
+    padding-right: 0;
+    padding-left: 0;
+}
+[dir="rtl"] .mango-country-dropdown {
+    right: 0;
+}
+[dir="rtl"] .mango-input-variant-borderless .mango-input-wrapper {
+    padding-right: 0;
+    padding-left: 0;
+}
+[dir="rtl"] .mango-input-container>*:first-child {
+    border-top-right-radius: inherit !important;
+    border-bottom-right-radius: inherit !important;
 }

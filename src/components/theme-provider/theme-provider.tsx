@@ -1,68 +1,49 @@
-import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
+import { createTheme, type MangoTheme, type ComponentOverrides } from '../../utils/create-theme';
 
 export type ThemeMode = 'light' | 'dark';
 
-// ─── Built-in Color Tokens ────────────────────────────────────────────────────
+// ─── Built-in Color Tokens ────────────────────────────────────
 
 export interface ThemeColors {
-  // Core
   background: string;
   primaryColor: string;
   lightPrimaryColor: string;
   secondaryColor: string;
   primaryContainercolor: string;
   secondaryContainercolor: string;
-
-  // Text
   textColor: string;
   textSecondaryColor: string;
   labelColor: string;
   labelSecondaryColor: string;
-
-  // UI
   borderColor: string;
   accent: string;
   accentForeground: string;
-
-  // Status
   successColor: string;
   warningColor: string;
   errorColor: string;
   infoColor: string;
-
-  // Effects
   shadowColor: string;
   shadowColorOpacity: string;
 }
 
-// ─── Built-in Size / Spacing Tokens ──────────────────────────────────────────
-
 export interface ThemeSizes {
-  /** Base border radius */
   radiusSm?: string;
   radiusMd?: string;
   radiusLg?: string;
   radiusFull?: string;
-  /** Base font sizes */
   fontSizeXs?: string;
   fontSizeSm?: string;
   fontSizeMd?: string;
   fontSizeLg?: string;
   fontSizeXl?: string;
-  /** Base spacing */
   spacingSm?: string;
   spacingMd?: string;
   spacingLg?: string;
   spacingXl?: string;
 }
 
-// ─── Extended / Custom Tokens ─────────────────────────────────────────────────
-// Users can pass any string key with a string value.
-// They will be auto-injected as CSS variables with the prefix '--custom-'
-
 export type CustomTokens = Record<string, string>;
-
-// ─── Full Theme Config ────────────────────────────────────────────────────────
 
 export interface ThemeModeTokens {
   colors?: Partial<ThemeColors>;
@@ -75,7 +56,7 @@ export interface ThemeConfig {
   dark: ThemeModeTokens;
 }
 
-// ─── Defaults ─────────────────────────────────────────────────────────────────
+// ─── Defaults ─────────────────────────────────────────────────
 
 export const defaultColors: ThemeColors = {
   background: '#ffffff',
@@ -137,84 +118,31 @@ export const defaultSizes: ThemeSizes = {
   spacingXl: '40px',
 };
 
-// ─── Built-in variable names map ──────────────────────────────────────────────
-
-const COLOR_VAR_MAP: Record<keyof ThemeColors, string> = {
-  background: '--background',
-  primaryColor: '--primaryColor',
-  lightPrimaryColor: '--lightPrimaryColor',
-  secondaryColor: '--secondaryColor',
-  primaryContainercolor: '--primaryContainercolor',
-  secondaryContainercolor: '--secondaryContainercolor',
-  textColor: '--textColor',
-  textSecondaryColor: '--textSecondaryColor',
-  labelColor: '--labelColor',
-  labelSecondaryColor: '--labelSecondaryColor',
-  borderColor: '--borderColor',
-  accent: '--accent',
-  accentForeground: '--accent-foreground',
-  successColor: '--successColor',
-  warningColor: '--warningColor',
-  errorColor: '--errorColor',
-  infoColor: '--infoColor',
-  shadowColor: '--shadowColorRGB',
-  shadowColorOpacity: '--shadowOpacity',
-};
-
-const SIZE_VAR_MAP: Record<keyof ThemeSizes, string> = {
-  radiusSm: '--radius-sm',
-  radiusMd: '--radius-md',
-  radiusLg: '--radius-lg',
-  radiusFull: '--radius-full',
-  fontSizeXs: '--font-size-xs',
-  fontSizeSm: '--font-size-sm',
-  fontSizeMd: '--font-size-md',
-  fontSizeLg: '--font-size-lg',
-  fontSizeXl: '--font-size-xl',
-  spacingSm: '--spacing-sm',
-  spacingMd: '--spacing-md',
-  spacingLg: '--spacing-lg',
-  spacingXl: '--spacing-xl',
-};
-
-// ─── Context ──────────────────────────────────────────────────────────────────
+// ─── Context ──────────────────────────────────────────────────
 
 export interface ThemeContextValue {
   themeMode: ThemeMode;
   setThemeMode: (theme: ThemeMode) => void;
   toggleTheme: () => void;
-  /** All resolved color tokens for the active mode */
   colors: ThemeColors;
-  /** All resolved size tokens for the active mode */
   sizes: ThemeSizes;
-  /** All resolved custom tokens for the active mode (user-defined) */
   custom: CustomTokens;
-  /**
-   * `tokens` merges colors + sizes + custom into a flat object for
-   * convenient access: `tokens.primaryColor`, `tokens.heroBackground`, etc.
-   */
   tokens: ThemeColors & ThemeSizes & CustomTokens;
+  theme: MangoTheme;
+  components: ComponentOverrides | undefined;
+  getComponentProps: <T extends Record<string, unknown>>(componentName: string, props: T) => T;
+  getComponentStyle: (componentName: string, key: string) => Record<string, string | number> | undefined;
 }
 
-const ThemeContext = createContext<ThemeContextValue>({
-  themeMode: 'light',
-  setThemeMode: () => { },
-  toggleTheme: () => { },
-  colors: defaultColors,
-  sizes: defaultSizes,
-  custom: {},
-  tokens: { ...defaultColors, ...defaultSizes },
-});
+const ThemeContext = createContext<ThemeContextValue>({} as ThemeContextValue);
 
-// ─── Provider ─────────────────────────────────────────────────────────────────
+// ─── Provider ─────────────────────────────────────────────────
 
 export interface ThemeProviderProps {
-  /** Initial theme mode to apply before localStorage is read */
   defaultThemeMode?: ThemeMode;
-  /** localStorage key for persisting user's theme choice */
   storageKey?: string;
-  /** Your theme overrides — can include colors, sizes, and custom tokens */
-  theme?: Partial<ThemeConfig>;
+  theme?: Partial<MangoTheme>;
+  followSystemTheme?: boolean;
   children: React.ReactNode;
 }
 
@@ -222,44 +150,71 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   defaultThemeMode = 'light',
   storageKey = 'mango-ui-theme',
   theme: userTheme,
+  followSystemTheme = false,
   children,
 }) => {
-  const [themeMode, setThemeModeState] = useState<ThemeMode>(() => {
+  const resolvedTheme = useMemo(() => createTheme(userTheme), [userTheme]);
+
+  const getInitialMode = (): ThemeMode => {
+    if (followSystemTheme && typeof window !== 'undefined') {
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      if (mq.matches) return 'dark';
+    }
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem(storageKey) as ThemeMode | null;
       if (stored === 'light' || stored === 'dark') return stored;
     }
     return defaultThemeMode;
-  });
+  };
 
-  // Resolve full tokens for each mode
+  const [themeMode, setThemeModeState] = useState<ThemeMode>(getInitialMode);
+
+  const setThemeMode = useCallback((mode: ThemeMode) => {
+    setThemeModeState(mode);
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setThemeModeState(prev => prev === 'light' ? 'dark' : 'light');
+  }, []);
+
+  // Follow system preference
+  useEffect(() => {
+    if (!followSystemTheme) return;
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem(storageKey)) {
+        setThemeModeState(e.matches ? 'dark' : 'light');
+      }
+    };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, [followSystemTheme, storageKey]);
+
+  // Resolve tokens
   const resolved = useMemo(() => {
     const resolve = (mode: 'light' | 'dark') => {
       const baseColors = mode === 'light' ? defaultColors : defaultDarkColors;
       const colors: ThemeColors = {
         ...baseColors,
-        ...userTheme?.[mode]?.colors,
+        ...resolvedTheme[mode]?.colors,
       };
       const sizes: ThemeSizes = {
         ...defaultSizes,
-        ...userTheme?.[mode]?.sizes,
+        ...resolvedTheme[mode]?.sizes,
       };
       const custom: CustomTokens = {
-        ...userTheme?.light?.custom,  // light custom is the base
-        ...userTheme?.[mode]?.custom, // dark custom overrides
+        ...resolvedTheme.light?.custom,
+        ...resolvedTheme[mode]?.custom,
       };
       return { colors, sizes, custom };
     };
-    return {
-      light: resolve('light'),
-      dark: resolve('dark'),
-    };
-  }, [userTheme]);
+    return { light: resolve('light'), dark: resolve('dark') };
+  }, [resolvedTheme]);
 
   const { colors, sizes, custom } = themeMode === 'light' ? resolved.light : resolved.dark;
-
   const tokens = { ...colors, ...sizes, ...custom } as ThemeColors & ThemeSizes & CustomTokens;
 
+  // Inject CSS variables
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute('data-theme', themeMode);
@@ -267,36 +222,147 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
     const { colors: c, sizes: s, custom: cu } = themeMode === 'light' ? resolved.light : resolved.dark;
 
-    // Inject built-in color vars
+    const COLOR_VAR_MAP: Record<keyof ThemeColors, string> = {
+      background: '--background',
+      primaryColor: '--primaryColor',
+      lightPrimaryColor: '--lightPrimaryColor',
+      secondaryColor: '--secondaryColor',
+      primaryContainercolor: '--primaryContainercolor',
+      secondaryContainercolor: '--secondaryContainercolor',
+      textColor: '--textColor',
+      textSecondaryColor: '--textSecondaryColor',
+      labelColor: '--labelColor',
+      labelSecondaryColor: '--labelSecondaryColor',
+      borderColor: '--borderColor',
+      accent: '--accent',
+      accentForeground: '--accent-foreground',
+      successColor: '--successColor',
+      warningColor: '--warningColor',
+      errorColor: '--errorColor',
+      infoColor: '--infoColor',
+      shadowColor: '--shadowColorRGB',
+      shadowColorOpacity: '--shadowOpacity',
+    };
+
+    const SIZE_VAR_MAP: Record<keyof ThemeSizes, string> = {
+      radiusSm: '--radius-sm',
+      radiusMd: '--radius-md',
+      radiusLg: '--radius-lg',
+      radiusFull: '--radius-full',
+      fontSizeXs: '--btn-font-size-xs',
+      fontSizeSm: '--btn-font-size-sm',
+      fontSizeMd: '--btn-font-size-md',
+      fontSizeLg: '--btn-font-size-lg',
+      fontSizeXl: '--btn-font-size-xl',
+      spacingSm: '--spacing-sm',
+      spacingMd: '--spacing-md',
+      spacingLg: '--spacing-lg',
+      spacingXl: '--spacing-xl',
+    };
+
     Object.entries(COLOR_VAR_MAP).forEach(([key, varName]) => {
       const val = c[key as keyof ThemeColors];
       if (val !== undefined) root.style.setProperty(varName, val);
     });
 
-    // Inject built-in size vars
     Object.entries(SIZE_VAR_MAP).forEach(([key, varName]) => {
       const val = s[key as keyof ThemeSizes];
       if (val !== undefined) root.style.setProperty(varName, val);
     });
 
-    // Inject custom tokens as CSS variables with '--custom-' prefix
     Object.entries(cu).forEach(([key, val]) => {
-      // Convert camelCase key to kebab-case: heroBackground → --custom-hero-background
       const kebab = key.replace(/([A-Z])/g, '-$1').toLowerCase();
       root.style.setProperty(`--custom-${kebab}`, val);
     });
-  }, [themeMode, storageKey, resolved]);
 
-  const setThemeMode = (mode: ThemeMode) => setThemeModeState(mode);
-  const toggleTheme = () => setThemeModeState(prev => prev === 'light' ? 'dark' : 'light');
+    // Inject typography CSS variables
+    if (resolvedTheme.typography) {
+      const typ = resolvedTheme.typography;
+      if (typ.fontFamily) {
+        Object.entries(typ.fontFamily).forEach(([key, val]) => {
+          root.style.setProperty(`--font-${key}`, val);
+        });
+      }
+      if (typ.fontSize) {
+        Object.entries(typ.fontSize).forEach(([key, val]) => {
+          root.style.setProperty(`--font-size-${key}`, val);
+        });
+      }
+      if (typ.fontWeight) {
+        Object.entries(typ.fontWeight).forEach(([key, val]) => {
+          root.style.setProperty(`--font-weight-${key}`, val);
+        });
+      }
+      if (typ.lineHeight) {
+        Object.entries(typ.lineHeight).forEach(([key, val]) => {
+          root.style.setProperty(`--line-height-${key}`, val);
+        });
+      }
+      if (typ.letterSpacing) {
+        Object.entries(typ.letterSpacing).forEach(([key, val]) => {
+          root.style.setProperty(`--letter-spacing-${key}`, val);
+        });
+      }
+    }
+
+    // Inject component overrides
+    if (resolvedTheme.components) {
+      Object.entries(resolvedTheme.components).forEach(([compName, override]) => {
+        if (override.style) {
+          Object.entries(override.style).forEach(([cssProp, val]) => {
+            const varName = `--${compName}-${cssProp.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+            root.style.setProperty(varName, String(val));
+          });
+        }
+        if (override.variants) {
+          Object.entries(override.variants).forEach(([variant, styles]) => {
+            Object.entries(styles).forEach(([cssProp, val]) => {
+              const varName = `--${compName}-${variant}-${cssProp.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+              root.style.setProperty(varName, String(val));
+            });
+          });
+        }
+        if (override.sizes) {
+          Object.entries(override.sizes).forEach(([size, styles]) => {
+            Object.entries(styles).forEach(([cssProp, val]) => {
+              const varName = `--${compName}-${size}-${cssProp.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+              root.style.setProperty(varName, String(val));
+            });
+          });
+        }
+      });
+    }
+  }, [themeMode, storageKey, resolved, resolvedTheme]);
+
+  // Component prop merging helper
+  const getComponentProps = useCallback(<T extends Record<string, unknown>>(componentName: string, props: T): T => {
+    const defaults = resolvedTheme.components?.[componentName]?.defaultProps as Partial<T> | undefined;
+    if (!defaults) return props;
+    return { ...defaults, ...props } as T;
+  }, [resolvedTheme]);
+
+  const getComponentStyle = useCallback((componentName: string): Record<string, string | number> | undefined => {
+    return resolvedTheme.components?.[componentName]?.style;
+  }, [resolvedTheme]);
 
   return (
-    <ThemeContext.Provider value={{ themeMode, setThemeMode, toggleTheme, colors, sizes, custom, tokens }}>
+    <ThemeContext.Provider value={{
+      themeMode, setThemeMode, toggleTheme, colors, sizes, custom, tokens,
+      theme: resolvedTheme,
+      components: resolvedTheme.components,
+      getComponentProps, getComponentStyle,
+    }}>
       {children}
     </ThemeContext.Provider>
   );
 };
 
-// ─── Hook ─────────────────────────────────────────────────────────────────────
+// ─── Hook ─────────────────────────────────────────────────────
 
-export const useTheme = (): ThemeContextValue => useContext(ThemeContext);
+export const useTheme = (): ThemeContextValue => {
+  const ctx = useContext(ThemeContext);
+  if (!ctx.theme) {
+    throw new Error('useTheme must be used within a <ThemeProvider>');
+  }
+  return ctx;
+};

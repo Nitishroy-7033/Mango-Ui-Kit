@@ -250,3 +250,13 @@
 .snippet-body::-webkit-scrollbar-thumb:hover {
     background: var(--snippet-line-number);
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .edit-badge {
+    margin-right: 8px;
+}
+[dir="rtl"] .code-textarea {
+    right: 0;
+}
+[dir="rtl"] .line-numbers {
+    border-left: 1px solid var(--snippet-border);
+}

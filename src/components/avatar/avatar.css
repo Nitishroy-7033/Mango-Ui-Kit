@@ -81,12 +81,12 @@
 
 /* ── Variants ───────────────────────────────────────── */
 .avatar-variant-bordered {
-    border: 2px solid var(--borderColor);
+    border: 2px solid var(--borderColor, #e2e8f0);
 }
 
 .avatar-variant-ghost {
     background-color: transparent;
-    border: 2px dashed var(--borderColor);
+    border: 2px dashed var(--borderColor, #e2e8f0);
 }
 
 /* ── Status ─────────────────────────────────────────── */
@@ -191,4 +191,17 @@
 .avatar-group-item:hover {
     transform: translateY(-4px);
     z-index: 20 !important;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .status-top-right {
+    left: 0;
+}
+[dir="rtl"] .status-bottom-right {
+    left: 0;
+}
+[dir="rtl"] .status-bottom-left {
+    right: 0;
+}
+[dir="rtl"] .status-top-left {
+    right: 0;
 }

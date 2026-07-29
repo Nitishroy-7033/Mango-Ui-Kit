@@ -71,7 +71,7 @@
 }
 
 .mango-segmented-item:hover:not(.is-active):not(.is-disabled) {
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     background-color: rgba(0, 0, 0, 0.03);
 }
 
@@ -124,3 +124,7 @@
 
 /* ── Specific Dark Mode Adjustments if needed ── */
 /* (Assuming consumer will handle theme via CSS variables) */
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-segmented-indicator {
+    right: 0;
+}

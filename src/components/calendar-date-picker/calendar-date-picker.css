@@ -8,7 +8,7 @@
 .picker-label {
     display: block;
     font-weight: 600;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     margin-bottom: 6px;
 }
 
@@ -27,7 +27,7 @@
 .picker-helper {
     margin-top: 5px;
     font-size: 0.8rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .picker-error {
@@ -68,37 +68,37 @@
 
 /* variants */
 .cdp-trigger-default {
-    background: var(--secondaryColor);
-    border: 1px solid var(--borderColor);
-    color: var(--textColor);
+    background: var(--secondaryColor, #f3f4f6);
+    border: 1px solid var(--borderColor, #e2e8f0);
+    color: var(--textColor, #383838);
 }
 
 .cdp-trigger-filled {
-    background: var(--primaryColor);
-    border: 1px solid var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
+    border: 1px solid var(--primaryColor, #fa8029);
     color: #fff;
 }
 
 .cdp-trigger-outline {
     background: transparent;
-    border: 1.5px solid var(--borderColor);
-    color: var(--textColor);
+    border: 1.5px solid var(--borderColor, #e2e8f0);
+    color: var(--textColor, #383838);
 }
 
 .cdp-trigger-ghost {
     background: transparent;
     border: 1px solid transparent;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
 }
 
 .cdp-trigger-ghost:hover {
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
 }
 
 /* states */
 .cdp-trigger:hover:not(.is-disabled) {
-    border-color: var(--primaryColor);
-    background: var(--primaryContainercolor);
+    border-color: var(--primaryColor, #fa8029);
+    background: var(--primaryContainercolor, #ffffff);
 }
 
 .cdp-trigger-filled:hover:not(.is-disabled) {
@@ -106,7 +106,7 @@
 }
 
 .cdp-trigger.active {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
     box-shadow: 0 0 0 3px rgba(250, 128, 41, 0.15);
 }
 
@@ -122,13 +122,13 @@
 }
 
 .cdp-trigger-icon {
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     flex-shrink: 0;
     transition: color 0.2s;
 }
 
 .cdp-trigger:hover .cdp-trigger-icon {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 .cdp-trigger-text {
@@ -140,7 +140,7 @@
 }
 
 .cdp-trigger-placeholder {
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-weight: 400;
 }
 
@@ -149,7 +149,7 @@
     align-items: center;
     padding: 2px;
     border-radius: 4px;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     transition: all 0.2s;
     flex-shrink: 0;
 }
@@ -165,7 +165,7 @@
     top: calc(100% + 8px);
     left: 0;
     width: 320px;
-    background: var(--primaryContainercolor);
+    background: var(--primaryContainercolor, #ffffff);
     overflow: hidden;
     z-index: 10000;
     box-shadow:
@@ -185,7 +185,7 @@
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 /* ── Month Navigation ─────────────────────────────────── */
@@ -202,25 +202,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--secondaryColor);
-    border: 1px solid var(--borderColor);
+    background: var(--secondaryColor, #f3f4f6);
+    border: 1px solid var(--borderColor, #e2e8f0);
     border-radius: 10px;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     cursor: pointer;
     transition: all 0.2s;
     flex-shrink: 0;
 }
 
 .cdp-nav-btn:hover {
-    background: var(--primaryContainercolor);
-    border-color: var(--primaryColor);
-    color: var(--primaryColor);
+    background: var(--primaryContainercolor, #ffffff);
+    border-color: var(--primaryColor, #fa8029);
+    color: var(--primaryColor, #fa8029);
 }
 
 .cdp-month-label {
     font-size: 1rem;
     font-weight: 800;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     letter-spacing: -0.01em;
 }
 
@@ -236,7 +236,7 @@
     text-align: center;
     font-size: 0.72rem;
     font-weight: 800;
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     letter-spacing: 0.04em;
     padding: 4px 0;
 }
@@ -260,7 +260,7 @@
     justify-content: center;
     font-size: 0.92rem;
     font-weight: 500;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     background: transparent;
     border: none;
     /* border-radius is set inline via dayBorderRadius prop */
@@ -270,25 +270,25 @@
 
 .cdp-day:hover:not(:disabled):not(.selected) {
     background: rgba(250, 128, 41, 0.12);
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 .cdp-day.today {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     font-weight: 800;
     background: rgba(250, 128, 41, 0.1);
-    border: 1.5px solid var(--primaryColor);
+    border: 1.5px solid var(--primaryColor, #fa8029);
 }
 
 .cdp-day.selected {
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: #fff;
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(250, 128, 41, 0.4);
 }
 
 .cdp-day.today.selected {
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: #fff;
     border: none;
     box-shadow: 0 4px 12px rgba(250, 128, 41, 0.4);
@@ -306,7 +306,7 @@
     align-items: center;
     gap: 8px;
     padding: 12px 16px 14px;
-    border-top: 1px solid var(--borderColor);
+    border-top: 1px solid var(--borderColor, #e2e8f0);
     flex-wrap: wrap;
 }
 
@@ -318,7 +318,7 @@
     border-radius: 20px;
     border: none;
     background: rgba(250, 128, 41, 0.1);
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
@@ -327,7 +327,7 @@
 }
 
 .cdp-quick-btn:hover {
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: #fff;
 }
 
@@ -339,9 +339,9 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid var(--borderColor);
-    background: var(--secondaryColor);
-    color: var(--labelSecondaryColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
+    background: var(--secondaryColor, #f3f4f6);
+    color: var(--labelSecondaryColor, #94a3b8);
     cursor: pointer;
     transition: all 0.2s;
     flex-shrink: 0;
@@ -368,4 +368,11 @@
 
 .animate-scale-in {
     animation: scaleIn 0.18s cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .cdp-card {
+    right: 0;
+}
+[dir="rtl"] .cdp-quick-close {
+    margin-right: auto;
 }

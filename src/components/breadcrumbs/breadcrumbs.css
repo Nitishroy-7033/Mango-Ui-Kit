@@ -62,7 +62,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-user-select: none;
     user-select: none;
@@ -74,7 +74,7 @@
 }
 
 .breadcrumb-link:hover .breadcrumb-item {
-    color: var(--hover-color, var(--primaryColor));
+    color: var(--hover-color, var(--primaryColor, #fa8029));
     transform: translateY(-1px);
 }
 
@@ -84,7 +84,7 @@
 }
 
 .breadcrumb-item.active {
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     font-weight: 700;
 }
 
@@ -92,7 +92,7 @@
 .breadcrumb-icon {
     display: flex;
     align-items: center;
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     transition: transform 0.2s ease;
 }
 
@@ -104,7 +104,7 @@
 .breadcrumb-separator {
     display: flex;
     align-items: center;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     opacity: 0.4;
     font-weight: normal;
 }
@@ -119,12 +119,12 @@
     justify-content: center;
     padding: 2px 4px;
     cursor: pointer;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     transition: all 0.2s;
 }
 
 .breadcrumb-collapsed-btn:hover {
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: white;
     transform: scale(1.05);
 }
@@ -133,4 +133,9 @@
 .breadcrumbs-filled {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .breadcrumbs-default {
+    padding-right: 0;
+    padding-left: 0;
 }

@@ -19,9 +19,9 @@
     border-radius: 10px;
 
     /* Theme-aware background */
-    background: var(--primaryContainercolor);
-    color: var(--textColor);
-    border: 1px solid var(--borderColor);
+    background: var(--primaryContainercolor, #ffffff);
+    color: var(--textColor, #383838);
+    border: 1px solid var(--borderColor, #e2e8f0);
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.12),
         0 2px 6px rgba(0, 0, 0, 0.06);
@@ -47,8 +47,8 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    background: var(--primaryContainercolor);
-    border: 1px solid var(--borderColor);
+    background: var(--primaryContainercolor, #ffffff);
+    border: 1px solid var(--borderColor, #e2e8f0);
 }
 
 /* ── Position: Top ─────────────────────────────────────── */
@@ -129,4 +129,51 @@
     border-right: none;
     border-top: none;
     transform: rotate(45deg);
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .tooltip-pos-top::after {
+    right: 50%;
+    margin-right: -6px;
+    border-right: none;
+}
+[dir="rtl"] .tooltip-pos-top {
+    right: 50%;
+    transform: translateX(50%) translateY(6px) scale(0.96);
+}
+[dir="rtl"] .tooltip-pos-right {
+    right: calc(100% + 10px);
+    transform: translateY(-50%) translateX(6) scale(0.96);
+}
+[dir="rtl"] .tooltip-pos-left::after {
+    left: -6px;
+    border-right: none;
+}
+[dir="rtl"] .tooltip-pos-bottom::after {
+    right: 50%;
+    margin-right: -6px;
+    border-left: none;
+}
+[dir="rtl"] .tooltip-pos-bottom.tooltip-visible {
+    transform: translateX(50%) translateY(0) scale(1);
+}
+[dir="rtl"] .tooltip-pos-right::after {
+    right: -6px;
+    border-left: none;
+}
+[dir="rtl"] .tooltip-pos-right.tooltip-visible {
+    transform: translateY(-5-0%) translateX(-0) scale(1);
+}
+[dir="rtl"] .tooltip-pos-left {
+    left: calc(100% + 10px);
+    transform: translateY(-50%) translateX(-6px) scale(0.96);
+}
+[dir="rtl"] .tooltip-pos-left.tooltip-visible {
+    transform: translateY(-5-0%) translateX(-0) scale(1);
+}
+[dir="rtl"] .tooltip-pos-bottom {
+    right: 50%;
+    transform: translateX(50%) translateY(-6px) scale(0.96);
+}
+[dir="rtl"] .tooltip-pos-top.tooltip-visible {
+    transform: translateX(50%) translateY(0) scale(1);
 }

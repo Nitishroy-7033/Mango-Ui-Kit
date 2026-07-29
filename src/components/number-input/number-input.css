@@ -154,3 +154,16 @@
 [data-theme='dark'] .mango-number-input-btn:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.05);
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-number-input-btn.btn-minus {
+    border-left: 1px solid var(--borderColor, #e5e7eb);
+}
+[dir="rtl"] .mango-number-input-icon-suffix {
+    padding-left: 12px;
+}
+[dir="rtl"] .mango-number-input-btn.btn-plus {
+    border-right: 1px solid var(--borderColor, #e5e7eb);
+}
+[dir="rtl"] .mango-number-input-icon-prefix {
+    padding-right: 12px;
+}

@@ -26,12 +26,12 @@
 }
 
 .app-dropdown-trigger:hover:not(.disabled) {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
     background-color: var(--primaryContainercolor, #ffffff);
 }
 
 .app-dropdown-trigger.active {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
     background-color: var(--primaryContainercolor, #ffffff);
     box-shadow: 0 0 0 4px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.1);
 }
@@ -39,7 +39,7 @@
 .app-dropdown-trigger.disabled {
     cursor: not-allowed;
     opacity: 0.5;
-    background-color: var(--secondaryColor);
+    background-color: var(--secondaryColor, #f3f4f6);
 }
 
 /* Trigger Content */
@@ -53,7 +53,7 @@
 .trigger-text {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -61,7 +61,7 @@
 
 .trigger-placeholder {
     font-size: 0.9rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-weight: 500;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .selected-tag {
-    background-color: var(--primaryColor);
+    background-color: var(--primaryColor, #fa8029);
     color: white;
     padding: 2px 8px;
     border-radius: 6px;
@@ -86,8 +86,8 @@
 .selected-tag-more {
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--primaryColor);
-    background: var(--lightPrimaryColor);
+    color: var(--primaryColor, #fa8029);
+    background: var(--lightPrimaryColor, rgba(250, 128, 41, 0.1));
     padding: 2px 6px;
     border-radius: 6px;
 }
@@ -97,7 +97,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .clear-icon {
@@ -129,7 +129,7 @@
 }
 
 .app-dropdown-variant-ghost .app-dropdown-trigger:hover {
-    background-color: var(--secondaryColor);
+    background-color: var(--secondaryColor, #f3f4f6);
 }
 
 .app-dropdown-variant-plain {
@@ -214,7 +214,7 @@
 /* Menu Header */
 .menu-header {
     background-color: var(--secondaryColor, #f8fafc);
-    border-bottom: 1px solid var(--borderColor);
+    border-bottom: 1px solid var(--borderColor, #e2e8f0);
 }
 
 .menu-label {
@@ -223,7 +223,7 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 /* Search Wrapper */
@@ -232,13 +232,13 @@
     padding: 8px 12px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--borderColor);
+    border-bottom: 1px solid var(--borderColor, #e2e8f0);
 }
 
 .search-icon {
     position: absolute;
     left: 20px;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .menu-search-input {
@@ -248,21 +248,21 @@
     border: 1px solid transparent;
     border-radius: 10px;
     font-size: 0.85rem;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     outline: none;
     transition: all 0.2s;
 }
 
 .menu-search-input:focus {
     background-color: var(--primaryContainercolor, #ffffff);
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
     box-shadow: 0 0 0 3px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.1);
 }
 
 .search-clear {
     position: absolute;
     right: 20px;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     cursor: pointer;
 }
 
@@ -281,7 +281,7 @@
 }
 
 .menu-scroll::-webkit-scrollbar-thumb {
-    background: var(--borderColor);
+    background: var(--borderColor, #e2e8f0);
     border-radius: 10px;
 }
 
@@ -302,7 +302,7 @@
 }
 
 .menu-option.selected {
-    background-color: var(--lightPrimaryColor);
+    background-color: var(--lightPrimaryColor, rgba(250, 128, 41, 0.1));
 }
 
 .menu-option.disabled {
@@ -315,19 +315,19 @@
     width: 18px;
     height: 18px;
     border-radius: 5px;
-    border: 2px solid var(--borderColor);
+    border: 2px solid var(--borderColor, #e2e8f0);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
-    background-color: var(--primaryContainercolor);
+    background-color: var(--primaryContainercolor, #ffffff);
     color: white;
     flex-shrink: 0;
 }
 
 .option-checkbox.checked {
-    background-color: var(--primaryColor);
-    border-color: var(--primaryColor);
+    background-color: var(--primaryColor, #fa8029);
+    border-color: var(--primaryColor, #fa8029);
 }
 
 /* Option Icon */
@@ -339,18 +339,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--labelColor);
+    color: var(--labelColor, #475569);
     transition: all 0.2s;
     flex-shrink: 0;
 }
 
 .menu-option:hover .option-icon {
-    background-color: var(--primaryContainercolor);
-    color: var(--primaryColor);
+    background-color: var(--primaryContainercolor, #ffffff);
+    color: var(--primaryColor, #fa8029);
 }
 
 .menu-option.selected .option-icon {
-    background-color: var(--primaryColor);
+    background-color: var(--primaryColor, #fa8029);
     color: white;
 }
 
@@ -365,7 +365,7 @@
 .option-name {
     font-size: 0.9rem;
     font-weight: 700;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -373,21 +373,21 @@
 
 .option-details {
     font-size: 0.75rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-weight: 500;
 }
 
 /* Footer & More */
 .menu-footer {
     padding: 8px;
-    border-top: 1px solid var(--borderColor);
+    border-top: 1px solid var(--borderColor, #e2e8f0);
     background-color: var(--secondaryColor, #f8fafc);
 }
 
 .no-options-found {
     padding: 30px 16px;
     text-align: center;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -403,7 +403,7 @@
     gap: 8px;
     padding: 12px;
     font-size: 0.75rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-weight: 600;
 }
 
@@ -422,4 +422,22 @@
 /* Custom rendered options */
 .custom-option-wrapper {
     cursor: pointer;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .menu-scroll {
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+}
+[dir="rtl"] .app-dropdown-menu {
+    right: 0;
+}
+[dir="rtl"] .search-icon {
+    right: 20px;
+}
+[dir="rtl"] .app-dropdown-menu::before {
+    right: 0;
+    left: 0;
+}
+[dir="rtl"] .search-clear {
+    left: 20px;
 }

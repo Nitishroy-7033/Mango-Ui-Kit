@@ -7,9 +7,9 @@
     padding: 0 24px;
     z-index: 1000;
     transition: all 0.3s ease;
-    background-color: var(--primaryContainercolor);
-    border-bottom: 1px solid var(--borderColor);
-    color: var(--textColor);
+    background-color: var(--primaryContainercolor, #ffffff);
+    border-bottom: 1px solid var(--borderColor, #e2e8f0);
+    color: var(--textColor, #383838);
     box-sizing: border-box;
 }
 
@@ -27,14 +27,14 @@
 }
 
 .app-bar-variant-bordered {
-    border-bottom: 2px solid var(--borderColor);
+    border-bottom: 2px solid var(--borderColor, #e2e8f0);
 }
 
 .app-bar-variant-floating {
     width: calc(100% - 48px);
     margin: 16px 24px;
     border-radius: 16px;
-    border: 1px solid var(--borderColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
 }
@@ -71,7 +71,7 @@
     font-size: 1.25rem;
     font-weight: 800;
     letter-spacing: -0.025em;
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 /* ── Sections ────────────────────────────────────────── */
@@ -112,7 +112,7 @@
     border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     text-decoration: none;
     transition: all 0.2s;
     display: flex;
@@ -125,13 +125,13 @@
 }
 
 .nav-link:hover {
-    background-color: rgba(var(--shadowColorRGB), 0.05);
-    color: var(--textColor);
+    background-color: rgba(var(--shadowColorRGB, 250, 128, 41), 0.05);
+    color: var(--textColor, #383838);
 }
 
 .nav-link.active {
-    color: var(--primaryColor);
-    background-color: rgba(var(--shadowColorRGB), 0.08);
+    color: var(--primaryColor, #fa8029);
+    background-color: rgba(var(--shadowColorRGB, 250, 128, 41), 0.08);
 }
 
 .nav-link.icon-only {
@@ -140,7 +140,7 @@
 
 .nav-arrow {
     transition: transform 0.2s;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .nav-arrow.rotated {
@@ -160,8 +160,8 @@
     top: calc(100% + 8px);
     left: 0;
     min-width: 200px;
-    background: var(--primaryContainercolor);
-    border: 1px solid var(--borderColor);
+    background: var(--primaryContainercolor, #ffffff);
+    border: 1px solid var(--borderColor, #e2e8f0);
     border-radius: 12px;
     padding: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -190,7 +190,7 @@
     background: transparent;
     border: none;
     border-radius: 8px;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
@@ -200,8 +200,8 @@
 }
 
 .dropdown-item:hover {
-    background: rgba(var(--shadowColorRGB), 0.05);
-    color: var(--textColor);
+    background: rgba(var(--shadowColorRGB, 250, 128, 41), 0.05);
+    color: var(--textColor, #383838);
 }
 
 .dropdown-item.logout {
@@ -232,7 +232,7 @@
 }
 
 .user-profile-trigger:hover {
-    background-color: rgba(var(--shadowColorRGB), 0.05);
+    background-color: rgba(var(--shadowColorRGB, 250, 128, 41), 0.05);
 }
 
 .user-avatar {
@@ -240,7 +240,7 @@
     height: 32px;
     border-radius: 50%;
     overflow: hidden;
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,8 +260,8 @@
     top: calc(100% + 12px);
     right: 0;
     width: 240px;
-    background: var(--primaryContainercolor);
-    border: 1px solid var(--borderColor);
+    background: var(--primaryContainercolor, #ffffff);
+    border: 1px solid var(--borderColor, #e2e8f0);
     border-radius: 16px;
     padding: 8px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -277,19 +277,19 @@
 .dropdown-name {
     font-size: 0.95rem;
     font-weight: 700;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     margin: 0;
 }
 
 .dropdown-email {
     font-size: 0.8rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     margin: 4px 0 0 0;
 }
 
 .dropdown-divider {
     height: 1px;
-    background: var(--borderColor);
+    background: var(--borderColor, #e2e8f0);
     margin: 8px 4px;
 }
 
@@ -304,7 +304,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: white;
 }
 
@@ -313,7 +313,7 @@
 }
 
 .plan-badge.business {
-    background-color: var(--primaryColor);
+    background-color: var(--primaryColor, #fa8029);
 }
 
 /* ── Search ────────────────────────────────────────── */
@@ -328,7 +328,7 @@
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     pointer-events: none;
 }
 
@@ -336,9 +336,9 @@
     width: 100%;
     padding: 10px 12px 10px 40px;
     border-radius: 12px;
-    background: rgba(var(--shadowColorRGB), 0.05);
-    border: 1px solid var(--borderColor);
-    color: var(--textColor);
+    background: rgba(var(--shadowColorRGB, 250, 128, 41), 0.05);
+    border: 1px solid var(--borderColor, #e2e8f0);
+    color: var(--textColor, #383838);
     font-size: 0.9rem;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     box-sizing: border-box;
@@ -346,13 +346,13 @@
 
 .app-bar-search-input:focus {
     outline: none;
-    border-color: var(--primaryColor);
-    background: var(--primaryContainercolor);
+    border-color: var(--primaryColor, #fa8029);
+    background: var(--primaryContainercolor, #ffffff);
     box-shadow: 0 0 0 4px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.15);
 }
 
 .app-bar-search-input::placeholder {
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     opacity: 0.7;
 }
 
@@ -363,7 +363,7 @@
     border-radius: 8px;
     background: transparent;
     border: none;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     cursor: pointer;
 }
 
@@ -406,7 +406,7 @@
     min-width: 16px;
     height: 16px;
     border-radius: 8px;
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: white;
     font-size: 0.65rem;
     font-weight: 700;
@@ -414,11 +414,11 @@
     align-items: center;
     justify-content: center;
     padding: 0 4px;
-    border: 2px solid var(--primaryContainercolor);
+    border: 2px solid var(--primaryContainercolor, #ffffff);
 }
 .login-btn {
     padding: 8px 18px;
-    background-color: var(--primaryColor);
+    background-color: var(--primaryColor, #fa8029);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -437,4 +437,23 @@
 
 .login-btn:active {
     transform: translateY(0);
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .user-dropdown-menu {
+    left: 0;
+}
+[dir="rtl"] .nav-dropdown-menu {
+    right: 0;
+}
+[dir="rtl"] .app-bar-fixed {
+    right: 0;
+}
+[dir="rtl"] .search-icon {
+    right: 12px;
+}
+[dir="rtl"] .notification-badge {
+    left: 2px;
+}
+[dir="rtl"] .dropdown-item {
+    text-align: right;
 }

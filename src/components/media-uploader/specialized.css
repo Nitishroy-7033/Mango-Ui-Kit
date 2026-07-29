@@ -31,7 +31,7 @@
     position: absolute;
     bottom: 0px;
     right: 0px;
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: white;
     padding: 6px;
     border-radius: 50%;
@@ -51,9 +51,9 @@
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
     aspect-ratio: 1/1;
-    border: 1px solid var(--borderColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
 }
 
 .image-preview-item img {
@@ -107,8 +107,8 @@
     align-items: center;
     gap: 12px;
     padding: 12px;
-    background: var(--primaryContainercolor);
-    border: 1px solid var(--borderColor);
+    background: var(--primaryContainercolor, #ffffff);
+    border: 1px solid var(--borderColor, #e2e8f0);
     border-radius: 12px;
 }
 
@@ -116,7 +116,7 @@
     width: 40px;
     height: 40px;
     background: rgba(250, 128, 41, 0.1);
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -155,8 +155,8 @@
 }
 
 .doc-item:hover {
-    border-color: var(--borderColor);
-    background: var(--primaryContainercolor);
+    border-color: var(--borderColor, #e2e8f0);
+    background: var(--primaryContainercolor, #ffffff);
 }
 
 .doc-info {
@@ -168,12 +168,12 @@
 .doc-info .name {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
 }
 
 .doc-info .size {
     font-size: 0.75rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .doc-icon {
@@ -186,4 +186,11 @@
 
 [data-theme='dark'] .doc-item {
     background: rgba(255, 255, 255, 0.03);
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .avatar-trigger .overlay {
+    left: 0px;
+}
+[dir="rtl"] .image-preview-item .remove-btn {
+    left: 6px;
 }

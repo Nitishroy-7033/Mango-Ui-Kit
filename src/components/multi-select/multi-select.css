@@ -36,13 +36,13 @@
 }
 
 .mango-multi-select-trigger:hover {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
 }
 
 .mango-multi-select.is-open .mango-multi-select-trigger {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
     box-shadow: 0 0 0 3px var(--ms-focus-ring);
-    background: var(--primaryContainercolor);
+    background: var(--primaryContainercolor, #ffffff);
 }
 
 .mango-multi-select-tags {
@@ -62,13 +62,13 @@
     border-radius: 6px;
     font-size: 0.8rem;
     font-weight: 600;
-    border: 1px solid var(--borderColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
     animation: mango-tag-pop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .mango-multi-select-tag-more {
-    background: var(--secondaryColor);
-    color: var(--labelSecondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
+    color: var(--labelSecondaryColor, #94a3b8);
     border-color: var(--ms-border);
 }
 
@@ -111,7 +111,7 @@
 
 .arrow.open {
     transform: rotate(180deg);
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 /* ── Dropdown Menu ───────────────────────────────────── */
@@ -137,7 +137,7 @@
     align-items: center;
     gap: 8px;
     border-bottom: 1px solid var(--ms-border);
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
     color: var(--labelSecondaryColor, #9ca3af);
 }
 
@@ -171,7 +171,7 @@
 }
 
 .mango-multi-select-option:hover {
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
 }
 
 .mango-multi-select-option.selected {
@@ -192,8 +192,8 @@
 }
 
 .option-checkbox.checked {
-    background: var(--primaryColor);
-    border-color: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
+    border-color: var(--primaryColor, #fa8029);
     color: white;
 }
 
@@ -211,7 +211,7 @@
 
 .option-details {
     font-size: 0.75rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .no-results,
@@ -219,7 +219,7 @@
     padding: 20px;
     text-align: center;
     font-size: 0.85rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -229,7 +229,7 @@
 .mango-multi-select-footer {
     padding: 10px;
     border-top: 1px solid var(--ms-border);
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
 }
 
 /* ── Sizes ───────────────────────────────────────────── */
@@ -264,7 +264,7 @@
 
 .mango-multi-select.is-disabled .mango-multi-select-trigger {
     cursor: not-allowed;
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
 }
 
 /* ── Animations ──────────────────────────────────────── */
@@ -291,6 +291,14 @@
 }
 
 .mango-multi-select-list::-webkit-scrollbar-thumb {
-    background: var(--borderColor);
+    background: var(--borderColor, #e2e8f0);
     border-radius: 10px;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-multi-select-label {
+    margin-right: 2px;
+}
+[dir="rtl"] .mango-multi-select-dropdown {
+    right: 0;
+    left: 0;
 }

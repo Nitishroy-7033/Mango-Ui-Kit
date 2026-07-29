@@ -6,6 +6,29 @@
   --accent-rgb: 250, 128, 41;
   --accent-foreground: #ffffff;
   --transition-speed: 0.3s;
+
+  --background: #f2f7fa;
+  --primaryColor: #fa8029;
+  --primaryColor-rgb: 250, 128, 41;
+  --lightPrimaryColor: rgba(250, 128, 41, 0.1);
+  --secondaryColor: #f3f4f6;
+  --primaryContainercolor: #ffffff;
+  --secondaryContainercolor: #fa8029;
+  --textColor: #383838;
+  --textSecondaryColor: #64748b;
+  --labelColor: #475569;
+  --labelSecondaryColor: #94a3b8;
+  --borderColor: #e2e8f0;
+  --successColor: #10b981;
+  --warningColor: #f59e0b;
+  --errorColor: #ef4444;
+  --infoColor: #3b82f6;
+  --shadowColorRGB: 250, 128, 41;
+  --shadowOpacity: 0.35;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
 }
 
 [data-theme='light'] {
@@ -17,10 +40,16 @@
   --primaryContainercolor: #ffffff;
   --secondaryContainercolor: #fa8029;
   --textColor: #383838;
-  --textSecondaryColor: #7bff00;
+  --textSecondaryColor: #64748b;
   --labelColor: #475569;
   --labelSecondaryColor: #94a3b8;
   --borderColor: #e2e8f0;
+  --successColor: #10b981;
+  --warningColor: #f59e0b;
+  --errorColor: #ef4444;
+  --infoColor: #3b82f6;
+  --shadowColorRGB: 250, 128, 41;
+  --shadowOpacity: 0.35;
 }
 
 [data-theme='dark'] {
@@ -36,20 +65,37 @@
   --labelColor: #8e9196;
   --labelSecondaryColor: #8e9196;
   --borderColor: #3d3f43;
+  --successColor: #10b981;
+  --warningColor: #f59e0b;
+  --errorColor: #ef4444;
+  --infoColor: #3b82f6;
+  --shadowColorRGB: 250, 128, 41;
+  --shadowOpacity: 0.35;
 }
 
-/* Default to light theme */
-:root:not([data-theme]) {
-  --background: #f2f7fa;
-  --primaryColor: #fa8029;
-  --primaryColor-rgb: 250, 128, 41;
-  --lightPrimaryColor: rgba(250, 128, 41, 0.1);
-  --secondaryColor: #f3f4f6;
-  --primaryContainercolor: #ffffff;
-  --secondaryContainercolor: #fa8029;
-  --textColor: #383838;
-  --textSecondaryColor: #7bff00;
-  --labelColor: #475569;
-  --labelSecondaryColor: #94a3b8;
-  --borderColor: #e2e8f0;
+:root:not([data-theme]) { }
+
+/* ═══════════════════════════════════════════════════════════
+   RTL Support
+   ═══════════════════════════════════════════════════════════ */
+
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
 }
+
+[dir="rtl"] * {
+  /* Ensure proper box model for RTL */
+  -webkit-margin-start: unset;
+  -webkit-margin-end: unset;
+}
+
+/* RTL-specific overrides for common patterns */
+[dir="rtl"] .text-left { text-align: right; }
+[dir="rtl"] .text-right { text-align: left; }
+[dir="rtl"] .float-left { float: right; }
+[dir="rtl"] .float-right { float: left; }
+[dir="rtl"] .mr-auto { margin-left: auto !important; margin-right: 0 !important; }
+[dir="rtl"] .ml-auto { margin-right: auto !important; margin-left: 0 !important; }
+[dir="rtl"] .pl-0 { padding-right: 0 !important; }
+[dir="rtl"] .pr-0 { padding-left: 0 !important; }

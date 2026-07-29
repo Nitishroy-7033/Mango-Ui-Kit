@@ -199,3 +199,11 @@
 [data-theme='dark'] .mango-command-footer {
     background: rgba(255, 255, 255, 0.02);
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-command-search-icon {
+    margin-left: 14px;
+}
+[dir="rtl"] .mango-command-overlay {
+    right: 0;
+    left: 0;
+}

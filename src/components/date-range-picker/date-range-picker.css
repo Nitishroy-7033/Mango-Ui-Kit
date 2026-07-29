@@ -8,7 +8,7 @@
 .picker-label {
     display: block;
     font-weight: 600;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     margin-bottom: 6px;
 }
 
@@ -27,7 +27,7 @@
 .picker-helper {
     margin-top: 5px;
     font-size: 0.8rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .picker-error {
@@ -68,14 +68,14 @@
 
 /* Variants */
 .range-trigger-default {
-    background: var(--secondaryColor);
-    border: 1px solid var(--borderColor);
-    color: var(--textColor);
+    background: var(--secondaryColor, #f3f4f6);
+    border: 1px solid var(--borderColor, #e2e8f0);
+    color: var(--textColor, #383838);
 }
 
 .range-trigger-filled {
-    background: var(--primaryColor);
-    border: 1px solid var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
+    border: 1px solid var(--primaryColor, #fa8029);
     color: #fff;
 }
 
@@ -86,35 +86,35 @@
 
 .range-trigger-outline {
     background: transparent;
-    border: 1.5px solid var(--borderColor);
-    color: var(--textColor);
+    border: 1.5px solid var(--borderColor, #e2e8f0);
+    color: var(--textColor, #383838);
 }
 
 .range-trigger-ghost {
     background: transparent;
     border: 1px solid transparent;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
 }
 
 .range-trigger-ghost:hover {
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
 }
 
 /* States */
 .range-input-trigger:hover:not(.is-disabled) {
-    border-color: var(--primaryColor);
-    background: var(--primaryContainercolor);
+    border-color: var(--primaryColor, #fa8029);
+    background: var(--primaryContainercolor, #ffffff);
 }
 
 .range-trigger-filled:hover {
     opacity: 0.92;
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
 }
 
 .range-input-trigger.active {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
     box-shadow: 0 0 0 3px rgba(250, 128, 41, 0.15);
-    background: var(--primaryContainercolor);
+    background: var(--primaryContainercolor, #ffffff);
 }
 
 .range-input-trigger.has-error {
@@ -129,13 +129,13 @@
 }
 
 .trigger-icon {
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     flex-shrink: 0;
     transition: color 0.2s;
 }
 
 .range-input-trigger:hover .trigger-icon {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 .trigger-text {
@@ -149,7 +149,7 @@
 }
 
 .trigger-placeholder {
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-weight: 400;
 }
 
@@ -181,7 +181,7 @@
     align-items: center;
     padding: 2px;
     border-radius: 4px;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     transition: all 0.2s;
     flex-shrink: 0;
 }
@@ -197,8 +197,8 @@
     top: calc(100% + 8px);
     left: 0;
     width: 320px;
-    background-color: var(--primaryContainercolor) !important;
-    color: var(--textColor) !important;
+    background-color: var(--primaryContainercolor, #ffffff) !important;
+    color: var(--textColor, #383838) !important;
     overflow: hidden;
     z-index: 10000;
     box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.04);
@@ -216,7 +216,7 @@
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 /* ── Presets ──────────────────────────────────────────── */
@@ -225,16 +225,16 @@
     flex-wrap: wrap;
     gap: 6px;
     padding: 12px 16px;
-    border-bottom: 1px solid var(--borderColor);
-    background: var(--secondaryColor);
+    border-bottom: 1px solid var(--borderColor, #e2e8f0);
+    background: var(--secondaryColor, #f3f4f6);
 }
 
 .drp-preset-btn {
     padding: 5px 12px;
     border-radius: 20px;
-    border: 1px solid var(--borderColor);
-    background: var(--primaryContainercolor);
-    color: var(--textColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
+    background: var(--primaryContainercolor, #ffffff);
+    color: var(--textColor, #383838);
     font-size: 0.78rem;
     font-weight: 600;
     cursor: pointer;
@@ -243,8 +243,8 @@
 }
 
 .drp-preset-btn:hover {
-    background: var(--primaryColor);
-    border-color: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
+    border-color: var(--primaryColor, #fa8029);
     color: white;
 }
 
@@ -266,24 +266,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--secondaryColor);
-    border: 1px solid var(--borderColor);
+    background: var(--secondaryColor, #f3f4f6);
+    border: 1px solid var(--borderColor, #e2e8f0);
     border-radius: 8px;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .calendar-nav-btn:hover {
-    background: var(--primaryColor);
-    border-color: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
+    border-color: var(--primaryColor, #fa8029);
     color: white;
 }
 
 .current-month {
     font-weight: 700;
     font-size: 0.95rem;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
 }
 
 .drp-weekdays {
@@ -296,7 +296,7 @@
     text-align: center;
     font-size: 0.72rem;
     font-weight: 700;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     padding-bottom: 6px;
@@ -316,7 +316,7 @@
     justify-content: center;
     font-size: 0.84rem;
     font-weight: 500;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.15s;
@@ -325,12 +325,12 @@
 
 .drp-day:hover:not(.empty):not(.disabled) {
     background: rgba(250, 128, 41, 0.12);
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 .drp-day.start,
 .drp-day.end {
-    background: var(--primaryColor) !important;
+    background: var(--primaryColor, #fa8029) !important;
     color: white !important;
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(250, 128, 41, 0.35);
@@ -338,13 +338,13 @@
 
 .drp-day.in-range {
     background: rgba(250, 128, 41, 0.1);
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     border-radius: 0;
     font-weight: 600;
 }
 
 .drp-day.today:not(.start):not(.end) {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     font-weight: 800;
     border: 1.5px solid rgba(250, 128, 41, 0.3);
 }
@@ -361,14 +361,14 @@
 
 .drp-day.disabled:hover {
     background: none;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
 }
 
 /* ── Footer ───────────────────────────────────────────── */
 .drp-footer {
     margin-top: 14px;
     padding-top: 12px;
-    border-top: 1px solid var(--borderColor);
+    border-top: 1px solid var(--borderColor, #e2e8f0);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -376,14 +376,14 @@
 
 .drp-hint {
     font-size: 0.78rem;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-style: italic;
 }
 
 .drp-clear-range-btn {
     background: transparent;
     border: none;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
@@ -409,4 +409,8 @@
 
 .animate-scale-in {
     animation: scaleIn 0.18s cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .drp-dropdown {
+    right: 0;
 }

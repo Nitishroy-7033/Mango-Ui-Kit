@@ -110,6 +110,10 @@ export interface TableProps<T = any> {
   rowKey: string | ((record: T) => string | number);
   /** Sticky header toggle */
   stickyHeader?: boolean;
+  /** Enable virtual scrolling for large datasets */
+  virtualized?: boolean;
+  /** Row height in pixels (sensible default based on table size) */
+  rowHeight?: number;
   /** Fixed height for scrolling */
   height?: number | string;
   /** Message shown when no data */

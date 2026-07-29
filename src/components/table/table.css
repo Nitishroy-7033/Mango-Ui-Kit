@@ -76,7 +76,7 @@
 
 .sort-icon.active {
     opacity: 1;
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 .action-btn {
@@ -101,7 +101,7 @@
     background: var(--primaryContainercolor, #ffffff);
     padding: 12px;
     border-radius: 14px;
-    border: 1.5px solid var(--primaryColor);
+    border: 1.5px solid var(--primaryColor, #fa8029);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     /* Ensure it stays above everything */
@@ -120,13 +120,13 @@
     border: 1px solid var(--table-border-color);
     background: var(--secondaryColor, #f1f5f9);
     font-size: 0.85rem;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     outline: none;
     transition: all 0.2s;
 }
 
 .header-search-input:focus {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
     box-shadow: 0 0 0 2px rgba(var(--primaryColor-rgb, 250, 128, 41), 0.1);
 }
 
@@ -161,7 +161,7 @@
     width: 18px;
     height: 18px;
     cursor: pointer;
-    accent-color: var(--primaryColor);
+    accent-color: var(--primaryColor, #fa8029);
 }
 
 /* ── Sticky Positioning ──────────────────────────────── */
@@ -255,7 +255,7 @@
 .table-empty-cell {
     padding: 60px;
     text-align: center;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     font-style: italic;
 }
 
@@ -310,7 +310,7 @@
     justify-content: center;
     border-radius: 6px;
     border: 1px solid var(--table-border-color);
-    background: var(--primaryContainercolor);
+    background: var(--primaryContainercolor, #ffffff);
     color: var(--table-text-color);
     padding: 0 8px;
     cursor: pointer;
@@ -320,8 +320,8 @@
 
 .page-btn:hover:not(:disabled),
 .page-num:hover:not(.active) {
-    background-color: var(--secondaryColor);
-    border-color: var(--primaryColor);
+    background-color: var(--secondaryColor, #f3f4f6);
+    border-color: var(--primaryColor, #fa8029);
 }
 
 .page-btn:disabled {
@@ -330,8 +330,8 @@
 }
 
 .page-num.active {
-    background-color: var(--primaryColor);
-    border-color: var(--primaryColor);
+    background-color: var(--primaryColor, #fa8029);
+    border-color: var(--primaryColor, #fa8029);
     color: white;
 }
 
@@ -520,4 +520,41 @@
     background: #1f2937;
     border-color: #374151;
     color: #d1d5db;
+}
+
+/* ── Virtual Scrolling ────────────────────────── */
+.is-virtualized .table-row {
+    animation: none;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .table-cell {
+    border-left: 1px solid var(--table-border-color);
+}
+[dir="rtl"] .is-fixed-right::before {
+    right: 0;
+}
+[dir="rtl"] .table-header-cell:last-child {
+    border-left: none;
+}
+[dir="rtl"] .is-fixed-left::after {
+    left: 0;
+}
+[dir="rtl"] .header-search-popover {
+    right: 16px;
+}
+[dir="rtl"] .table-cell:last-child {
+    border-left: none;
+}
+[dir="rtl"] .table-header-cell {
+    text-align: right;
+    border-left: 1px solid var(--table-border-color);
+}
+[dir="rtl"] .is-card-layout .table-header-cell {
+    border-left: none;
+}
+[dir="rtl"] .table-variant-plain .table-cell, .table-variant-plain .table-header-cell {
+    border-left: none;
+}
+[dir="rtl"] .is-card-layout .table-cell {
+    border-left: none;
 }

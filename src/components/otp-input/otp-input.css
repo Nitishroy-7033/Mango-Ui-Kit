@@ -65,8 +65,8 @@
 
 /* States */
 .mango-otp-box:focus {
-    border-color: var(--primaryColor);
-    background: var(--primaryContainercolor);
+    border-color: var(--primaryColor, #fa8029);
+    background: var(--primaryContainercolor, #ffffff);
     box-shadow: 0 0 0 4px rgba(250, 128, 41, 0.15);
     transform: translateY(-2px);
 }
@@ -97,5 +97,19 @@
 .mango-otp-box:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    background: var(--secondaryColor);
+    background: var(--secondaryColor, #f3f4f6);
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-otp-helper {
+    margin-right: 4px;
+}
+[dir="rtl"] .mango-otp-label {
+    margin-right: 2px;
+}
+[dir="rtl"] .mango-otp-error {
+    margin-right: 4px;
+}
+[dir="rtl"] .mango-otp-variant-underlined {
+    border-right: none;
+    border-left: none;
 }

@@ -110,7 +110,7 @@
 
 .style-soft.variant-neutral {
     background: rgba(148, 163, 184, 0.1);
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     border-color: rgba(148, 163, 184, 0.2);
 }
 
@@ -184,8 +184,8 @@
 }
 
 .style-outline.variant-neutral {
-    border-color: var(--borderColor);
-    color: var(--textColor);
+    border-color: var(--borderColor, #e2e8f0);
+    color: var(--textColor, #383838);
 }
 
 .style-outline .alert-action {
@@ -229,7 +229,7 @@
 .style-glass.variant-neutral {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.15);
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     backdrop-filter: blur(12px);
 }
 

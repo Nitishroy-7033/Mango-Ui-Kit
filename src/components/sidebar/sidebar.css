@@ -53,7 +53,7 @@
     font-weight: 700;
     white-space: nowrap;
     letter-spacing: -0.01em;
-    color: var(--sidebar-active-color, var(--primaryColor));
+    color: var(--sidebar-active-color, var(--primaryColor, #fa8029));
 }
 
 /* ── Toggle Button ──────────────────────────────────── */
@@ -74,8 +74,8 @@
 }
 
 .mango-sidebar-toggle:hover {
-    background: var(--sidebar-active-bg, var(--lightPrimaryColor));
-    color: var(--sidebar-active-color, var(--primaryColor));
+    background: var(--sidebar-active-bg, var(--lightPrimaryColor, rgba(250, 128, 41, 0.1)));
+    color: var(--sidebar-active-color, var(--primaryColor, #fa8029));
 }
 
 .mango-sidebar-toggle.is-float {
@@ -83,7 +83,7 @@
     top: 72px;
     right: -18px;
     background: var(--primaryContainercolor, #fff);
-    border: 1px solid var(--borderColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 10;
     padding: 8px;
@@ -95,7 +95,7 @@
     justify-content: flex-start;
     font-size: 0.85rem;
     font-weight: 500;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .is-collapsed .mango-sidebar-toggle.is-bottom {
@@ -180,8 +180,8 @@
 }
 
 .mango-sidebar-item.is-active {
-    background: var(--sidebar-active-bg, var(--lightPrimaryColor));
-    color: var(--sidebar-active-color, var(--primaryColor));
+    background: var(--sidebar-active-bg, var(--lightPrimaryColor, rgba(250, 128, 41, 0.1)));
+    color: var(--sidebar-active-color, var(--primaryColor, #fa8029));
 }
 
 .mango-sidebar-item.is-active::before {
@@ -191,7 +191,7 @@
     top: 15%;
     height: 70%;
     width: 3px;
-    background: var(--sidebar-active-color, var(--primaryColor));
+    background: var(--sidebar-active-color, var(--primaryColor, #fa8029));
     border-radius: 0 4px 4px 0;
 }
 
@@ -225,7 +225,7 @@
 
 .mango-sidebar-chevron {
     transition: transform 0.2s ease;
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
 }
 
 .mango-sidebar-chevron.rotated {
@@ -250,7 +250,7 @@
     top: 0;
     bottom: 12px;
     width: 1px;
-    background: var(--borderColor);
+    background: var(--borderColor, #e2e8f0);
 }
 
 .mango-sidebar-sub-item {
@@ -273,24 +273,24 @@
     top: 50%;
     width: 10px;
     height: 1px;
-    background: var(--borderColor);
+    background: var(--borderColor, #e2e8f0);
 }
 
 .mango-sidebar-sub-item:hover {
     background: var(--secondaryColor, #f1f5f9);
-    color: var(--textColor);
+    color: var(--textColor, #383838);
 }
 
 .mango-sidebar-sub-item.is-active {
-    color: var(--sidebar-active-color, var(--primaryColor));
+    color: var(--sidebar-active-color, var(--primaryColor, #fa8029));
     font-weight: 600;
 }
 
 /* ── Badges ─────────────────────────────────────────── */
 
 .mango-sidebar-badge {
-    background: var(--secondaryColor);
-    color: var(--labelColor);
+    background: var(--secondaryColor, #f3f4f6);
+    color: var(--labelColor, #475569);
     font-size: 0.65rem;
     font-weight: 800;
     padding: 2px 5px;
@@ -300,7 +300,7 @@
 }
 
 .badge-primary {
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: #fff;
 }
 
@@ -360,6 +360,28 @@
 }
 
 .mango-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--borderColor);
+    background: var(--borderColor, #e2e8f0);
     border-radius: 10px;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-sidebar-toggle.is-float {
+    left: -18px;
+}
+[dir="rtl"] .is-collapsed .mango-sidebar-item.is-active::before {
+    right: 2px;
+}
+[dir="rtl"] .mango-sidebar-item.is-active::before {
+    right: 0;
+}
+[dir="rtl"] .mango-sidebar-sub-items.show-tree .mango-sidebar-sub-item::before {
+    right: -11px;
+}
+[dir="rtl"] .mango-sidebar {
+    border-left: 1px solid var(--borderColor, #e2e8f0);
+}
+[dir="rtl"] .mango-sidebar-sub-items.show-tree::before {
+    right: 17px;
+}
+[dir="rtl"] .mango-sidebar-sub-items {
+    padding-right: 28px;
 }

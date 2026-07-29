@@ -214,3 +214,28 @@
     color: #fff !important;
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-speed-dial-root.position-bottom-right {
+    left: 24px;
+}
+[dir="rtl"] .mango-speed-dial-container.direction-right {
+    flex-direction: row-reverse;
+}
+[dir="rtl"] .mango-speed-dial-container.direction-right .mango-speed-dial-actions {
+    flex-direction: row-reverse;
+}
+[dir="rtl"] .mango-speed-dial-root.position-top-right {
+    left: 24px;
+}
+[dir="rtl"] .mango-speed-dial-root.position-bottom-left {
+    right: 24px;
+}
+[dir="rtl"] .mango-speed-dial-container.direction-left .mango-speed-dial-actions {
+    flex-direction: row;
+}
+[dir="rtl"] .mango-speed-dial-root.position-top-left {
+    right: 24px;
+}
+[dir="rtl"] .mango-speed-dial-container.direction-left {
+    flex-direction: row;
+}

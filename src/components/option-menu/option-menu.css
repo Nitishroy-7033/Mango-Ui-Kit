@@ -142,3 +142,25 @@
 .is-flipped-x .mango-menu-item:hover>.mango-menu-submenu {
     transform: translateX(0);
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-menu-submenu {
+    right: 100%;
+    transform: translateX(10);
+}
+[dir="rtl"] .mango-menu-item:hover>.mango-menu-submenu {
+    transform: translateX(-0);
+}
+[dir="rtl"] .is-flipped-x .mango-menu-item:hover>.mango-menu-submenu {
+    transform: translateX(-0);
+}
+[dir="rtl"] .mango-menu-item {
+    text-align: right;
+}
+[dir="rtl"] .mango-submenu-arrow {
+    margin-right: 4px;
+}
+[dir="rtl"] .is-flipped-x .mango-menu-submenu {
+    right: auto;
+    left: 100%;
+    transform: translateX(-10px);
+}

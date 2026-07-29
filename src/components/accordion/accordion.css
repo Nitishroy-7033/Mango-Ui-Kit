@@ -19,14 +19,14 @@
 /* Bordered: No top-level gap, borders connect or items look tight */
 .accordion-variant-bordered {
     gap: 0;
-    border: 1px solid var(--borderColor);
+    border: 1px solid var(--borderColor, #e2e8f0);
     border-radius: inherit;
 }
 
 .accordion-variant-bordered .accordion-item {
     border-radius: 0;
     border: none;
-    border-bottom: 1px solid var(--borderColor);
+    border-bottom: 1px solid var(--borderColor, #e2e8f0);
 }
 
 .accordion-variant-bordered .accordion-item:last-child {
@@ -44,7 +44,7 @@
 }
 
 .accordion-variant-ghost .accordion-item.open {
-    background: rgba(var(--shadowColorRGB), 0.05);
+    background: rgba(var(--shadowColorRGB, 250, 128, 41), 0.05);
 }
 
 /* Filled: Stronger container backgrounds */
@@ -53,24 +53,24 @@
 }
 
 .accordion-variant-filled .accordion-item {
-    background: var(--secondaryContainercolor);
+    background: var(--secondaryContainercolor, #fa8029);
     border: none;
 }
 
 /* ── Item Base ───────────────────────────────────────── */
 .accordion-item {
-    background: var(--primaryContainercolor);
-    border: 1px solid var(--borderColor);
+    background: var(--primaryContainercolor, #ffffff);
+    border: 1px solid var(--borderColor, #e2e8f0);
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .accordion-item:hover:not(.disabled) {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
 }
 
 .accordion-item.open {
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
 }
 
 .accordion-item.disabled {
@@ -93,12 +93,12 @@
 }
 
 .accordion-trigger:focus-visible {
-    outline: 2px solid var(--primaryColor);
+    outline: 2px solid var(--primaryColor, #fa8029);
     outline-offset: -2px;
 }
 
 .accordion-item:not(.disabled) .accordion-trigger:hover {
-    background: rgba(var(--shadowColorRGB), 0.03);
+    background: rgba(var(--shadowColorRGB, 250, 128, 41), 0.03);
 }
 
 .trigger-content {
@@ -114,18 +114,18 @@
 }
 
 .accordion-icon {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
     flex-shrink: 0;
 }
 
 .accordion-title {
     font-weight: 600;
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     flex: 1;
 }
 
 .accordion-arrow {
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
 }
@@ -136,7 +136,7 @@
 
 .accordion-item.open .accordion-arrow {
     transform: rotate(180deg);
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 /* ── Sizes ───────────────────────────────────────────── */
@@ -242,7 +242,7 @@
 }
 
 .accordion-content {
-    color: var(--labelSecondaryColor);
+    color: var(--labelSecondaryColor, #94a3b8);
     line-height: 1.6;
 }
 
@@ -252,3 +252,10 @@
 }
 
 /* ─────────────────────────────────────────────────── */
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .accordion-trigger {
+    text-align: right;
+}
+[dir="rtl"] .accordion-arrow.left {
+    margin-left: 12px;
+}

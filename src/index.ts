@@ -1,6 +1,5 @@
 import './styles/index.css';
 
-// Existing components
 export * from './components/button';
 export * from './components/badge';
 export * from './components/avatar';
@@ -14,12 +13,7 @@ export * from './components/list';
 export * from './components/grid';
 export * from './components/report-metrics-card';
 export * from './components/speed-dial';
-
 export * from './components/bottom-nav-bar';
-
-
-
-// New components
 export * from './components/accordion';
 export * from './components/alert';
 export * from './components/app-bar';
@@ -59,6 +53,7 @@ export * from './components/box';
 export * from './components/selection-toolbar';
 export * from './components/tags-input';
 export * from './components/code-snippet';
+export * from './components/form';
 
 export * from './hooks';
 export * from './utils';

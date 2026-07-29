@@ -416,3 +416,35 @@
 [data-theme='dark'] .mango-toggle-root.is-neon:not(.is-checked) {
     background: rgba(255, 255, 255, 0.05);
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .toggle-md .is-checked .mango-toggle-thumb {
+    transform: translateX(-19px);
+}
+[dir="rtl"] .mango-toggle-thumb {
+    right: 3px;
+}
+[dir="rtl"] .toggle-lg .is-pill-slim.is-checked .mango-toggle-thumb {
+    transform: translateX(-30px);
+}
+[dir="rtl"] .toggle-sm .is-pill-slim.is-checked .mango-toggle-thumb {
+    transform: translateX(-15px);
+}
+[dir="rtl"] .mango-toggle-container:active .mango-toggle-root.is-bounce.is-checked .mango-toggle-thumb {
+    transform: translateX(-14px);
+}
+[dir="rtl"] .toggle-md .is-pill-slim.is-checked .mango-toggle-thumb {
+    transform: translateX(-22px);
+}
+[dir="rtl"] .toggle-lg .is-checked .mango-toggle-thumb {
+    transform: translateX(-25px);
+}
+[dir="rtl"] .mango-toggle-root.is-modern .mango-toggle-thumb {
+    right: 4px;
+}
+[dir="rtl"] .mango-toggle-root.is-checked .toggle-track-on {
+    left: unset;
+    right: 6px;
+}
+[dir="rtl"] .toggle-sm .is-checked .mango-toggle-thumb {
+    transform: translateX(-13px);
+}

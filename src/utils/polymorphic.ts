@@ -1,0 +1,24 @@
+import type React from 'react';
+
+export type AsProp<C extends React.ElementType> = {
+  as?: C;
+};
+
+export type PropsToOmit<C extends React.ElementType, P> = keyof (AsProp<C> & P);
+
+export type PolymorphicComponentProps<
+  C extends React.ElementType,
+  Props = Record<string, never>,
+> = AsProp<C> &
+  Props &
+  Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
+
+export type PolymorphicRef<C extends React.ElementType> =
+  React.ComponentPropsWithRef<C>['ref'];
+
+export type PolymorphicComponentPropsWithRef<
+  C extends React.ElementType,
+  Props = Record<string, never>,
+> = PolymorphicComponentProps<C, Props> & {
+  ref?: PolymorphicRef<C>;
+};

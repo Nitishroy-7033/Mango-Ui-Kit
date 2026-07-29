@@ -117,14 +117,14 @@
 
 .chip-soft.chip-color-neutral {
     background: rgba(148, 163, 184, 0.12);
-    color: var(--labelColor);
-    border-color: var(--borderColor);
+    color: var(--labelColor, #475569);
+    border-color: var(--borderColor, #e2e8f0);
 }
 
 /* ── Color Palettes (Filled) ──────────────────────── */
 
 .chip-filled.chip-color-primary {
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: #fff;
 }
 
@@ -160,8 +160,8 @@
 /* ── Color Palettes (Outline) ─────────────────────── */
 
 .chip-outline.chip-color-primary {
-    border-color: var(--primaryColor);
-    color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
+    color: var(--primaryColor, #fa8029);
 }
 
 .chip-outline.chip-color-success {
@@ -185,14 +185,14 @@
 }
 
 .chip-outline.chip-color-neutral {
-    border-color: var(--borderColor);
-    color: var(--labelColor);
+    border-color: var(--borderColor, #e2e8f0);
+    color: var(--labelColor, #475569);
 }
 
 /* ── Color Palettes (Ghost) ───────────────────────── */
 
 .chip-ghost.chip-color-primary {
-    color: var(--primaryColor);
+    color: var(--primaryColor, #fa8029);
 }
 
 .chip-ghost.chip-color-success {
@@ -212,7 +212,7 @@
 }
 
 .chip-ghost.chip-color-neutral {
-    color: var(--labelColor);
+    color: var(--labelColor, #475569);
 }
 
 .chip-ghost:hover:not(.is-disabled) {

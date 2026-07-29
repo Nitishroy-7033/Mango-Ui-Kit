@@ -1,8 +1,19 @@
 import React, { forwardRef, useEffect, useRef } from 'react';
-import { Check, Minus } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import type { CheckboxProps } from './checkbox.types';
 import './checkbox.css';
+
+const CheckIcon = ({ size, strokeWidth }: { size?: number; strokeWidth?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 14} height={size ?? 14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth ?? 2} strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+    </svg>
+);
+
+const MinusIcon = ({ size, strokeWidth }: { size?: number; strokeWidth?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 14} height={size ?? 14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth ?? 2} strokeLinecap="round" strokeLinejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+);
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     (
@@ -70,9 +81,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
                     <div className="mango-checkbox-box">
                         {indeterminate ? (
-                            <Minus className="mango-checkbox-icon" size={size === 'sm' ? 12 : size === 'lg' ? 18 : 14} strokeWidth={3} />
+                            <MinusIcon size={size === 'sm' ? 12 : size === 'lg' ? 18 : 14} strokeWidth={3} />
                         ) : (
-                            <Check className="mango-checkbox-icon" size={size === 'sm' ? 12 : size === 'lg' ? 18 : 14} strokeWidth={3} />
+                            <CheckIcon size={size === 'sm' ? 12 : size === 'lg' ? 18 : 14} strokeWidth={3} />
                         )}
                     </div>
 

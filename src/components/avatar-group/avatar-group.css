@@ -32,7 +32,17 @@
     justify-content: center;
     font-weight: 700;
     background-color: var(--secondaryColor, #2d2f33);
-    color: var(--textColor);
+    color: var(--textColor, #383838);
     border: 2px solid var(--primaryContainercolor, #ffffff);
     margin-left: -0.75rem;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .avatar-group-tight>* {
+    margin-right: -0.75rem;
+}
+[dir="rtl"] .avatar-group-extra {
+    margin-right: -0.75rem;
+}
+[dir="rtl"] .avatar-group-tight {
+    margin-right: 0.75rem;
 }

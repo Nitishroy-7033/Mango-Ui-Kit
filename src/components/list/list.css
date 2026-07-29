@@ -191,17 +191,21 @@
 }
 
 .pagination-btn:hover:not(:disabled) {
-    border-color: var(--primaryColor);
-    color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
+    color: var(--primaryColor, #fa8029);
 }
 
 .pagination-btn.is-active {
-    background: var(--primaryColor);
+    background: var(--primaryColor, #fa8029);
     color: white;
-    border-color: var(--primaryColor);
+    border-color: var(--primaryColor, #fa8029);
 }
 
 .pagination-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-list-item.is-active {
+    border-right: 3px solid var(--primaryColor, #fa8029);
 }

@@ -139,7 +139,7 @@
 .mango-toast-close {
     background: transparent;
     border: none;
-    color: var(--borderColor);
+    color: var(--borderColor, #e2e8f0);
     cursor: pointer;
     padding: 4px;
     border-radius: 4px;
@@ -149,7 +149,7 @@
 
 .mango-toast-close:hover {
     background: rgba(0, 0, 0, 0.05);
-    color: var(--textColor);
+    color: var(--textColor, #383838);
 }
 
 /* Progress Bar (The Mango Twist) */
@@ -190,4 +190,35 @@
 
 [data-theme='dark'] .mango-toast-description {
     color: #9ca3af;
+}
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-toast-enter-active {
+    transform: translateX(-0);
+}
+[dir="rtl"] .mango-toast-container.top-right {
+    left: 0;
+}
+[dir="rtl"] .mango-toast-container.bottom-right {
+    left: 0;
+}
+[dir="rtl"] .mango-toast-enter {
+    transform: translateX(-100%);
+}
+[dir="rtl"] .mango-toast-container.top-left {
+    right: 0;
+}
+[dir="rtl"] .mango-toast-container.top-center {
+    right: 50%;
+    transform: translateX(50%);
+}
+[dir="rtl"] .mango-toast-container.bottom-left {
+    right: 0;
+}
+[dir="rtl"] .mango-toast-container.bottom-center {
+    right: 50%;
+    transform: translateX(50%);
+}
+[dir="rtl"] .mango-toast-progress {
+    right: 0;
+    transform-origin: right;
 }

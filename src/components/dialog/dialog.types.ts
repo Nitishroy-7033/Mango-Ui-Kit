@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { ButtonVariant } from '../button/button.types';
+import type { ButtonVariant } from '../../utils/component-maps';
 
 export interface DialogButtonProps {
     label: string;

@@ -184,3 +184,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-radio-group-horizontal {
+    flex-direction: row-reverse;
+}

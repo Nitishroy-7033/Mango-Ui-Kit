@@ -196,3 +196,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+/* ── RTL Support ────────────────────────────────────── */
+[dir="rtl"] .mango-checkbox-group-horizontal {
+    flex-direction: row-reverse;
+}

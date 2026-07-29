@@ -1,9 +1,38 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { cn } from '../../utils/cn';
-import { Eye, EyeOff, Search, ChevronDown, Check } from 'lucide-react';
 import type { InputProps } from './input.types';
 export type { InputProps };
 import './input.css';
+
+const EyeIcon = ({ size }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 18} height={size ?? 18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+    </svg>
+);
+
+const EyeOffIcon = ({ size }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 18} height={size ?? 18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" /><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" /><line x1="1" y1="1" x2="23" y2="23" />
+    </svg>
+);
+
+const SearchIcon = ({ size }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 14} height={size ?? 14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+);
+
+const ChevronDownIcon = ({ size, className }: { size?: number; className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 14} height={size ?? 14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polyline points="6 9 12 15 18 9" />
+    </svg>
+);
+
+const CheckIcon = ({ size, className }: { size?: number; className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size ?? 14} height={size ?? 14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polyline points="20 6 9 17 4 12" />
+    </svg>
+);
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     (
@@ -140,7 +169,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                 >
                                     <span className="mango-country-flag">{selectedCountry?.flag}</span>
                                     <span className="mango-country-code">{countrySelector.value}</span>
-                                    <ChevronDown size={14} className={cn('mango-country-arrow', isCountryOpen && 'rotated')} />
+                                    <ChevronDownIcon size={14} className={cn('mango-country-arrow', isCountryOpen && 'rotated')} />
                                 </div>
 
                                 {isCountryOpen && (
@@ -150,7 +179,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                     >
                                         {countrySelector.showSearch && (
                                             <div className="mango-country-search">
-                                                <Search size={14} />
+                                                <SearchIcon size={14} />
                                                 <input
                                                     placeholder={countrySelector.placeholder || 'Search...'}
                                                     value={countrySearch}
@@ -175,7 +204,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                                         <span className="item-label">{opt.label}</span>
                                                         <span className="item-value">{opt.value}</span>
                                                     </div>
-                                                    {opt.value === countrySelector.value && <Check size={14} className="item-check" />}
+                                                    {opt.value === countrySelector.value && <CheckIcon size={14} className="item-check" />}
                                                 </div>
                                             ))}
                                             {filteredCountries.length === 0 && (
@@ -218,7 +247,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                 onClick={() => setShowPassword(!showPassword)}
                                 tabIndex={-1}
                             >
-                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                {showPassword ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
                             </button>
                         )}
 
