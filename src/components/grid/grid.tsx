@@ -8,7 +8,7 @@ import './grid.css';
  * Grid component for displaying items in a responsive grid layout.
  * Supports loading states, pagination, and infinite scroll.
  */
-export const Grid = forwardRef<HTMLDivElement, GridProps>(
+const Grid = forwardRef<HTMLDivElement, GridProps>(
     (
         {
             children,
@@ -186,3 +186,6 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
 );
 
 Grid.displayName = 'Grid';
+
+const GridMemo = React.memo(Grid);
+export { GridMemo as Grid };

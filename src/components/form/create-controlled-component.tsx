@@ -32,7 +32,7 @@ export function createControlledComponent<
     return (
       <Component
         ref={ref}
-        {...(rest as unknown as P)}
+        {...(rest as P)}
         {...(value !== undefined ? { value } : {})}
         {...(defaultValue !== undefined ? { defaultValue } : {})}
         {...(onChange ? { onChange } : {})}

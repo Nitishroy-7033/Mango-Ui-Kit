@@ -15,7 +15,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
   if (toasts.length === 0) return null;
 
   return (
-    <div className={`mango-toast-container ${position}`}>
+    <div className={`mango-toast-container ${position}`} aria-live="polite" aria-relevant="additions removals">
       {toasts.map((t) => (
         <Toast key={t.id} {...t} onClose={dismiss} />
       ))}

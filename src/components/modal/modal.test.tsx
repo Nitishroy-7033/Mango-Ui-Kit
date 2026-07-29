@@ -61,6 +61,6 @@ describe('Modal', () => {
     it('restores body scroll when closed', () => {
         const { rerender } = render(<Modal isOpen onClose={() => {}}>Content</Modal>);
         rerender(<Modal isOpen={false} onClose={() => {}}>Content</Modal>);
-        expect(document.body.style.overflow).toBe('unset');
+        expect(document.body.style.overflow).toBe('');
     });
 });

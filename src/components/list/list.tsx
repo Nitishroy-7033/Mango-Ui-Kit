@@ -64,7 +64,7 @@ ListItem.displayName = 'ListItem';
 /**
  * List component for displaying a set of items with loading, pagination, and scroll support.
  */
-export const List = forwardRef<HTMLDivElement, ListProps>(
+const List = forwardRef<HTMLDivElement, ListProps>(
     (
         {
             children,
@@ -202,3 +202,6 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
 );
 
 List.displayName = 'List';
+
+const ListMemo = React.memo(List);
+export { ListMemo as List };

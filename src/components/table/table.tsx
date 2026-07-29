@@ -51,7 +51,16 @@ const MoreVerticalIcon = ({ size }: { size?: number }) => (
 );
 
 
-export const Table = <T extends Record<string, any>>({
+type TableCSSProperties = React.CSSProperties & {
+  '--table-header-bg'?: string;
+  '--table-header-color'?: string;
+  '--table-row-bg'?: string;
+  '--table-row-hover-bg'?: string;
+  '--table-border-color'?: string;
+  '--table-text-color'?: string;
+};
+
+const Table = <T extends Record<string, any>>({
   columns,
   dataSource,
   loading = false,
@@ -90,6 +99,7 @@ export const Table = <T extends Record<string, any>>({
   const [scrollTop, setScrollTop] = useState(0);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  const sentinelRef = useRef<HTMLTableRowElement>(null);
   const prevLengthRef = useRef(0);
 
   // Helper to get row key
@@ -330,8 +340,7 @@ export const Table = <T extends Record<string, any>>({
     };
 
     const observer = new IntersectionObserver(handleIntersect, options);
-    const sentinel = document.getElementById('table-sentinel');
-    if (sentinel) observer.observe(sentinel);
+    if (sentinelRef.current) observer.observe(sentinelRef.current);
 
     return () => observer.disconnect();
   }, [infiniteScroll, onLoadMore, hasMore, loading, scrollThreshold]);
@@ -413,6 +422,7 @@ export const Table = <T extends Record<string, any>>({
               type="text"
               className="header-search-input"
               placeholder={`Search ${col.title}...`}
+              aria-label={`Search ${col.title}`}
               autoFocus
               value={searchQueries[col.dataIndex!] || ''}
               onChange={e => setSearchQueries(prev => ({ ...prev, [col.dataIndex!]: e.target.value }))}
@@ -578,7 +588,7 @@ export const Table = <T extends Record<string, any>>({
         '--table-row-hover-bg': colors?.rowHoverBg,
         '--table-border-color': colors?.borderColor,
         '--table-text-color': colors?.textColor,
-      } as any}
+      } as TableCSSProperties}
     >
       {renderTableCardHeader()}
 
@@ -646,7 +656,7 @@ export const Table = <T extends Record<string, any>>({
             })()}
 
             {loading && (
-              <tr>
+              <tr aria-live="polite">
                 <td colSpan={colCount} className="table-loading-cell">
                   <div className="loading-overlay">
                     <Spinner />
@@ -655,7 +665,7 @@ export const Table = <T extends Record<string, any>>({
                 </td>
               </tr>
             )}
-            <tr id="table-sentinel" style={{ height: '1px' }} />
+            <tr ref={sentinelRef} style={{ height: '1px' }} />
           </tbody>
         </table>
       </div>
@@ -665,3 +675,6 @@ export const Table = <T extends Record<string, any>>({
     </div>
   );
 };
+
+const TableMemo = React.memo(Table) as typeof Table;
+export { TableMemo as Table };

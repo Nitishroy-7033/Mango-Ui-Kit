@@ -1,44 +1,54 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Check, Clipboard } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import type { CodeSnippetProps } from './code-snippet.types';
 import './code-snippet.css';
 
-/**
- * A lightweight regex-based syntax highlighter for common programming languages.
- * Designed to be zero-dependency and theme-aware.
- */
-const highlightCode = (code: string, _language: string) => {
-    let highlightedArea = code
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+const escapeHtml = (str: string) =>
+    str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-    // Basic common rules
-    const rules = [
-        // Comments
-        { regex: /(\/\/.*|\/\*[\s\S]*?\*\/)/g, token: 'comment' },
-        // Strings
-        { regex: /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g, token: 'string' },
-        // Keywords
-        { regex: /\b(break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|function|if|import|in|instanceof|new|null|return|super|switch|this|throw|true|try|typeof|var|void|while|with|yield|await|async|let|static|interface|type|from|as)\b/g, token: 'keyword' },
-        // Numbers
-        { regex: /\b(\d+)\b/g, token: 'number' },
-        // Functions
-        { regex: /\b([a-zA-Z_$][a-zA-Z\d_$]*)(?=\s*\()/g, token: 'function' },
-    ];
+const TOKEN_RULES = [
+    { regex: /(\/\/.*|\/\*[\s\S]*?\*\/)/g, className: 'token-comment' },
+    { regex: /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g, className: 'token-string' },
+    { regex: /\b(break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|function|if|import|in|instanceof|new|null|return|super|switch|this|throw|true|try|typeof|var|void|while|with|yield|await|async|let|static|interface|type|from|as)\b/g, className: 'token-keyword' },
+    { regex: /\b(\d+)\b/g, className: 'token-number' },
+    { regex: /\b([a-zA-Z_$][a-zA-Z\d_$]*)(?=\s*\()/g, className: 'token-function' },
+];
 
-    rules.forEach(({ regex, token }) => {
-        highlightedArea = highlightedArea.replace(regex, (match) => {
-            return `<span class="token-${token}">${match}</span>`;
-        });
-    });
+interface TokenSpan { text: string; className?: string }
 
-    return highlightedArea;
-};
+function tokenizeLine(line: string): TokenSpan[] {
+    const escaped = escapeHtml(line);
+    let spans: TokenSpan[] = [{ text: escaped }];
+
+    for (const rule of TOKEN_RULES) {
+        const nextSpans: TokenSpan[] = [];
+        for (const span of spans) {
+            if (span.className) {
+                nextSpans.push(span);
+                continue;
+            }
+            let lastIndex = 0;
+            let match: RegExpExecArray | null;
+            const regex = new RegExp(rule.regex.source, 'g');
+            while ((match = regex.exec(span.text)) !== null) {
+                if (match.index > lastIndex) {
+                    nextSpans.push({ text: span.text.slice(lastIndex, match.index) });
+                }
+                nextSpans.push({ text: match[0], className: rule.className });
+                lastIndex = regex.lastIndex;
+            }
+            if (lastIndex < span.text.length) {
+                nextSpans.push({ text: span.text.slice(lastIndex) });
+            }
+        }
+        spans = nextSpans;
+    }
+    return spans;
+}
 
 export const CodeSnippet: React.FC<CodeSnippetProps> = ({
-    code: initialCode,
+    code: propCode,
     language = 'javascript',
     showLineNumbers = true,
     lineSpacing = 'normal',
@@ -52,30 +62,27 @@ export const CodeSnippet: React.FC<CodeSnippetProps> = ({
     style,
     ...props
 }) => {
-    const [code, setCode] = useState(initialCode);
+    const [code, setCode] = useState(propCode);
     const [copied, setCopied] = useState(false);
 
-    // Sync state with prop if needed
-    React.useEffect(() => {
-        setCode(initialCode);
-    }, [initialCode]);
+    const displayCode = readOnly ? propCode : code;
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText(code);
+    const handleCopy = useCallback(() => {
+        navigator.clipboard.writeText(displayCode);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-    };
+    }, [displayCode]);
 
-    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleTextChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newValue = e.target.value;
         setCode(newValue);
         onCodeChange?.(newValue);
-    };
+    }, [onCodeChange]);
 
-    const lines = useMemo(() => code.split('\n'), [code]);
-    const highlightedLines = useMemo(() =>
-        lines.map(line => highlightCode(line, language)),
-        [lines, language]);
+    const lines = useMemo(() => displayCode.split('\n'), [displayCode]);
+    const tokenizedLines = useMemo(() =>
+        lines.map(line => tokenizeLine(line)),
+        [lines]);
 
     return (
         <div
@@ -124,12 +131,16 @@ export const CodeSnippet: React.FC<CodeSnippetProps> = ({
                             />
                         )}
                         <pre className="code-content">
-                            {highlightedLines.map((line, i) => (
-                                <code
-                                    key={i}
-                                    className="code-line"
-                                    dangerouslySetInnerHTML={{ __html: line || ' ' }}
-                                />
+                            {tokenizedLines.map((tokens, i) => (
+                                <code key={i} className="code-line">
+                                    {tokens.length === 0 ? ' ' : tokens.map((token, j) =>
+                                        token.className ? (
+                                            <span key={j} className={token.className}>{token.text}</span>
+                                        ) : (
+                                            <React.Fragment key={j}>{token.text}</React.Fragment>
+                                        )
+                                    )}
+                                </code>
                             ))}
                         </pre>
                     </div>

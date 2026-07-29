@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { cn } from '../../utils/cn';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import './modal.css';
 
 export interface ModalProps {
@@ -25,18 +26,17 @@ export const Modal: React.FC<ModalProps> = ({
     className,
     closeOnOverlayClick = true
 }) => {
-    const modalRef = useRef<HTMLDivElement>(null);
+    const modalRef = useFocusTrap(isOpen);
 
     // Lock body scroll when open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
-            // Focus trapping would go here (or via a hook)
         } else {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
         }
         return () => {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
         };
     }, [isOpen]);
 

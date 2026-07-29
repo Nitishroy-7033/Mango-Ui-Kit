@@ -143,6 +143,7 @@ export const TagsInputInput: React.FC<TagsInputInputProps> = ({ className, ...pr
         setInputValue,
         addTag,
         tags,
+        setTags,
         highlightedIndex,
         setHighlightedIndex,
         disabled,
@@ -164,20 +165,15 @@ export const TagsInputInput: React.FC<TagsInputInputProps> = ({ className, ...pr
             } else {
                 const indexToRemove = highlightedIndex;
                 const newIndex = indexToRemove > 0 ? indexToRemove - 1 : 0;
-                const newTags = [...tags];
-                newTags.splice(indexToRemove, 1);
-                // context state updates
-                const context = (TagsInputContext as any)._currentValue;
-                context.setTags(newTags);
-                context.setHighlightedIndex(newTags.length > 0 ? newIndex : -1);
+                const newTags = tags.filter((_, i) => i !== indexToRemove);
+                setTags(newTags);
+                setHighlightedIndex(newTags.length > 0 ? newIndex : -1);
             }
         } else if (e.key === 'Delete' && highlightedIndex !== -1) {
             const indexToRemove = highlightedIndex;
-            const newTags = [...tags];
-            newTags.splice(indexToRemove, 1);
-            const context = (TagsInputContext as any)._currentValue;
-            context.setTags(newTags);
-            context.setHighlightedIndex(newTags.length > indexToRemove ? indexToRemove : (newTags.length > 0 ? newTags.length - 1 : -1));
+            const newTags = tags.filter((_, i) => i !== indexToRemove);
+            setTags(newTags);
+            setHighlightedIndex(newTags.length > indexToRemove ? indexToRemove : (newTags.length > 0 ? newTags.length - 1 : -1));
         } else if (e.key === 'ArrowLeft') {
             if (inputValue === '' || highlightedIndex !== -1) {
                 if (highlightedIndex === -1) {

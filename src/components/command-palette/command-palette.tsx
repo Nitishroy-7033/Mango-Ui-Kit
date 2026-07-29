@@ -4,7 +4,7 @@ import { cn } from '../../utils/cn';
 import type { CommandPaletteProps, CommandAction } from './command-palette.types';
 import './command-palette.css';
 
-export const CommandPalette: React.FC<CommandPaletteProps> = ({
+const CommandPalette: React.FC<CommandPaletteProps> = ({
     isOpen,
     onClose,
     actions,
@@ -106,7 +106,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     />
                 </div>
 
-                <div className="mango-command-list" ref={listRef}>
+                <div className="mango-command-list" ref={listRef} aria-live="polite">
                     {filteredActions.length === 0 ? (
                         <div style={{ padding: '40px 20px', textAlign: 'center', opacity: 0.5 }}>
                             No results found for "{search}"
@@ -172,3 +172,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 };
 
 CommandPalette.displayName = 'CommandPalette';
+
+const CommandPaletteMemo = React.memo(CommandPalette);
+export { CommandPaletteMemo as CommandPalette };

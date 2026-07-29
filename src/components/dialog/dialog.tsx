@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { X, AlertTriangle, CheckCircle2, Info, AlertCircle } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import { Button } from '../button';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import type { DialogProps, DialogButtonProps } from './dialog.types';
 import './dialog.css';
 
@@ -26,6 +27,8 @@ export const Dialog: React.FC<DialogProps> = ({
     style,
     children,
 }) => {
+    const dialogRef = useFocusTrap(isOpen);
+
     // Handle Esc key to close
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -106,6 +109,7 @@ export const Dialog: React.FC<DialogProps> = ({
     return (
         <div className="mango-dialog-overlay animate-fade-in" onClick={handleOverlayClick}>
             <div
+                ref={dialogRef}
                 className={cn('mango-dialog-container animate-slide-up', className)}
                 role="dialog"
                 aria-modal="true"
